@@ -92,7 +92,7 @@ int parse_and_add_model_info(char *line){
   sane_model_info *current_t;
   static int  def_vid = 0x4f9;
   static int  def_int = 0xffff;
-  static char def_str[2] ="";
+  static char def_str[4] ="";
   reform_line(line);
   current_t = (sane_model_info *)calloc(sizeof(sane_model_info),1);
 
@@ -225,9 +225,9 @@ int scan_model_directory(){
 //
 //
 //------------------------------------
-sane_model_info  get_model_info_from_ini_by_product_id(int id){
+sane_model_info  get_model_info_from_ini_by_product_id(unsigned int id){
   static sane_model_info *current = NULL;
-  static int pre_id=-1;
+  static unsigned int pre_id = 0xFFFFFFFF;
 
   if(id == pre_id && current != NULL){
     return *current;
@@ -241,14 +241,14 @@ sane_model_info  get_model_info_from_ini_by_product_id(int id){
     }
     current = current->next;
   }
-  pre_id=-1;
+  pre_id = 0xFFFFFFFF;
   current = &ERRORINFO;
   return ERRORINFO;
 }
 
-sane_model_info  *get_p_model_info_from_ini_by_product_id(int id){
+sane_model_info  *get_p_model_info_from_ini_by_product_id(unsigned int id){
   static sane_model_info *current = NULL;
-  static int pre_id=-1;
+  static unsigned int pre_id = 0xFFFFFFFF;
 
   if(id == pre_id && current != NULL){
     return current;
@@ -263,7 +263,7 @@ sane_model_info  *get_p_model_info_from_ini_by_product_id(int id){
     }
     current = current->next;
   }
-  pre_id=-1;
+  pre_id = 0xFFFFFFFF;
   current = &ERRORINFO;
   return &ERRORINFO;
 }
@@ -562,8 +562,7 @@ char *get_net_ini_value_by_name(char *name ,int key, char *value, int size){
   char *src = NULL;
   if(root_netini == NULL)init_netini();
   current_netini = root_netini;
-  if(current_netini->friendlyname == NULL ||
-     current_netini->friendlyname[0] == 0){
+  if(current_netini->friendlyname[0] == 0){
     return NULL;
   }
   while(strcmp(name,current_netini->friendlyname)){

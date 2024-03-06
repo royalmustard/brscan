@@ -65,7 +65,7 @@
 //-----------------------------------------------------------------------------
 //
 BOOL
-ExecQueryThread( Brother_Scanner *this, void *lpQueryProc)
+ExecQueryThread( Brother_Scanner *this, void *(*lpQueryProc)(void*))
 {
     pthread_t   tid;
 

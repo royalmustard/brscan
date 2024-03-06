@@ -177,9 +177,12 @@ int get_config_from_commandline(char **arg,  int argc,
   *model = '\"';
   strcat(model,"\"");
   if(check_model_name_available(model)){
-    get_ids_with_modelname(model,&vid,&pid);
-    sprintf(id,"0x%x:0x%x",vid,pid);
-    ret = 0;
+    if (get_ids_with_modelname(model,&vid,&pid) != 0){
+      sprintf(id,"0x%x:0x%x",vid,pid);
+      ret = 0;
+    }else{
+      ret = -1;
+    }
   }
   else{
     ret = -1;
@@ -575,7 +578,7 @@ int loggingon(){
 }
 
 int loggingoff(){
-  char filter[100];
+  char filter[128];
   char tmpconffile[32]=BRSANETMPFILE;
   int tmp;
 

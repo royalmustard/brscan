@@ -219,8 +219,8 @@ struct model_inf{
       struct model_inf *next;	/* pointer to next model info structure */
       int index;
       int expcaps;              /* expanded capability flags */
-      int vendorID;		/* Vendor ID */
-      int productID;		/* Product ID */
+      unsigned int vendorID;	/* Vendor ID */
+      unsigned int productID;	/* Product ID */
       int seriesNo;		/* series Number */
       char *modelName;		/* Model name */
       char *modelTypeName;	/* Model type */

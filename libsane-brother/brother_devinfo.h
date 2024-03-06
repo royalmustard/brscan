@@ -38,7 +38,7 @@
 //
 // prototype
 //
-BOOL  ExecQueryThread( Brother_Scanner *this, void *lpQueryProc );
+BOOL  ExecQueryThread( Brother_Scanner *this, void *(*lpQueryProc)(void*) );
 BOOL  QueryDeviceInfo( Brother_Scanner *this );
 BOOL  QueryScannerInfo( Brother_Scanner *this );
 void  SetDefaultScannerInfo( Brother_Scanner *this );

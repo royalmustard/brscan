@@ -376,6 +376,8 @@ sane_init (SANE_Int *version_code, SANE_Auth_Callback authCB)
   MODELINF          modelInfList;
   int i,nnetdev;
 
+  (void) authCB;
+
   WriteLog( "<<< sane_init start >>> " );
 #if       BRSANESUFFIX == 2
   DBG_INIT();
@@ -383,8 +385,6 @@ sane_init (SANE_Int *version_code, SANE_Auth_Callback authCB)
 #else
 Not support (force causing compile error)
 #endif    //BRSANESUFFIX
-
-  authCB++; /* compiler */
 
   DBG(DEBUG_VERBOSE,"brother init\n");
   if (version_code)
@@ -449,7 +449,7 @@ Not support (force causing compile error)
     for(i = 0 ; i < nnetdev ; i ++){
 	  PMODELINF       pModelInf;
 	  char ach[100];
-	  int inf_id_vendor,inf_id_Product;
+	  unsigned int inf_id_vendor,inf_id_Product;
 	  pModelInf = &modelInfList;
 	  get_device_id(i,&inf_id_vendor,&inf_id_Product);
 	  for (pModelInf=&modelInfList; pModelInf; pModelInf = pModelInf->next){
@@ -814,6 +814,8 @@ sane_control_option (SANE_Handle handle, SANE_Int iOpt,
 	case optResolution:
 	case optTLX: case optTLY: case optBRX: case optBRY:
 	  if (pnInfo) (*pnInfo) |= SANE_INFO_RELOAD_PARAMS;
+	  this->aoptVal[iOpt].w = *(SANE_Word*)pVal;
+	  break;
 	case optBrightness:
 	case optContrast:
 	  this->aoptVal[iOpt].w = *(SANE_Word*)pVal;
@@ -830,6 +832,7 @@ sane_control_option (SANE_Handle handle, SANE_Int iOpt,
 	  if ((rc = SetupScanMode( this, id )) != SANE_STATUS_GOOD)
 	    return rc;
 
+    break;
 	case optScanSrc:
 
 	if (this->aoptVal[iOpt].s)
@@ -1031,7 +1034,8 @@ sane_cancel (SANE_Handle handle)
 SANE_Status
 sane_set_io_mode(SANE_Handle h, SANE_Bool m)
 {
-  h++;
+  (void) h;
+
   if (m==SANE_TRUE) /* no non-blocking-mode */
     return SANE_STATUS_UNSUPPORTED;
   return SANE_STATUS_GOOD;
@@ -1040,6 +1044,8 @@ sane_set_io_mode(SANE_Handle h, SANE_Bool m)
 SANE_Status
 sane_get_select_fd(SANE_Handle handle, SANE_Int *fd)
 {
-  handle++; fd++;
+  (void) handle;
+  (void) fd;
+
   return SANE_STATUS_UNSUPPORTED; /* we have no file IO */
 }

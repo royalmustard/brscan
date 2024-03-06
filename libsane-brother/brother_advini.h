@@ -28,8 +28,8 @@
 typedef struct _sane_model_info  {
   char                       model_name[NAMELEN];
   char                       friendly_name[NAMELEN];
-  int                        pid;
-  int                        vid;
+  unsigned int               pid;
+  unsigned int               vid;
   int                        func_type;
   int                        expanded_func_type;    //M-LNX-20
   int                        model_type;
@@ -49,8 +49,8 @@ typedef struct _sane_model_info  {
 
 #define MODELSECTION "[Support Model]"
 
-sane_model_info  get_model_info_from_ini_by_product_id(int id);
-sane_model_info  *get_p_model_info_from_ini_by_product_id(int id);
+sane_model_info  get_model_info_from_ini_by_product_id(unsigned int id);
+sane_model_info  *get_p_model_info_from_ini_by_product_id(unsigned int id);
 int free_inifile_tree();
 
 #define IPDEVICEFORMAT      "DEVICE=%s , %s , %s , IP-ADDRESS=%s "

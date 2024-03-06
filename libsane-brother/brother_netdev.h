@@ -98,6 +98,6 @@ int get_interface_type();
 #define   IFTYPE_USB       1
 #define   IFTYPE_UNKNOWN   2
 
-int get_device_id(int index,int *idvendor,int *idproduct);
+int get_device_id(int index, unsigned int *idvendor, unsigned int *idproduct);
 
 #endif

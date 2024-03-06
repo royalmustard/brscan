@@ -47,7 +47,7 @@
 /*		prototype		    */
 /*==========================================*/
 
-static int GetHexInfo(char *,int *);
+static int GetHexInfo(char *,unsigned int *);
 static int GetDecInfo(char *,int *);
 static int GetModelNo(char *,char *);
 static int NextPoint(char *);
@@ -123,7 +123,7 @@ int init_model_info(void)
 {
 	char		*readModelInfo;
 	char		*modelRecord;
-	char		modelTypeNo[BUF_SIZE];
+	char		modelTypeNo[BUF_SIZE] = {0};
 	char		*recordPoint;
 	char		*readInfoPoint;
 	PMODELINF	model;
@@ -176,12 +176,12 @@ int init_model_info(void)
 	{
 	    model->index = count;
 	    count++;			/* Add record number */
-	    model->next = NULL_C;	/* Add null to pointer of next model. */
+	    model->next = NULL;	/* Add null to pointer of next model. */
 	    recordLength = strlen(readInfoPoint); /* count length of record */
 	    if(NULL == ( modelRecord = MALLOC(recordLength+1)))	 /* Allocate memory for 1 record.*/
 	    {
-		/* ERR½èÍý */
-		(model-1)->next = NULL_C;
+		/* ERRï¿½ï¿½ï¿½ï¿½ */
+		(model-1)->next = NULL;
 		exit_model_info();		 /* Free all alocated area */
 		modelListGetEnable = FALSE;
 		break;
@@ -208,7 +208,7 @@ int init_model_info(void)
 			if(res == FALSE && NULL != (model->modelTypeName))
 				FREE(model->modelTypeName);
 			FREE(modelRecord);
-			(model-1)->next = NULL_C;
+			(model-1)->next = NULL;
 			exit_model_info();	/* Free all alocated area */
 			modelListGetEnable = FALSE;
 			break;
@@ -219,7 +219,7 @@ int init_model_info(void)
 			/* Error */
 			FREE(modelRecord);
 			FREE(model->modelTypeName);
-			(model-1)->next = NULL_C;
+			(model-1)->next = NULL;
 			exit_model_info();						/* Free all alocated area */
 			modelListGetEnable = FALSE;
 			break;
@@ -230,7 +230,7 @@ int init_model_info(void)
 			/* Error */
 			FREE(modelRecord);
 			FREE(model->modelTypeName);
-			(model-1)->next = NULL_C;
+			(model-1)->next = NULL;
 			exit_model_info();						/* Free all alocated area */
 			modelListGetEnable = FALSE;
 			break;
@@ -247,7 +247,7 @@ int init_model_info(void)
 			/* Error */
 			FREE(modelRecord);
 			FREE(model->modelTypeName);
-			(model-1)->next = NULL_C;
+			(model-1)->next = NULL;
 			exit_model_info();						/* Free all alocated area */
 			modelListGetEnable = FALSE;
 			break;
@@ -282,7 +282,7 @@ int init_model_info(void)
 ;	Date		Fixer	Comments
 ;------------------------------------------------------------------------------
 */
-int GetHexInfo(char *modelRecord,int *receiveInfo)
+int GetHexInfo(char *modelRecord, unsigned int *receiveInfo)
 {
 	char	para[BUF_SIZE];
 	char	*comma_pt;
@@ -1220,7 +1220,7 @@ void GetColorMatchName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 	return;
 }
 
-int ChangeEndpoint[] = {};
+int ChangeEndpoint[] = {0};
 
 #else    //BRSANESUFFIX
   force causing compile error
@@ -1577,7 +1577,7 @@ int ReadInitFileString( LPCTSTR lpAppName,			/*  points to section name */
 				{
 					*buf=NULL_C;
 				}
-				if(lpAppName == NULL_C)			     /* if lpAppName is NULL */
+				if(lpAppName == NULL || lpAppName[0] == NULL_C)			     /* if lpAppName is NULL */
 				{
 					checkEnd = AllSectionName(lpReturnedString, nSize, buf,&count);	/* return list of SectionName */
 					if(feof(rfile) || checkEnd == END)					/* end  */
@@ -1598,7 +1598,7 @@ int ReadInitFileString( LPCTSTR lpAppName,			/*  points to section name */
 				}
 				else
 				{
-					if(lpKeyName == NULL_C)
+					if(lpKeyName == NULL || lpKeyName[0] == NULL_C)
 					{
 						checkEnd = AllKeyName(lpReturnedString, nSize, buf,&count);	/* return KeyName list */
 						if(feof(rfile) || checkEnd == END)				/* End */
@@ -1839,7 +1839,7 @@ int ReadModelInfoSize(LPCTSTR lpAppName, LPCTSTR lpKeyName, int *size, int *reco
 			}
 			else
 			{
-				if(lpKeyName == NULL_C)
+				if(lpKeyName == NULL || lpKeyName[0] == NULL_C)
 					checkEnd = GetModelInfoSize(size,record,buf);	/* return size of model information*/
 				else
 					checkEnd = GetModelInfoKeyValueSize(lpKeyName,size,buf);	/* return size of key value */

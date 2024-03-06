@@ -367,7 +367,7 @@ int write_device_net(br_net_dev_handle h_dev,
 
 }
 
-int get_device_id(int index ,  int *idvendor,int *idproduct){
+int get_device_id(int index , unsigned int *idvendor, unsigned int *idproduct){
   static char idstring[500],*pid;
   int gidvendor=0,gidproduct=0;
 

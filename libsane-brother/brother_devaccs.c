@@ -1008,6 +1008,7 @@ int discard_usb_criticalsection(void){
     return -1;
   }
   if(semaphore_owner == 1){
+    semuni.val = 1;
     semctl(sem_id,0,IPC_RMID,semuni);
   }
   return 0;
