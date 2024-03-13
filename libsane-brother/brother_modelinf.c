@@ -602,7 +602,7 @@ void GetSupportReso(int series,PMODELCONFIG modelConfig)
 ;	Module Name	: GetSupportScanMode
 ;	Summary of Capability	: get scan mode information
 ;	Iinput			: series number, pointer of model setting structure
-;	Return			: ¤Ê¤·
+;	Return			: ï¿½Ê¤ï¿½
 ;	Created			: 2003.08.11
 ;	Notes		:
 ;------------------------------------------------------------------------------
@@ -623,7 +623,7 @@ void GetSupportScanMode(int series,PMODELCONFIG modelConfig)
 			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* error diffusion */
 			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/*  gray scale */
 			modelConfig->SupportScanMode.bit.b24BitColor     = FALSE;		/* 24bit color		*/
-			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bitcolor¡Êno ColorMatch¡Ë*/
+			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bitcolorï¿½ï¿½no ColorMatchï¿½ï¿½*/
 			break;
 
 		case	ALL_FB_DCP:
@@ -634,7 +634,7 @@ void GetSupportScanMode(int series,PMODELCONFIG modelConfig)
 			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* error diffusion	*/
 			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/*  gray scale	*/
 			modelConfig->SupportScanMode.bit.b24BitColor     = TRUE;		/* 24bitcolor		*/
-			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = TRUE;		/* 24bitcolor¡ÊColorMatch¡Ë*/
+			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = TRUE;		/* 24bitcolorï¿½ï¿½ColorMatchï¿½ï¿½*/
 			break;
 
 		default:
@@ -642,7 +642,7 @@ void GetSupportScanMode(int series,PMODELCONFIG modelConfig)
 			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* error diffusion	*/
 			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* gray scale	*/
 			modelConfig->SupportScanMode.bit.b24BitColor     = TRUE;		/* 24bitcolor		*/
-			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bitcolor¡Êno ColorMatch¡Ë*/
+			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bitcolorï¿½ï¿½no ColorMatchï¿½ï¿½*/
 			break;
 	}
 	return;
@@ -719,7 +719,7 @@ void GetSupportScanSrc(int series,PMODELINF modelInf ,PMODELCONFIG modelConfig){
 ;	Module Name	: GetSupportScanAreaHeight
 ;	Summary of Capability	: get supported scan length
 ;	Iinput			: series number, pointer of model setting structure
-;	Return			: ¤Ê¤·
+;	Return			: ï¿½Ê¤ï¿½
 ;	Created			: 2003.08.21
 ;	Notes		:
 ;------------------------------------------------------------------------------
@@ -818,7 +818,7 @@ void GetGrayLebelName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 ;	Module Name	: GetColorMatchName
 ;	Summary of Capability	: get filename of color matching
 ;	Iinput			: series number, pointer of model setting structure
-;	Return			: ¤Ê¤·
+;	Return			: ï¿½Ê¤ï¿½
 ;	Created			: 2003.08.11
 ;	Notes		:
 ;------------------------------------------------------------------------------
@@ -869,20 +869,20 @@ int ChangeEndpoint[] = {AL_FB_DCP,AL_DUPLEX,L4CFB,GENERIC_YCBCR_MODEL_2,
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetSupportReso
-;	µ¡Ç½³µÍ×		: ¥µ¥Ý¡¼¥È²òÁüÅÙ¼èÆÀ
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.11
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetSupportReso
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½Ù¼ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.11
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 void GetSupportReso(int series,PMODELCONFIG modelConfig)
 {
-	modelConfig->SupportReso.val   = 0x0000;						/* ½é´ü²½ */
+	modelConfig->SupportReso.val   = 0x0000;						/* ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	switch(series)
 	{
 		case	YL4_SF_TYPE:
@@ -930,48 +930,48 @@ void GetSupportReso(int series,PMODELCONFIG modelConfig)
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetSupportScanMode
-;	µ¡Ç½³µÍ×		: ¥µ¥Ý¡¼¥ÈScanMode¼èÆÀ
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.11
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetSupportScanMode
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ScanModeï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.11
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 void GetSupportScanMode(int series,PMODELCONFIG modelConfig)
 {
-	modelConfig->SupportScanMode.val = 0x0000;								/* ½é´ü²½ */
+	modelConfig->SupportScanMode.val = 0x0000;								/* ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	switch(series)
 	{
 		case	YL4_SF_TYPE:
 		case	ZLE_SF_TYPE:
 		case	ZL2_SF_TYPE:
-			modelConfig->SupportScanMode.bit.bBlackWhite     = TRUE;		/* £²ÃÍ(Çò¹õ)		*/
-			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* ¸íº¹³È»¶			*/
-			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* ¥°¥ì¡¼¥¹¥±¡¼¥ë	*/
-			modelConfig->SupportScanMode.bit.b24BitColor     = FALSE;		/* 24bit¥«¥é¡¼		*/
-			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bit¥«¥é¡¼¹âÂ®¡ÊColorMatch¤Ê¤·¡Ë*/
+			modelConfig->SupportScanMode.bit.bBlackWhite     = TRUE;		/* ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)		*/
+			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½			*/
+			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* ï¿½ï¿½ï¿½ì¡¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	*/
+			modelConfig->SupportScanMode.bit.b24BitColor     = FALSE;		/* 24bitï¿½ï¿½ï¿½é¡¼		*/
+			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bitï¿½ï¿½ï¿½é¡¼ï¿½ï¿½Â®ï¿½ï¿½ColorMatchï¿½Ê¤ï¿½ï¿½ï¿½*/
 			break;
 
 		case	YL4_FB_DCP:
 		case	ZLE_FB_DCP:
 		case	ZL2_FB_DCP:
-			modelConfig->SupportScanMode.bit.bBlackWhite     = TRUE;		/* £²ÃÍ(Çò¹õ)		*/
-			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* ¸íº¹³È»¶			*/
-			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* ¥°¥ì¡¼¥¹¥±¡¼¥ë	*/
-			modelConfig->SupportScanMode.bit.b24BitColor     = TRUE;		/* 24bit¥«¥é¡¼		*/
-			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = TRUE;		/* 24bit¥«¥é¡¼¹âÂ®¡ÊColorMatch¤Ê¤·¡Ë*/
+			modelConfig->SupportScanMode.bit.bBlackWhite     = TRUE;		/* ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)		*/
+			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½			*/
+			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* ï¿½ï¿½ï¿½ì¡¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	*/
+			modelConfig->SupportScanMode.bit.b24BitColor     = TRUE;		/* 24bitï¿½ï¿½ï¿½é¡¼		*/
+			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = TRUE;		/* 24bitï¿½ï¿½ï¿½é¡¼ï¿½ï¿½Â®ï¿½ï¿½ColorMatchï¿½Ê¤ï¿½ï¿½ï¿½*/
 			break;
 
 		default:
-			modelConfig->SupportScanMode.bit.bBlackWhite     = TRUE;		/* £²ÃÍ(Çò¹õ)		*/
-			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* ¸íº¹³È»¶			*/
-			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* ¥°¥ì¡¼¥¹¥±¡¼¥ë	*/
-			modelConfig->SupportScanMode.bit.b24BitColor     = TRUE;		/* 24bit¥«¥é¡¼		*/
-			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bit¥«¥é¡¼¹âÂ®¡ÊColorMatch¤Ê¤·¡Ë*/
+			modelConfig->SupportScanMode.bit.bBlackWhite     = TRUE;		/* ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)		*/
+			modelConfig->SupportScanMode.bit.bErrorDiffusion = TRUE;		/* ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½			*/
+			modelConfig->SupportScanMode.bit.bTrueGray       = TRUE;		/* ï¿½ï¿½ï¿½ì¡¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	*/
+			modelConfig->SupportScanMode.bit.b24BitColor     = TRUE;		/* 24bitï¿½ï¿½ï¿½é¡¼		*/
+			modelConfig->SupportScanMode.bit.b24BitNoCMatch  = FALSE;		/* 24bitï¿½ï¿½ï¿½é¡¼ï¿½ï¿½Â®ï¿½ï¿½ColorMatchï¿½Ê¤ï¿½ï¿½ï¿½*/
 			break;
 	}
 	return;
@@ -979,25 +979,25 @@ void GetSupportScanMode(int series,PMODELCONFIG modelConfig)
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetSupportScanSrc
-;	µ¡Ç½³µÍ×		: ¥µ¥Ý¡¼¥ÈScanSrc¼èÆÀ
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.11
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetSupportScanSrc
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ScanSrcï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.11
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 #if 0   //M-LNX-20
 void GetSupportScanSrc(int series,PMODELCONFIG modelConfig)
 {
 
-	modelConfig->SupportScanSrc.val = 0x0000;					/* ½é´ü²½ */
+	modelConfig->SupportScanSrc.val = 0x0000;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ */
 #else   //M-LNX-20
 void GetSupportScanSrc(int series,PMODELINF modelInf ,PMODELCONFIG modelConfig){
-	modelConfig->SupportScanSrc.val = 0x0000;					/* ½é´ü²½ */
+	modelConfig->SupportScanSrc.val = 0x0000;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	if( (modelInf->expcaps & EXP_CAPDUPLEX) != 0){
 	  modelConfig->SupportScanSrc.bit.ADF_DUP    = TRUE;		/* Duplex capability TRUE */
 	}
@@ -1036,15 +1036,15 @@ void GetSupportScanSrc(int series,PMODELINF modelInf ,PMODELCONFIG modelConfig){
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetSupportScanAreaHeight
-;	µ¡Ç½³µÍ×		: ¥µ¥Ý¡¼¥ÈÆÉ¤ß¹þ¤ßÈÏ°ÏÄ¹¼èÆÀ
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.21
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetSupportScanAreaHeight
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½É¤ß¹ï¿½ï¿½ï¿½ï¿½Ï°ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.21
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 void GetSupportScanAreaHeight(int series,PMODELCONFIG modelConfig)
@@ -1063,15 +1063,15 @@ void GetSupportScanAreaHeight(int series,PMODELCONFIG modelConfig)
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetSupportScanAreaWidth
-;	µ¡Ç½³µÍ×		: ¥µ¥Ý¡¼¥ÈÆÉ¤ß¹þ¤ßÈÏ°ÏÉý¼èÆÀ
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.11
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetSupportScanAreaWidth
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½É¤ß¹ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.11
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 void GetSupportScanAreaWidth(int series,PMODELCONFIG modelConfig)
@@ -1096,15 +1096,15 @@ void GetSupportScanAreaWidth(int series,PMODELCONFIG modelConfig)
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetGrayLebelName
-;	µ¡Ç½³µÍ×		: ¥°¥ì¥¤¥ì¥Ù¥ëÍÑ¥Ç¡¼¥¿Ì¾
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.11
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetGrayLebelName
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½ì¥¤ï¿½ï¿½Ù¥ï¿½ï¿½Ñ¥Ç¡ï¿½ï¿½ï¿½Ì¾
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.11
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 #if 0  //M-LNX-20
@@ -1123,7 +1123,7 @@ void GetGrayLebelName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 	}
 #endif  //M-LNX-20
 
-	switch(series)						/* ¥·¥ê¡¼¥ºNo¤«¤éName¤ò¼èÆÀ */
+	switch(series)						/* ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½Noï¿½ï¿½ï¿½ï¿½Nameï¿½ï¿½ï¿½ï¿½ï¿½ */
 	{
 		case	YL4_SF_TYPE:
 			name = YL4_SF_TYPE_NAME;
@@ -1162,7 +1162,7 @@ void GetGrayLebelName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 			name = BHL2_FB_DCP_NAME;
 			break;
 		default:
-			name = NULL_S;				/* ³ºÅö¤¹¤ë¤â¤Î¤¬¤Ê¤±¤ì¤ÐNULL */
+			name = NULL_S;				/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½NULL */
 	}
 	strcpy(modelConfig->szGrayLebelName,name);
 	return;
@@ -1171,15 +1171,15 @@ void GetGrayLebelName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 
 /*
 ;------------------------------------------------------------------------------
-;	¥â¥¸¥å¡¼¥ëÌ¾	: GetColorMatchName
-;	µ¡Ç½³µÍ×		: ¥«¥é¡¼¥Þ¥Ã¥Á¥ó¥°ÍÑ¥Ç¡¼¥¿Ì¾
-;	ÆþÎÏ			: ¥·¥ê¡¼¥ºÈÖ¹æ,¥â¥Ç¥ëÀßÄê¹½Â¤ÂÎ¥Ý¥¤¥ó¥¿
-;	Ìá¤êÃÍ			: ¤Ê¤·
-;	ºîÀ®Æü			: 2003.08.11
-;	ÆÃµ­»ö¹à		:
+;	ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Ì¾	: GetColorMatchName
+;	ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½		: ï¿½ï¿½ï¿½é¡¼ï¿½Þ¥Ã¥ï¿½ï¿½ï¿½ï¿½Ñ¥Ç¡ï¿½ï¿½ï¿½Ì¾
+;	ï¿½ï¿½ï¿½ï¿½			: ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½,ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ê¹½Â¤ï¿½Î¥Ý¥ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½			: ï¿½Ê¤ï¿½
+;	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			: 2003.08.11
+;	ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½		:
 ;------------------------------------------------------------------------------
-;	ÊÑ¹¹ÍúÎò
-;	ÆüÉÕ		¹¹¿·¼Ô	¥³¥á¥ó¥È
+;	ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½
+;	ï¿½ï¿½ï¿½ï¿½		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;------------------------------------------------------------------------------
 */
 
@@ -1200,7 +1200,7 @@ void GetColorMatchName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 #endif  //M-LNX-20
 
 
-	/* ¥·¥ê¡¼¥ºÈÖ¹æ¤Ë¤è¤êName¤ò¼èÆÀ */
+	/* ï¿½ï¿½ï¿½ê¡¼ï¿½ï¿½ï¿½Ö¹ï¿½Ë¤ï¿½ï¿½Nameï¿½ï¿½ï¿½ï¿½ï¿½ */
 	switch(series)
 	{
 		case	YL4_FB_DCP:
@@ -1213,7 +1213,7 @@ void GetColorMatchName(int series,PMODELINF modelInf,PMODELCONFIG modelConfig){
 			name = ZL2_FB_DCP_CM_NAME;
 			break;
 		default:
-			name = NULL_S;	/* ³ºÅö¤¹¤ë¤â¤Î¤¬¤Ê¤±¤ì¤ÐNULL */
+			name = NULL_S;	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½NULL */
 			break;
 	}
 	strcpy(modelConfig->szColorMatchName,name);
@@ -2052,7 +2052,7 @@ int AllReadModelInfo(LPTSTR lpReturnedString, int nSize, char *buf,int *count)
 			movePoint =(lpReturnedString+*count);			/* Start point of straging */
 			length = strlen(buf);
 			*count += strlen(buf);					/* update number of input characters */
-			if(*(buf+length-1)== LF)				/* convert from LF to NULL¤Ë */
+			if(*(buf+length-1)== LF)				/* convert from LF to NULLï¿½ï¿½ */
 				*(buf+length-1) = NULL_C;
 			strcpy(movePoint,buf);				       /* Straging data */
 		}
@@ -2066,7 +2066,7 @@ int AllReadModelInfo(LPTSTR lpReturnedString, int nSize, char *buf,int *count)
 
 /*
 /////////////////////////////////////////////////
-////////       get_Suport_inf´Ø¿ô        ////////
+////////       get_Suport_infï¿½Ø¿ï¿½        ////////
 /////////////////////////////////////////////////
 */
 
@@ -2250,7 +2250,7 @@ int get_scansrc_string(SCANSRCLIST scanSrc, const char **scanSrcList)
 ;------------------------------------------------------------------------------
 ;	Module Name	: get_scanmode_id
 ;	Summary of Capability	: get scanmode ID number from string
-;	input			: ScanMode Ê¸»úÎó
+;	input			: ScanMode Ê¸ï¿½ï¿½ï¿½ï¿½
 ;	Return			: ScanModeID
 ;	Created			: 2003.08.19
 ;	Notes		:

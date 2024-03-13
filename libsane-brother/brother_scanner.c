@@ -459,7 +459,7 @@ ScanStart( Brother_Scanner *this )
 //		None
 //
 //-----------------------------------------------------------------------------
-//	PageScanStart¡ÊA part of PageScan of Windows version¡Ë
+//	PageScanStartï¿½ï¿½A part of PageScan of Windows versionï¿½ï¿½
 BOOL
 PageScanStart( Brother_Scanner *this )
 {
@@ -600,10 +600,10 @@ static struct timezone save_tz;		// Valiable for time-interval information(min)
  *									      *
  *	PURPOSE		Scan 1 page					      *
  *									      *
- *      ARGUMENT	Brother_Scanner *this	¡§ Brother_Scanner structure  *
- *			char *lpFwBuf		¡§ transmission buffer	      *
- *			int nMaxLen		¡§ size of transmission buffer*
- *			int *lpFwLen		¡§ size of data to sent	      *
+ *      ARGUMENT	Brother_Scanner *this	ï¿½ï¿½ Brother_Scanner structure  *
+ *			char *lpFwBuf		ï¿½ï¿½ transmission buffer	      *
+ *			int nMaxLen		ï¿½ï¿½ size of transmission buffer*
+ *			int *lpFwLen		ï¿½ï¿½ size of data to sent	      *
  *									      *
  *									      *
  *									      *
@@ -1077,12 +1077,12 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
  *										*
  *	FUNCTION	PageScan						*
  *										*
- *	PURPOSE		£±¥Ú¡¼¥¸Ê¬¤ò¥¹¥­¥ã¥ó¤¹¤ë¡£					*
+ *	PURPOSE		ï¿½ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½Ê¬ï¿½ò¥¹¥ï¿½ï¿½ï¿½ó¤¹¤ë¡£					*
  *										*
- *	°ú¿ô		Brother_Scanner *this	¡§ Brother_Scanner¹½Â¤ÂÎ		*
- *			char *lpFwBuf		¡§ Á÷¿®¥Ð¥Ã¥Õ¥¡			*
- *			int nMaxLen		¡§ Á÷¿®¥Ð¥Ã¥Õ¥¡Ä¹			*
- *			int *lpFwLen		¡§ Á÷¿®¥Ç¡¼¥¿Ä¹			*
+ *	ï¿½ï¿½ï¿½ï¿½		Brother_Scanner *this	ï¿½ï¿½ Brother_Scannerï¿½ï¿½Â¤ï¿½ï¿½		*
+ *			char *lpFwBuf		ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½			*
+ *			int nMaxLen		ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½Ä¹			*
+ *			int *lpFwLen		ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½Ä¹			*
  *										*
  *										*
  *										*
@@ -1090,8 +1090,8 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 int
 PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 {
-	WORD	wData=0;	// ¼õ¿®¥Ç¡¼¥¿¥µ¥¤¥º¡Ê¥Ð¥¤¥È¿ô¡Ë
-	WORD	wDataLineCnt=0;	// ¼õ¿®¥Ç¡¼¥¿¤Î¥é¥¤¥ó¿ô
+	WORD	wData=0;	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¥Ð¥ï¿½ï¿½È¿ï¿½ï¿½ï¿½
+	WORD	wDataLineCnt=0;	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Î¥é¥¤ï¿½ï¿½ï¿½
 	int	nAnswer=0;
 	int	rc;
 	LPSTR   lpRxTop;
@@ -1099,7 +1099,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	int	nReadSize;
 	LPSTR   lpReadBuf;
-	int	nMinReadSize; // ºÇ¾¯¥ê¡¼¥É¥µ¥¤¥º
+	int	nMinReadSize; // ï¿½Ç¾ï¿½ï¿½ê¡¼ï¿½É¥ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #ifdef NO39_DEBUG
 	struct timeval start_tv, tv;
@@ -1110,7 +1110,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 		rc = SANE_STATUS_IO_ERROR;
 		return rc;
 	}
-	if (this->scanState.bCanceled) { //¥­¥ã¥ó¥»¥ë½èÍý
+	if (this->scanState.bCanceled) { //ï¿½ï¿½ï¿½ï¿½ó¥»¥ï¿½ï¿½ï¿½ï¿½
 		WriteLog( "Page Canceled" );
 
 		rc = SANE_STATUS_CANCELLED;
@@ -1150,25 +1150,25 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 	WriteLog( "devScanInfo.ScanAreaByte.lHeight = [%d]", this->devScanInfo.ScanAreaByte.lHeight );
 
 
-	memset(lpFwBuf, 0x00, nMaxLen);	//  Á÷¿®¥Ð¥Ã¥Õ¥¡¤ò¥¼¥í¥¯¥ê¥¢¤·¤Æ¤ª¤¯¡£
+	memset(lpFwBuf, 0x00, nMaxLen);	//  ï¿½ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ò¥¼¥ï¿½ï¿½ï¿½ï¿½ê¥¢ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½
 	*lpFwLen = 0;
 
 	if ( (!this->scanState.iProcessEnd) && ( FwTempBuffLength < nMaxLen) ) { 
-	// ¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤ò¼õ¿®¤·¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ç¤«¤ÄÁ÷¿®¥Ð¥Ã¥Õ¥¡¥µ¥¤¥º¤è¤êÁ÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤Î¥Ç¡¼¥¿Ä¹¤¬¾®¤µ¤¤¾ì¹ç
+	// ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Î¥Ç¡ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// ÊÝÂ¸¥Ç¡¼¥¿¥Ð¥Ã¥Õ¥¡¤Ë¥Ç¡¼¥¿¤¬Â¸ºß¤¹¤ë¾ì¹ç¤Ï¡¢¼õ¿®¥Ç¡¼¥¿¥Ð¥Ã¥Õ¥¡¤Ë¥³¥Ô¡¼¤¹¤ë¡£
-	memmove( lpRxBuff, lpRxTempBuff, dwRxTempBuffLength );	// ÀèÆ¬¤ËÂÔÈò¥Ç¡¼¥¿Éü¸µ
-	wData += dwRxTempBuffLength;	// ³ÊÇ¼¥Ç¡¼¥¿length¤òÊäÀµ
+	// ï¿½ï¿½Â¸ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ë¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ß¤ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ë¥ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ë¡£
+	memmove( lpRxBuff, lpRxTempBuff, dwRxTempBuffLength );	// ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	wData += dwRxTempBuffLength;	// ï¿½ï¿½Ç¼ï¿½Ç¡ï¿½ï¿½ï¿½lengthï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	lpRxTop = lpRxBuff;
 
-	// Á÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤ËºÇÄã3¥é¥¤¥óÊ¬¤ÏÅ¸³«¤Ç¤­¤ë¤è¤¦¤Ë¥¹¥­¥ã¥Ê¤«¤é¥Ç¡¼¥¿ÆÉ¤ß¹þ¤à¡£
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ëºï¿½ï¿½ï¿½3ï¿½é¥¤ï¿½ï¿½Ê¬ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½ï¿½è¤¦ï¿½Ë¥ï¿½ï¿½ï¿½ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½É¤ß¹ï¿½ï¿½à¡£
 	if (this->devScanInfo.wColorType == COLOR_FUL || this->devScanInfo.wColorType == COLOR_FUL_NOCM )
 		nMinReadSize = (this->devScanInfo.ScanAreaByte.lWidth + 3) * 3;
 	else
 		nMinReadSize = (this->devScanInfo.ScanAreaByte.lWidth + 3);
 
-	nMinReadSize *= 3; // ºÇÄã3¥é¥¤¥óÊ¬¤Ï¥ê¡¼¥É¤¹¤ë¡£
+	nMinReadSize *= 3; // ï¿½ï¿½ï¿½ï¿½3ï¿½é¥¤ï¿½ï¿½Ê¬ï¿½Ï¥ê¡¼ï¿½É¤ï¿½ï¿½ë¡£
 	if ( !this->scanState.bReadbufEnd ) {
 		for (rc=0 ; wData < nMinReadSize;)
 		{
@@ -1202,13 +1202,13 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 	WriteLog( "Adjusted wData = %d, (dwRxTempBuffLength = %d)", wData, dwRxTempBuffLength );
 
 	if (wData != 0)
-	// ¥Ç¡¼¥¿¤ò¥é¥¤¥óÃ±°Ì¤Þ¤Ç¤Ë¶èÀÚ¤ë
+	// ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½é¥¤ï¿½ï¿½Ã±ï¿½Ì¤Þ¤Ç¤Ë¶ï¿½ï¿½Ú¤ï¿½
 	{
 	LPSTR  pt = lpRxBuff;
 	int nFwTempBuffMaxLine;
 	int nResoLine;
 
-	// Á÷¿®¤¹¤ë¥¤¥á¡¼¥¸¥Ç¡¼¥¿¤ÎÉý(¥É¥Ã¥È)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¥¤ï¿½á¡¼ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½É¥Ã¥ï¿½)
 	if (this->devScanInfo.wColorType == COLOR_FUL || this->devScanInfo.wColorType == COLOR_FUL_NOCM ) {
 		nFwTempBuffMaxLine = (dwFwTempBuffMaxSize / 2 - FwTempBuffLength) / this->scanInfo.ScanAreaByte.lWidth;
 		nFwTempBuffMaxLine *= 3;
@@ -1224,13 +1224,13 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 	for (wDataLineCnt=0; wDataLineCnt < nFwTempBuffMaxLine;){
 		BYTE headch;
 
-		if( dwRxTempBuffLength <= 0 )	break;	// Á´¤Æ¤Î¥Ç¡¼¥¿¤Ï½èÍý²ÄÇ½(¶èÀÚ¤êÎÉ¤¯¼õ¿®¤µ¤ì¤¿)
+		if( dwRxTempBuffLength <= 0 )	break;	// ï¿½ï¿½ï¿½Æ¤Î¥Ç¡ï¿½ï¿½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½(ï¿½ï¿½ï¿½Ú¤ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¤¿)
 
 		headch = (BYTE)*pt;
 		if ((char)headch < 0) {
-			// STATUS,CTRL·Ï¥³¡¼¥É
-			dwRxTempBuffLength --;			// CTRL·Ï¥³¡¼¥É¤Ï1byte¾ÃÈñ
-			pt++;					// ¼¡¤Îheader¾ðÊó¤ò»²¾È
+			// STATUS,CTRLï¿½Ï¥ï¿½ï¿½ï¿½ï¿½ï¿½
+			dwRxTempBuffLength --;			// CTRLï¿½Ï¥ï¿½ï¿½ï¿½ï¿½É¤ï¿½1byteï¿½ï¿½ï¿½ï¿½
+			pt++;					// ï¿½ï¿½ï¿½ï¿½headerï¿½ï¿½ï¿½ï¿½ò»²¾ï¿½
 
 			wDataLineCnt+=3;
 		}else{
@@ -1240,30 +1240,30 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 				wDataLineCnt++;
 			}
 			else {
-				// ²èÁü¥Ç¡¼¥¿
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½
 				WORD length;
 
 				if( dwRxTempBuffLength < 3 )
-					length = 0;		// ½é´ü²½
+					length = 0;		// ï¿½ï¿½ï¿½ï¿½ï¿½
 				else
-					// ¥é¥¹¥¿¥Ç¡¼¥¿Ä¹¤Î¼èÆÀ
+					// ï¿½é¥¹ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½Ä¹ï¿½Î¼ï¿½ï¿½ï¿½
 					length = *(WORD *)( pt + 1 );	// format: [HEADER(1B)][LENGTH(intel 2B)][DATA...]
 
 				if( dwRxTempBuffLength < (DWORD)( length + 3) ){	// length+3 = head(1B)+length(2B)+data(length)
 					break;
 				}
 				else{
-					// 1lineÊ¬¤Î¥Ç¡¼¥¿¤¢¤ê
-					dwRxTempBuffLength -= length + 3;	// ²èÁü¥Ç¡¼¥¿¤Ï length+3 byte¾ÃÈñ
-					pt += length + 3;			// ¼¡¤Îheader¾ðÊó¤ò»²¾È
+					// 1lineÊ¬ï¿½Î¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					dwRxTempBuffLength -= length + 3;	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ length+3 byteï¿½ï¿½ï¿½ï¿½
+					pt += length + 3;			// ï¿½ï¿½ï¿½ï¿½headerï¿½ï¿½ï¿½ï¿½ò»²¾ï¿½
 					wDataLineCnt++;
 				}
 			}
 		}
 	} // end of for(;;)
-	wData -= dwRxTempBuffLength;	// Å¸³«½èÍý¤Ë²ó¤¹¥Ç¡¼¥¿¤«¤é£±¥é¥¤¥óÌ¤Ëþ¤Î¥Ç¡¼¥¿¤ò½ü¤¯
+	wData -= dwRxTempBuffLength;	// Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ó¤¹¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£±ï¿½é¥¤ï¿½ï¿½Ì¤ï¿½ï¿½ï¿½Î¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// ¥é¥¹¥¿¥Ç¡¼¥¿¤ÎÅ¸³«½èÍý
+	// ï¿½é¥¹ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #ifdef NO39_DEBUG
 	if (gettimeofday(&start_tv, &tz) == -1)
 		return FALSE;
@@ -1289,11 +1289,11 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	if ((dwRxTempBuffLength > 0) || (wProcessSize < wData)) {
 		dwRxTempBuffLength += (wData - wProcessSize);
-		memmove( lpRxTempBuff, lpRxBuff+wProcessSize, dwRxTempBuffLength );	// »Ä¤ê¥Ç¡¼¥¿¤òÊÝÂ¸
+		memmove( lpRxTempBuff, lpRxBuff+wProcessSize, dwRxTempBuffLength );	// ï¿½Ä¤ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸
 	}
 
 	if ( nAnswer == SCAN_EOF || nAnswer == SCAN_MPS )  {
-		// ºÇ¸å¤Î¥Ú¡¼¥¸¥Ç¡¼¥¿¤Î¾ì¹ç
+		// ï¿½Ç¸ï¿½Î¥Ú¡ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Î¾ï¿½ï¿½
 		if( lRealY > 0 ){
 
 			ImgLineProcInfo.pWriteBuff = lpFwTempBuff+FwTempBuffLength;
@@ -1312,7 +1312,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			WriteLog( "  PageScan End1 nWriteLineCount = %d", nWriteLineCount );
 #endif
 		}
-		// ¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬Á÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤ËÆþ¤Ã¤¿¤¿¤á¡¢¾õÂÖ¤ò³Ð¤¨¤Æ¤ª¤¯
+		// ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¤ï¿½ï¿½ï¿½ï¿½á¡¢ï¿½ï¿½ï¿½Ö¤ï¿½Ð¤ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½
 		this->scanState.iProcessEnd = nAnswer;
 		WriteLog( " PageScan scanState.iProcessEnd = %d, ", this->scanState.iProcessEnd );
 	}
@@ -1328,12 +1328,12 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	} // if ( (!this->scanState.iProcessEnd) || ( FwTempBuffLength > nMaxLen) ) 
 
-	if (this->scanState.iProcessEnd) { // Á÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤Ë¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤ò¼õ¿®¤·¤Æ¤¤¤ë¾ì¹ç
+	if (this->scanState.iProcessEnd) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ë¥ï¿½ï¿½Æ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½
 		WriteLog( "<<<<< PageScan Status Code Read!!!" );
 		nAnswer = this->scanState.iProcessEnd;
 	}
 
-	/* Á÷¿®¥Ð¥Ã¥Õ¥¡¤ËÁ÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤Ë¤¢¤ë¥¤¥á¡¼¥¸¥Ç¡¼¥¿¤ò¥³¥Ô¡¼¤¹¤ë¡£*/
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ë¤ï¿½ï¿½ë¥¤ï¿½á¡¼ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ò¥³¥Ô¡ï¿½ï¿½ï¿½ï¿½ë¡£*/
 	WriteLog( "<<<<< PageScan FwTempBuffLength = %d", FwTempBuffLength );
 
 	if ( FwTempBuffLength > nMaxLen )
@@ -1343,8 +1343,8 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	FwTempBuffLength -= *lpFwLen ;
 
-	memmove( lpFwBuf, lpFwTempBuff, *lpFwLen);	// Á÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤«¤éÁ÷¿®¥Ð¥Ã¥Õ¥¡¤Ø¥³¥Ô¡¼¤¹¤ë¡£
-	memmove( lpFwTempBuff, lpFwTempBuff+*lpFwLen, FwTempBuffLength ); // »Ä¤ê¤ÎÊÝÂ¸¥Ç¡¼¥¿¤òÀèÆ¬¤Ë°ÜÆ°¤¹¤ë¡£	
+	memmove( lpFwBuf, lpFwTempBuff, *lpFwLen);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ø¥ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ë¡£
+	memmove( lpFwTempBuff, lpFwTempBuff+*lpFwLen, FwTempBuffLength ); // ï¿½Ä¤ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½Ë°ï¿½Æ°ï¿½ï¿½ï¿½ë¡£	
 
 	rc = SANE_STATUS_GOOD;
 
@@ -1357,9 +1357,9 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			return rc;
 		}
 		else {
-			// »ØÄê¤·¤¿¥Ç¡¼¥¿Ä¹¤è¤ê¼õ¿®¤·¤¿¥Ç¡¼¥¿Ä¹¤¬¾¯¤Ê¤¤¾ì¹ç¡¢»Ä¤ê¤Î¥Ç¡¼¥¿Ä¹¤ò¶õÇò¤È¤·¤Æ¥»¥Ã¥È¤¹¤ë¡£		
+			// ï¿½ï¿½ï¿½ê¤·ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ç¡¢ï¿½Ä¤ï¿½Î¥Ç¡ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½È¤ï¿½ï¿½Æ¥ï¿½ï¿½Ã¥È¤ï¿½ï¿½ë¡£		
 			if( lRealY < this->scanInfo.ScanAreaSize.lHeight ){
-				// »ØÄê¤·¤¿Ä¹¤µ¤è¤ê¾¯¤Ê¤¤ÃÍ¤Î¾õÂÖ¤Ç¡¢¥Ú¡¼¥¸¥¨¥ó¥É¥¹¥Æ¡¼¥¿¥¹¤È¤Ê¤Ã¤¿¾ì¹ç
+				// ï¿½ï¿½ï¿½ê¤·ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ê¾¯ï¿½Ê¤ï¿½ï¿½Í¤Î¾ï¿½ï¿½Ö¤Ç¡ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¥ï¿½ï¿½Æ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¤Ê¤Ã¤ï¿½ï¿½ï¿½ï¿½
 				int nHeightLen = this->scanInfo.ScanAreaSize.lHeight - lRealY;
 				int nSize = this->scanInfo.ScanAreaByte.lWidth * nHeightLen; 
 				int nMaxSize = nMaxLen - *lpFwLen;
@@ -1405,7 +1405,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			WriteLog( "  nAnswer = %d lRealY = %d", nAnswer, lRealY );
 
 			if( lRealY != 0 ) {
-				// Á÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤Ë¥Ç¡¼¥¿¤¬¤¢¤ë´Ö¤Ï¡¢SANE_STATUS_GOOD¤òÊÖ¤¹¡£
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ë¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤Ï¡ï¿½SANE_STATUS_GOODï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½
 				if (*lpFwLen == 0) {
 					this->scanState.bEOF=TRUE;
 					this->scanState.bScanning=FALSE;
@@ -1413,12 +1413,12 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 				}
 			}
 			else {
-				// ¥Ç¡¼¥¿¼õ¿®Ìµ¤·¤ÇEOF¤Î¾ì¹ç¡¢¥¨¥é¡¼¤È¤¹¤ë¡£
+				// ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½EOFï¿½Î¾ï¿½ç¡¢ï¿½ï¿½ï¿½é¡¼ï¿½È¤ï¿½ï¿½ë¡£
 				rc = SANE_STATUS_IO_ERROR;
 			}
 			break;
 		case SCAN_MPS:
-			// Á÷¿®ÊÝÂ¸¥Ð¥Ã¥Õ¥¡¤Ë¥Ç¡¼¥¿¤¬¤¢¤ë´Ö¤Ï¡¢SANE_STATUS_GOOD¤òÊÖ¤¹¡£
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½Ë¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤Ï¡ï¿½SANE_STATUS_GOODï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½
 			if (*lpFwLen == 0) {
 				this->scanState.bEOF=TRUE;
 				rc = SANE_STATUS_EOF;
@@ -1569,7 +1569,7 @@ ReadTrash( Brother_Scanner *this )
 //	Return values:
 //
 //-----------------------------------------------------------------------------
-//	AbortPageScan¡ÊThe part of PageScan i the windows version¡Ë
+//	AbortPageScanï¿½ï¿½The part of PageScan i the windows versionï¿½ï¿½
 void
 AbortPageScan( Brother_Scanner *this )
 {
@@ -1670,7 +1670,7 @@ ScanEnd( Brother_Scanner *this )
 //		None
 //
 //-----------------------------------------------------------------------------
-//	GetScanAreaParam(GetScanDot of the windows version¡Ë
+//	GetScanAreaParam(GetScanDot of the windows versionï¿½ï¿½
 void
 GetScanAreaParam( Brother_Scanner *this )
 {
@@ -1878,7 +1878,7 @@ StartDecodeStretchProc( Brother_Scanner *this )
 //		None
 //
 //-----------------------------------------------------------------------------
-//	GetDeviceScanArea¡ÊParts of GetScanDot in  the Windows version¡Ë
+//	GetDeviceScanAreaï¿½ï¿½Parts of GetScanDot in  the Windows versionï¿½ï¿½
 void
 GetDeviceScanArea( Brother_Scanner *this, LPAREARECT lpScanAreaDot )
 {

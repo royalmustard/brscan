@@ -92,11 +92,11 @@ ExecQueryThread( Brother_Scanner *this, void *(*lpQueryProc)(void*))
 //
 //
 //	Return values:
-//		TRUE  = Success to get device information¡ÊStorage information from device¡Ë
-//		FALSE = Fail to get device information¡ÊStorage default information
+//		TRUE  = Success to get device informationï¿½ï¿½Storage information from deviceï¿½ï¿½
+//		FALSE = Fail to get device informationï¿½ï¿½Storage default information
 //
 //-----------------------------------------------------------------------------
-//	QueryDeviceInfo¡ÊµìsendQ¡Ë
+//	QueryDeviceInfoï¿½Êµï¿½sendQï¿½ï¿½
 BOOL
 QueryDeviceInfo( Brother_Scanner *this )
 {
@@ -122,16 +122,16 @@ QueryDeviceInfo( Brother_Scanner *this )
 	if( this->mfcDeviceInfo.nColorType.val == 0 ){
 		if( this->mfcModelInfo.bColorModel ){
 			//
-			// BY/EUR¤Ë¤Ï¤³¤ÎÃÍÆþ¤Ã¤Æ¤¤¤Ê¤¤¤Î¤Ç¡¢default=BY¤ò¥»¥Ã¥È
+			// BY/EURï¿½Ë¤Ï¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¤Æ¤ï¿½ï¿½Ê¤ï¿½ï¿½Î¤Ç¡ï¿½default=BYï¿½ò¥»¥Ã¥ï¿½
 			//
 			this->mfcDeviceInfo.nColorType.val = MFCDEVINFCOLOR;
 		}else{
 			//
-			// YL1¡ÁYL3/USA¤Þ¤Ç¤Ë¤Ï¤³¤ÎÃÍÆþ¤Ã¤Æ¤¤¤Ê¤¤¤Î¤Ç¡¢default=YL¤ò¥»¥Ã¥È
-			// PC¥¹¥­¥ã¥Ê¡¼¡¿¥Ó¥Ç¥ª¥­¥ã¥×¥Á¥ã»ÅÍÍ½ñ '99¥â¥Ç¥ë ¤Ë
-			// Q¥³¥Þ¥ó¥É¤Î½ÐÎÏ¥Ç¡¼¥¿¥Õ¥©¡¼¥Þ¥Ã¥È¤ÎColorType¤Î¹à¤Ë
-			// YL:00000111B ¤Èµ­½Ò¤¬¤¢¤ë¤¬¡¢¤³¤ì¤Ï¸í¤ê¤ÇYL3/USA¤Þ¤Ç
-			// ¤Î¼Âµ¡¤«¤é¤Ï¥¼¥í¤¬ÊÖ¤Ã¤Æ¤¯¤ë
+			// YL1ï¿½ï¿½YL3/USAï¿½Þ¤Ç¤Ë¤Ï¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¤Æ¤ï¿½ï¿½Ê¤ï¿½ï¿½Î¤Ç¡ï¿½default=YLï¿½ò¥»¥Ã¥ï¿½
+			// PCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½ï¿½Ó¥Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½Í½ï¿½ '99ï¿½ï¿½Ç¥ï¿½ ï¿½ï¿½
+			// Qï¿½ï¿½ï¿½Þ¥ï¿½É¤Î½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½Õ¥ï¿½ï¿½ï¿½ï¿½Þ¥Ã¥È¤ï¿½ColorTypeï¿½Î¹ï¿½ï¿½
+			// YL:00000111B ï¿½Èµï¿½ï¿½Ò¤ï¿½ï¿½ï¿½ï¿½ë¤¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½YL3/USAï¿½Þ¤ï¿½
+			// ï¿½Î¼Âµï¿½ï¿½ï¿½ï¿½ï¿½Ï¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤Ã¤Æ¤ï¿½ï¿½ï¿½
 			//
 			this->mfcDeviceInfo.nColorType.val = MFCDEVINFMONO;
 		}
@@ -153,8 +153,8 @@ QueryDeviceInfo( Brother_Scanner *this )
 //		lpTwDev:Pointer to setting information of DataSource
 //
 //	Return values:
-//		TRUE  = Success to get device information¡ÊStorage information from device¡Ë
-//		FALSE = Fail to get device information¡ÊStorage default information
+//		TRUE  = Success to get device informationï¿½ï¿½Storage information from deviceï¿½ï¿½
+//		FALSE = Fail to get device informationï¿½ï¿½Storage default information
 //
 //-----------------------------------------------------------------------------
 //
@@ -282,7 +282,7 @@ SetDefaultScannerInfo( Brother_Scanner *this )
 //		FALSE = Fail to read device information
 //
 //-----------------------------------------------------------------------------
-//	QCommandProc¡ÊµìSendQ_do¡Ë
+//	QCommandProcï¿½Êµï¿½SendQ_doï¿½ï¿½
 DWORD
 QCommandProc( void *lpParameter )
 {
@@ -302,7 +302,10 @@ QCommandProc( void *lpParameter )
 	//
 	//WriteDeviceCommand( this->hScanner, MFCMD_QUERYDEVINFO, strlen( MFCMD_QUERYDEVINFO ) );
 	//2005/11/11 Add SeriesNnumber information for L4CFB
-	WriteDeviceCommand( this->hScanner, MFCMD_QUERYDEVINFO, strlen( MFCMD_QUERYDEVINFO ),this->modelInf.seriesNo  );
+	if (!WriteDeviceCommand( this->hScanner, MFCMD_QUERYDEVINFO, strlen( MFCMD_QUERYDEVINFO ),this->modelInf.seriesNo  ))
+	{
+		return FALSE;
+	}
 
 	// Set value of timeout
 	//
@@ -380,7 +383,10 @@ QueryScanInfoProc(
 	WriteLogScanCmd( "Write", szCmdStr );
 	//WriteDeviceCommand( this->hScanner, szCmdStr, CmdLength );
 	//2005/11/11 Add SeriesNnumber information for L4CFB
-	WriteDeviceCommand( this->hScanner, szCmdStr, CmdLength, this->modelInf.seriesNo );
+	if (!WriteDeviceCommand( this->hScanner, szCmdStr, CmdLength, this->modelInf.seriesNo ))
+	{
+		return FALSE;
+	}
 
 	//Set value of timeout
 	//
@@ -467,35 +473,35 @@ QueryScanInfoProc(
 		lpDataBuff = pReadBuf+2; // ¥µ¥¤¥º¤ÎÎÎ°èÊ¬¡¢¥Ý¥¤¥ó¥¿¤ò¿Ê¤á¤ë¡£
 		wReadSize = nRealReadSize-2;
 		//
-		// ¥¹¥­¥ã¥Ê¾ðÊó¤Î¥ê¡¼¥É
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Î¥ê¡¼ï¿½ï¿½
 		//
 		bResult = TRUE;
-		// ¥Ç¡¼¥¿¤Î½ª¤ï¤ê¤ËZero¤òÄÉ²Ã¤·¤ÆÊ¸»úÎó¤È¤·¤Æ°·¤¨¤ë¤è¤¦¤Ë¤¹¤ë
+		// ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½Zeroï¿½ï¿½ï¿½É²Ã¤ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½ï¿½ï¿½È¤ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½è¤¦ï¿½Ë¤ï¿½ï¿½ï¿½
 		*( lpDataBuff + wReadSize ) = '\0';
 		WriteLog( "  Response is [%s]", lpDataBuff );
 		//
-		// ¥¹¥­¥ã¥ó¤¹¤ë¼Â²òÁüÅÙ¤Î¼èÆÀ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¤¹¤ï¿½Â²ï¿½ï¿½ï¿½ï¿½Ù¤Î¼ï¿½ï¿½ï¿½
 		this->devScanInfo.DeviceScan.wResoX = StrToWord( GetToken( &lpDataBuff ) );
 		this->devScanInfo.DeviceScan.wResoY = StrToWord( GetToken( &lpDataBuff ) );
 		if( this->devScanInfo.DeviceScan.wResoX == 0 || this->devScanInfo.DeviceScan.wResoY == 0 ){
 			//
-			// ¼Â²òÁüÅÙ¤¬°Û¾ïÃÍ
+			// ï¿½Â²ï¿½ï¿½ï¿½ï¿½Ù¤ï¿½ï¿½Û¾ï¿½ï¿½ï¿½
 			bResult = FALSE;
 		}
 		//
-		// ¥¹¥­¥ã¥ó¥½¡¼¥¹¤Î¼èÆÀ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¥½¡ï¿½ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½
 		this->devScanInfo.wScanSource = StrToWord( GetToken( &lpDataBuff ) );
 		//
-		// ÆÉ¤ß¼è¤êºÇÂçÉý¤Î¾ðÊó¤ò¼èÆÀ¡Ê0.1mmÃ±°Ì¡¢¥É¥Ã¥È¿ô¡Ë
+		// ï¿½É¤ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0.1mmÃ±ï¿½Ì¡ï¿½ï¿½É¥Ã¥È¿ï¿½ï¿½ï¿½
 		this->devScanInfo.dwMaxScanWidth  = StrToWord( GetToken( &lpDataBuff ) ) * 10;
 		this->devScanInfo.dwMaxScanPixels = StrToWord( GetToken( &lpDataBuff ) );
 		if( this->devScanInfo.dwMaxScanWidth == 0 || this->devScanInfo.dwMaxScanPixels == 0 ){
 			//
-			// ÆÉ¤ß¼è¤êºÇÂçÉý¾ðÊó¤¬°Û¾ïÃÍ
+			// ï¿½É¤ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¤¬°Û¾ï¿½ï¿½ï¿½
 			bResult = FALSE;
 		}
 		//
-		// FBÆÉ¤ß¼è¤êºÇÂçÄ¹¤Î¾ðÊó¤ò¼èÆÀ¡Ê0.1mmÃ±°Ì¡¢¥é¥¹¥¿¿ô¡Ë
+		// FBï¿½É¤ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Î¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0.1mmÃ±ï¿½Ì¡ï¿½ï¿½é¥¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		this->devScanInfo.dwMaxScanHeight = StrToWord( GetToken( &lpDataBuff ) ) * 10;
 		this->devScanInfo.dwMaxScanRaster = StrToWord( GetToken( &lpDataBuff ) );
 
@@ -525,7 +531,7 @@ QueryScanInfoProc(
 
 //
 // Reasolution table of each device.
-// ZL series¡§main scan line is 100dpi,200dpi or 300dpi models.
+// ZL seriesï¿½ï¿½main scan line is 100dpi,200dpi or 300dpi models.
 //
 static RESOLUTION  tblDecScanReso100[] =
 {
@@ -545,7 +551,7 @@ static RESOLUTION  tblDecScanReso100[] =
 };
 
 //
-// BY/New-YL series¡§main scan line is 200dpi or 300dpi models.
+// BY/New-YL seriesï¿½ï¿½main scan line is 200dpi or 300dpi models.
 //
 static RESOLUTION  tblDecScanReso300[] =
 {
@@ -565,7 +571,7 @@ static RESOLUTION  tblDecScanReso300[] =
 };
 
 //
-// YL series¡§main scan line is 200dpi model¡ÊB/W¡Ë
+// YL seriesï¿½ï¿½main scan line is 200dpi modelï¿½ï¿½B/Wï¿½ï¿½
 //
 static RESOLUTION  tblDecScanReso200BW[] =
 {
@@ -585,7 +591,7 @@ static RESOLUTION  tblDecScanReso200BW[] =
 };
 
 //
-// YL series¡§main scan line is 200dpi model
+// YL seriesï¿½ï¿½main scan line is 200dpi model
 //
 static RESOLUTION  tblDecScanReso200Gray[] =
 {
@@ -629,7 +635,7 @@ CnvResoNoToDeviceResoValue( Brother_Scanner *this, WORD nResoNo, WORD nColorType
 	}
 	if( !this->mfcModelInfo.bColorModel && ( this->mfcDeviceInfo.nMainScanDpi == 1 ) ){
 		//
-		// YL series¡§main scan line is 200dpi model.
+		// YL seriesï¿½ï¿½main scan line is 200dpi model.
 		//
 		if( nColorType == COLOR_BW || nColorType == COLOR_ED ){
 			this->devScanInfo.DeviceScan.wResoX = tblDecScanReso200BW[ nResoNo ].wResoX;
@@ -640,14 +646,14 @@ CnvResoNoToDeviceResoValue( Brother_Scanner *this, WORD nResoNo, WORD nColorType
 		}
 	}else if( this->mfcDeviceInfo.nMainScanDpi == 2 ){
 		//
-		// BY/New-YL series¡§main scan line is 200dpi or 300dpi model
+		// BY/New-YL seriesï¿½ï¿½main scan line is 200dpi or 300dpi model
 		//
 		this->devScanInfo.DeviceScan.wResoX = tblDecScanReso300[ nResoNo ].wResoX;
 		this->devScanInfo.DeviceScan.wResoY = tblDecScanReso300[ nResoNo ].wResoY;
 
 	}else{
 		//
-		// ZL series ¡§main scan line is 100dpi,200dpi or 300dpi model.
+		// ZL series ï¿½ï¿½main scan line is 100dpi,200dpi or 300dpi model.
 		//
 		this->devScanInfo.DeviceScan.wResoX = tblDecScanReso100[ nResoNo ].wResoX;
 		this->devScanInfo.DeviceScan.wResoY = tblDecScanReso100[ nResoNo ].wResoY;

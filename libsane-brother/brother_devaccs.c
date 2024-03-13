@@ -593,7 +593,7 @@ ReadNonFixedData( usb_dev_handle *hScanner, LPSTR lpBuffer, WORD wReadSize, DWOR
 //	Note:
 //
 //-----------------------------------------------------------------------------
-//	ReadBidiFixedData¡ÊµìReadBidiComm32_q¡Ë
+//	ReadBidiFixedDataï¿½Êµï¿½ReadBidiComm32_qï¿½ï¿½
 BOOL
 ReadFixedData( usb_dev_handle *hScanner, LPSTR lpBuffer, WORD wReadSize, DWORD dwTimeOutMsec, int seriesNo )
 {
@@ -647,7 +647,7 @@ ReadFixedData( usb_dev_handle *hScanner, LPSTR lpBuffer, WORD wReadSize, DWORD d
 
 		if( wReadCount >= wReadSize ) break;	// terminate if reading data is completed
 
-		usleep(20 * 1000); // 20msÂÔ¤Ä
+		usleep(20 * 1000); // 20msï¿½Ô¤ï¿½
 	}
 
 	return bResult;
@@ -784,12 +784,12 @@ WriteDeviceData( usb_dev_handle *hScanner, LPSTR lpTxBuffer, int nWriteSize, int
 //
 //
 //	Return values:
-//		0 >  the function terminate successfully , the return value is the size of data written to the device
-//		0 <= the function is failed , the return value is error code.
+//		TRUE on success
+//		FALSE on error
 //
 //-----------------------------------------------------------------------------
 //
-int
+BOOL
 WriteDeviceCommand( usb_dev_handle *hScanner, LPSTR lpTxBuffer, int nWriteSize, int seriesNo)
 {
     int  nResultSize;
@@ -806,7 +806,7 @@ WriteDeviceCommand( usb_dev_handle *hScanner, LPSTR lpTxBuffer, int nWriteSize, 
 
     nResultSize = WriteDeviceData(hScanner, lpTxBuffer, nWriteSize, seriesNo);
 
-    return nResultSize;
+    return nResultSize == nWriteSize ? TRUE : FALSE;
 }
 
 

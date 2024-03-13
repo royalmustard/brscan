@@ -254,7 +254,7 @@ typedef union tagSCANMODELIST {
 	WORD  bErrorDiffusion:1; /* error-diffusion */
 	WORD  bTrueGray:1;	 /* gray scale */
 	WORD  b24BitColor:1;	 /* 24 bit color */
-	WORD  b24BitNoCMatch:1;	 /* fast 24 bit color ¡Êwithout ColorMatch¡Ë */
+	WORD  b24BitNoCMatch:1;	 /* fast 24 bit color ï¿½ï¿½without ColorMatchï¿½ï¿½ */
     } bit;
     WORD val;
 } SCANMODELIST, *PSCANMODELIST;

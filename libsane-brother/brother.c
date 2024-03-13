@@ -70,9 +70,9 @@ Not support (force causing compile error)
 
 TDevice *g_pdev;
 
-static int      num_devices;	// USB¾å¤Ë¸¡½Ð¤µ¤ì¤¿Brother¥Ç¥Ð¥¤¥¹¿ô
-static TDevice  *pdevFirst;	// USB¾å¤Ë¸¡½Ð¤µ¤ì¤¿Brother¥Ç¥Ð¥¤¥¹¥ê¥¹¥È
-static Brother_Scanner   *pinstFirst;	// ¥ª¡¼¥×¥ó¤·¤¿¥Ç¥Ð¥¤¥¹¤Î³Æ¼ï¾ðÊó
+static int      num_devices;	// USBï¿½ï¿½Ë¸ï¿½ï¿½Ð¤ï¿½ï¿½ì¤¿Brotherï¿½Ç¥Ð¥ï¿½ï¿½ï¿½ï¿½ï¿½
+static TDevice  *pdevFirst;	// USBï¿½ï¿½Ë¸ï¿½ï¿½Ð¤ï¿½ï¿½ì¤¿Brotherï¿½Ç¥Ð¥ï¿½ï¿½ï¿½ï¿½ê¥¹ï¿½ï¿½
+static Brother_Scanner   *pinstFirst;	// ï¿½ï¿½ï¿½ï¿½ï¿½×¥ó¤·¤ï¿½ï¿½Ç¥Ð¥ï¿½ï¿½ï¿½ï¿½Î³Æ¼ï¿½ï¿½ï¿½ï¿½
 
 /* ======================================================================
 
@@ -103,7 +103,7 @@ static SANE_Range rangeYmm;
 static SANE_Status
 SetupScanMode (Brother_Scanner *this, int scanMode)
 {
-   // ¥Ö¥é¥¤¥È¥Í¥¹/¥³¥ó¥È¥é¥¹¥È¤ÎÍ­¸ú/Ìµ¸ú¤òÈ½ÃÇ¤¹¤ë¡£
+   // ï¿½Ö¥é¥¤ï¿½È¥Í¥ï¿½/ï¿½ï¿½ï¿½ï¿½È¥é¥¹ï¿½È¤ï¿½Í­ï¿½ï¿½/Ìµï¿½ï¿½ï¿½ï¿½È½ï¿½Ç¤ï¿½ï¿½ë¡£
    if (scanMode == COLOR_FUL || scanMode == COLOR_FUL_NOCM)
    {
      this->aoptDesc[optContrast].cap |= SANE_CAP_INACTIVE;
@@ -161,7 +161,7 @@ InitOptions (Brother_Scanner *this)
   memset(this->aoptDesc,0,sizeof(this->aoptDesc));
   memset(this->aoptVal,0,sizeof(this->aoptVal));
 
-  // ¥¹¥­¥ã¥ó¥â¡¼¥É¤ÎÀßÄê¹àÌÜ¥ê¥¹¥È¤ò¼èÆÀ¤¹¤ë¡£
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â¡¼ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¥ê¥¹ï¿½È¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£
   nSize = NUM_SCANMODE * sizeof (scanModeList[0]);
   scanModeList = MALLOC (nSize);
   if (!scanModeList)
@@ -186,21 +186,21 @@ InitOptions (Brother_Scanner *this)
   if (!rc)
       return SANE_STATUS_INVAL;
 
-  // ÆÉ¤ß¼è¤êÉý¤Î¤ÎÀßÄêÈÏ°ÏÃÍ¤ò¼èÆÀ¤¹¤ë¡£
+  // ï¿½É¤ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£
   rangeXmm.min = SANE_FIX(0.0);
   rangeXmm.max = SANE_FIX(this->modelConfig.SupportScanAreaWidth);
   rangeXmm.quant = SANE_FIX(0.1);
 
-  // ºÇÂçÆÉ¤ß¼è¤êÉý¤è¤ê¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬Âç¤­¤¤¾ì¹ç¡¢ºÇÂçÆÉ¤ß¼è¤êÉý¤ò¥Ç¥Õ¥©¥ë¥È¤È¤¹¤ë¡£
+  // ï¿½ï¿½ï¿½ï¿½ï¿½É¤ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½Í¤ï¿½ï¿½ç¤­ï¿½ï¿½ï¿½ï¿½ç¡¢ï¿½ï¿½ï¿½ï¿½ï¿½É¤ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥Õ¥ï¿½ï¿½ï¿½È¤È¤ï¿½ï¿½ë¡£
   if (rangXY_DEF[optBRX-optTLX] > rangeXmm.max)
     rangXY_DEF[optBRX-optTLX] = rangeXmm.max;
 
-  // ÆÉ¤ß¼è¤êÄ¹¤ÎÀßÄêÈÏ°ÏÃÍ¤ò¼èÆÀ¤¹¤ë¡£
+  // ï¿½É¤ß¼ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£
   rangeYmm.min = SANE_FIX(0.0);
   rangeYmm.max = SANE_FIX(this->modelConfig.SupportScanAreaHeight);
   rangeYmm.quant = SANE_FIX(0.1);
 
-  // ºÇÂçÆÉ¤ß¼è¤êÄ¹¤è¤ê¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬Âç¤­¤¤¾ì¹ç¡¢ºÇÂçÆÉ¤ß¼è¤êÄ¹¤ò¥Ç¥Õ¥©¥ë¥È¤È¤¹¤ë¡£
+  // ï¿½ï¿½ï¿½ï¿½ï¿½É¤ß¼ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½Ç¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½Í¤ï¿½ï¿½ç¤­ï¿½ï¿½ï¿½ï¿½ç¡¢ï¿½ï¿½ï¿½ï¿½ï¿½É¤ß¼ï¿½ï¿½Ä¹ï¿½ï¿½Ç¥Õ¥ï¿½ï¿½ï¿½È¤È¤ï¿½ï¿½ë¡£
   if (rangXY_DEF[optBRY-optTLX] > rangeYmm.max)
     rangXY_DEF[optBRY-optTLX] = rangeYmm.max;
 
@@ -488,7 +488,7 @@ sane_exit (void)
   for (dev = pdevFirst; dev; dev = pNext)
     {
       pNext = dev->pNext;
-      // strdup´Ø¿ô¤Ç¥á¥â¥ê¤ò³ÎÊÝ¤·¤Æ¤¤¤ë¤¿¤á¡¢Ä¾ÀÜfree()¤ò»ÈÍÑ
+      // strdupï¿½Ø¿ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¤ï¿½ï¿½Æ¤ï¿½ï¿½ë¤¿ï¿½á¡¢Ä¾ï¿½ï¿½free()ï¿½ï¿½ï¿½ï¿½ï¿½
       free ((void *) dev->sane.name);
       free ((void *) dev->sane.model);
       free ((void *) dev->sane.type);
@@ -587,17 +587,17 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 	sscanf(devicename,"net1;dev%d",&this->hScanner->net_device_index);
     }
 
-    // ¥Ç¥Ð¥¤¥¹¥ª¡¼¥×¥ó
+    // ï¿½Ç¥Ð¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¥ï¿½
     rc= OpenDevice(this->hScanner, pdev->modelInf.seriesNo);
     if (!rc) return SANE_STATUS_INVAL;
 
-    // ³Æ¼ï¾ðÊó¤Î½é´ü²½
+    // ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ï¿½
     this->scanState.bEOF = FALSE;
     this->scanState.bCanceled = FALSE;
     this->scanState.bScanning = FALSE;
     this->scanState.nPageCnt = 0;
 
-    // ³Æ¼ïÀßÄê¾ðÊó¤ò¼èÆÀ
+    // ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     this->modelInf.productID = pdev->modelInf.productID;
     this->modelInf.expcaps = pdev->modelInf.expcaps;     //M-LNX-20
     this->modelInf.vendorID = pdev->modelInf.vendorID;
@@ -611,7 +611,7 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 
     GetLogSwitch( this );
 
-    // Frontend¾å¤ÎÀßÄêÃÍ¤ò¥»¥Ã¥È
+    // Frontendï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¤ò¥»¥Ã¥ï¿½
     this->uiSetting.ResoList.val = this->modelConfig.SupportReso.val;
     this->uiSetting.ScanModeList.val = this->modelConfig.SupportScanMode.val;
     this->uiSetting.ScanSrcList.val = this->modelConfig.SupportScanSrc.val;
@@ -650,19 +650,19 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     }
 #endif
     ///
-    /// ColorMatch DLL¤Î¥í¡¼¥É
+    /// ColorMatch DLLï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
     ///
     this->modelInf.index = pdev->modelInf.index;     // cp index
     LoadColorMatchDll( this ,this->modelInf.index);  // load dll
 
     //
-    // Scan Decode DLL¤Î¥í¡¼¥É
+    // Scan Decode DLLï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
     //
     rc = LoadScanDecDll( this );
     if ( !rc )  // Scan Decode DLL¤Î¥í¡¼¥É¼ºÇÔ
 	return SANE_STATUS_INVAL;
 
-    // GrayTable¤Î¥í¡¼¥É
+    // GrayTableï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
     LoadGrayTable( this, GRAY_TABLE_NO );
 
     rc = InitOptions(this);
@@ -824,7 +824,7 @@ sane_control_option (SANE_Handle handle, SANE_Int iOpt,
 	  if (pnInfo)
 	    (*pnInfo) |= SANE_INFO_RELOAD_PARAMS | SANE_INFO_RELOAD_OPTIONS;
 
-	  // ¥¹¥­¥ã¥ó¥â¡¼¥É¤Ë¤è¤Ã¤Æ±Æ¶Á¤ò¼õ¤±¤ëµ¡Ç½¤ò¥Á¥§¥Ã¥¯¤¹¤ë¡£
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â¡¼ï¿½É¤Ë¤ï¿½Ã¤Æ±Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ¡Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ë¡£
 	  id = get_scanmode_id(pVal);
 	  if (id == -1)
 	    return SANE_STATUS_INVAL;
@@ -836,7 +836,7 @@ sane_control_option (SANE_Handle handle, SANE_Int iOpt,
 	case optScanSrc:
 
 	if (this->aoptVal[iOpt].s)
-	 free (this->aoptVal[iOpt].s); // strdup´Ø¿ô¤Ç¥á¥â¥ê¤ò³ÎÊÝ¤·¤Æ¤¤¤ë¤¿¤á¡¢Ä¾ÀÜfree()¤ò»ÈÍÑ¡£
+	 free (this->aoptVal[iOpt].s); // strdupï¿½Ø¿ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¤ï¿½ï¿½Æ¤ï¿½ï¿½ë¤¿ï¿½á¡¢Ä¾ï¿½ï¿½free()ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½
 	this->aoptVal[iOpt].s = strdup (pVal);
 
 	  break;
@@ -864,7 +864,7 @@ SetupInternalParameters(Brother_Scanner *this)
   this->uiSetting.nContrast=(int)(this->aoptVal[optContrast].w>>SANE_FIXED_SCALE_SHIFT);
   this->uiSetting.nSrcType = get_scansrc_id(this->aoptVal[optScanSrc].s);  //06/02/27 Duplex Scan
 
-  // X¼´¤¬Æ±¤¸ÃÍ¤Î¾ì¹ç¤Ï¥¨¥é¡¼
+  // Xï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Í¤Î¾ï¿½ï¿½Ï¥ï¿½ï¿½é¡¼
   if (this->aoptVal[optTLX].w == this->aoptVal[optBRX].w )
     return SANE_STATUS_INVAL;
 
@@ -879,7 +879,7 @@ SetupInternalParameters(Brother_Scanner *this)
     this->uiSetting.ScanAreaMm.right = (int)(SANE_UNFIX(this->aoptVal[optTLX].w) * 10);
   }
 
-  // Y¼´¤¬Æ±¤¸ÃÍ¤Î¾ì¹ç¤Ï¥¨¥é¡¼
+  // Yï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Í¤Î¾ï¿½ï¿½Ï¥ï¿½ï¿½é¡¼
   if (this->aoptVal[optTLY].w == this->aoptVal[optBRY].w )
     return SANE_STATUS_INVAL;
 
@@ -897,7 +897,7 @@ SetupInternalParameters(Brother_Scanner *this)
   nWidthMm = this->uiSetting.ScanAreaMm.right - this->uiSetting.ScanAreaMm.left + 1;
   nHeightMm = this->uiSetting.ScanAreaMm.bottom - this->uiSetting.ScanAreaMm.top + 1;
 
-  // Éý¡¢¹â¤µ¤¬8mm°Ê²¼¤Î¾ì¹ç¡¢¥¨¥é¡¼¤È¤¹¤ë¡£
+  // ï¿½ï¿½ï¿½ï¿½ï¿½â¤µï¿½ï¿½8mmï¿½Ê²ï¿½ï¿½Î¾ï¿½ç¡¢ï¿½ï¿½ï¿½é¡¼ï¿½È¤ï¿½ï¿½ë¡£
   if (nWidthMm <= 80 || nHeightMm <= 80)
     return SANE_STATUS_INVAL;
 

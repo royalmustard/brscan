@@ -26,7 +26,7 @@
 //
 //
 //	Abstract:
-//			¥«¥é¡¼¥Þ¥Ã¥Á¥ó¥°½èÍý¥â¥¸¥å¡¼¥ë
+//			ï¿½ï¿½ï¿½é¡¼ï¿½Þ¥Ã¥ï¿½ï¿½ó¥°½ï¿½ï¿½ï¿½ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½
 //
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -62,19 +62,19 @@ extern HANDLE	hOrg;		//Gray Adjsut table from scanner
 //
 //
 //	Abstract:
-//		ColorMatch DLL¤ò¥í¡¼¥É¤·¡¢³Æ´Ø¿ô¤Ø¤Î¥Ý¥¤¥ó¥¿¤ò¼èÆÀ¤¹¤ë
+//		ColorMatch DLLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½Æ´Ø¿ï¿½ï¿½Ø¤Î¥Ý¥ï¿½ï¿½ó¥¿¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //
 //	Return values:
-//		TRUE  = Àµ¾ï½ªÎ»
-//		FALSE = ColorMatch DLL¤¬Â¸ºß¤·¤Ê¤¤¡¿¥¨¥é¡¼È¯À¸
+//		TRUE  = ï¿½ï¿½ï¿½ï½ªÎ»
+//		FALSE = ColorMatch DLLï¿½ï¿½Â¸ï¿½ß¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡¼È¯ï¿½ï¿½
 //
 //-----------------------------------------------------------------------------
-//	LoadColorMatchDll¡ÊµìDllMain¤Î°ìÉô¡Ë
+//	LoadColorMatchDllï¿½Êµï¿½DllMainï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½
 BOOL
 LoadColorMatchDll( Brother_Scanner *this ,int index){
 	BOOL  bResult = TRUE;
@@ -101,7 +101,7 @@ LoadColorMatchDll( Brother_Scanner *this ,int index){
 	}
 	if( this->cmatch.hColorMatch != NULL ){
 		//
-		// ColorMatch¥Õ¥¡¥ó¥¯¥·¥ç¥ó¡¦¥Ý¥¤¥ó¥¿¤Î¼èÆÀ
+		// ColorMatchï¿½Õ¥ï¿½ï¿½ó¥¯¥ï¿½ï¿½ï¿½ó¡¦¥Ý¥ï¿½ï¿½ó¥¿¤Î¼ï¿½ï¿½ï¿½
 		//
 		this->cmatch.lpfnColorMatchingInit    = dlsym ( this->cmatch.hColorMatch, "ColorMatchingInit" );
 		this->cmatch.lpfnColorMatchingEnd     = dlsym ( this->cmatch.hColorMatch, "ColorMatchingEnd" );
@@ -126,7 +126,7 @@ LoadColorMatchDll( Brother_Scanner *this ,int index){
 		  if(  this->cmatch.lpfnColorMatchingInit == NULL ||
 		       this->cmatch.lpfnColorMatchingEnd  == NULL ||
 		       this->cmatch.lpfnColorMatchingFnc  == NULL ){
-		    // DLL¤Ï¤¢¤ë¤¬¡¢¥¢¥É¥ì¥¹¤¬¼è¤ì¤Ê¤¤¤Î¤Ï°Û¾ï
+		    // DLLï¿½Ï¤ï¿½ï¿½ë¤¬ï¿½ï¿½ï¿½ï¿½ï¿½É¥ì¥¹ï¿½ï¿½ï¿½ï¿½ï¿½Ê¤ï¿½ï¿½Î¤Ï°Û¾ï¿½
 		    WriteLog( "ColorMatch initialize  Fail to get the procedure address from [%s]\n",szColorMatchDl );
 		    dlclose ( this->cmatch.hColorMatch );
 		    this->cmatch.hColorMatch = NULL;
@@ -149,15 +149,15 @@ LoadColorMatchDll( Brother_Scanner *this ,int index){
 //
 //
 //	Abstract:
-//		ColorMatch DLL¤ò³«Êü¤¹¤ë
+//		ColorMatch DLLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //
 //	Return values:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //-----------------------------------------------------------------------------
 //
@@ -166,7 +166,7 @@ FreeColorMatchDll( Brother_Scanner *this )
 {
 	if( this->cmatch.hColorMatch != NULL ){
 		//
-		// ColorMatch DLL¤ò³«Êü¤¹¤ë
+		// ColorMatch DLLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//
 		dlclose ( this->cmatch.hColorMatch );
 		this->cmatch.hColorMatch = NULL;
@@ -179,7 +179,7 @@ FreeColorMatchDll( Brother_Scanner *this )
 //
 //
 //	Abstract:
-//		ColorMatch½èÍý¤ò½é´ü²½¤¹¤ë
+//		ColorMatchï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
@@ -188,11 +188,11 @@ FreeColorMatchDll( Brother_Scanner *this )
 //		nRgbDataType
 //
 //	Return values:
-//		TRUE  = Àµ¾ï½ªÎ»
-//		FALSE = ColorMatch DLL¤¬Â¸ºß¤·¤Ê¤¤¡¿¥¨¥é¡¼È¯À¸
+//		TRUE  = ï¿½ï¿½ï¿½ï½ªÎ»
+//		FALSE = ColorMatch DLLï¿½ï¿½Â¸ï¿½ß¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡¼È¯ï¿½ï¿½
 //
 //-----------------------------------------------------------------------------
-//	InitColorMatchingFunc¡ÊµìPageTopProcess¤Î°ìÉô¡Ë
+//	InitColorMatchingFuncï¿½Êµï¿½PageTopProcessï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½
 void
 InitColorMatchingFunc( Brother_Scanner *this, WORD nColorType, int nRgbDataType )
 {
@@ -203,14 +203,14 @@ InitColorMatchingFunc( Brother_Scanner *this, WORD nColorType, int nRgbDataType 
 
 	if( this->cmatch.lpfnColorMatchingInit == NULL || this->modelConfig.bNoUseColorMatch ){
 		//
-		// ColorMatch DLL¤¬Â¸ºß¤·¤Ê¤¤¤«¡¢ColorMatch¤¬É¬Í×¤Ê¤¤
+		// ColorMatch DLLï¿½ï¿½Â¸ï¿½ß¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½ï¿½ColorMatchï¿½ï¿½É¬ï¿½×¤Ê¤ï¿½
 		//
 		this->cmatch.nColorMatchStatus = COLORMATCH_NONE;
 	}else{
 		if( nColorType == COLOR_FUL ){
 			if( this->cmatch.nColorMatchStatus == COLORMATCH_GOOD ){
 				//
-				// ºÆ½é´ü²½¤ò¹Ô¤¦¤¿¤á¤Ë½ªÎ»½èÍý¤ò¼Â¹Ô
+				// ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¹ï¿½
 				//
 				(*this->cmatch.lpfnColorMatchingEnd)();
 			}
@@ -233,7 +233,7 @@ InitColorMatchingFunc( Brother_Scanner *this, WORD nColorType, int nRgbDataType 
 			}
 		}else{
 			//
-			// ColorMatch¤ò¹Ô¤¦É¬Í×¤¬¤Ê¤¤
+			// ColorMatchï¿½ï¿½Ô¤ï¿½É¬ï¿½×¤ï¿½ï¿½Ê¤ï¿½
 			//
 			this->cmatch.nColorMatchStatus = COLORMATCH_NONE;
 		}
@@ -247,27 +247,27 @@ InitColorMatchingFunc( Brother_Scanner *this, WORD nColorType, int nRgbDataType 
 //
 //
 //	Abstract:
-//		ColorMatch½èÍý¤ò¼Â¹Ô¤¹¤ë
+//		ColorMatchï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¹Ô¤ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
 //		this
-//			Brother_Scanner¹½Â¤ÂÎ¤Î¥Ý¥¤¥ó¥¿
+//			Brother_Scannerï¿½ï¿½Â¤ï¿½Î¤Î¥Ý¥ï¿½ï¿½ï¿½
 //		lpRgbData
-//			RGB¥Ç¡¼¥¿¤Ø¤Î¥Ý¥¤¥ó¥¿
+//			RGBï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Ø¤Î¥Ý¥ï¿½ï¿½ï¿½
 //
 //		lRgbDataLen
-//			RGB¥Ç¡¼¥¿¤Î¥µ¥¤¥º
+//			RGBï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 //		lLineCount
-//			RGB¥Ç¡¼¥¿¤Î¥é¥¹¥¿¿ô
+//			RGBï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Î¥é¥¹ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Return values:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //-----------------------------------------------------------------------------
-//	ExecColorMatchingFunc¡ÊµìProcessMain¤Î°ìÉô¡Ë
+//	ExecColorMatchingFuncï¿½Êµï¿½ProcessMainï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½
 void
 ExecColorMatchingFunc( Brother_Scanner *this, LPBYTE lpRgbData, long lRgbDataLen, long lLineCount )
 {
@@ -285,18 +285,18 @@ ExecColorMatchingFunc( Brother_Scanner *this, LPBYTE lpRgbData, long lRgbDataLen
 //
 //
 //	Abstract:
-//		ColorMatch½èÍý¤ò½ªÎ»¤¹¤ë
+//		ColorMatchï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //
 //	Return values:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //-----------------------------------------------------------------------------
-//	CloseColorMatchingFunc¡ÊµìDRV_PROC¤Î°ìÉô¡Ë
+//	CloseColorMatchingFuncï¿½Êµï¿½DRV_PROCï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½
 void
 CloseColorMatchingFunc( Brother_Scanner *this )
 {
@@ -315,19 +315,19 @@ CloseColorMatchingFunc( Brother_Scanner *this )
 //
 //
 //	Abstract:
-//		GrayTable¤ò¥í¡¼¥É¤¹¤ë
+//		GrayTableï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //
 //	Return values:
-//		TRUE  = Àµ¾ï½ªÎ»
-//		FALSE = GrayTable¤¬Â¸ºß¤·¤Ê¤¤¡¿¥¨¥é¡¼È¯À¸
+//		TRUE  = ï¿½ï¿½ï¿½ï½ªÎ»
+//		FALSE = GrayTableï¿½ï¿½Â¸ï¿½ß¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡¼È¯ï¿½ï¿½
 //
 //-----------------------------------------------------------------------------
-//	LoadGrayTable¡ÊµìOpenDS¤Î°ìÉô¡Ë
+//	LoadGrayTableï¿½Êµï¿½OpenDSï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½
 BOOL
 LoadGrayTable( Brother_Scanner *this, BYTE GrayTableNo )
 {
@@ -378,15 +378,15 @@ LoadGrayTable( Brother_Scanner *this, BYTE GrayTableNo )
 //
 //
 //	Abstract:
-//		GrayTable¤ò³«Êü¤¹¤ë
+//		GrayTableï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //
 //	Return values:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //-----------------------------------------------------------------------------
 //
@@ -395,7 +395,7 @@ FreeGrayTable( Brother_Scanner *this )
 {
 	if( this->cmatch.hGrayTbl != NULL ){
 		//
-		// GrayTable¤ò³«Êü¤¹¤ë
+		// GrayTableï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//
 		FREE( this->cmatch.hGrayTbl );
 		this->cmatch.hGrayTbl = NULL;
@@ -409,18 +409,18 @@ FreeGrayTable( Brother_Scanner *this )
 //
 //
 //	Abstract:
-//		²è¼ÁÄ´À°¡ÊBrightness/Contrast¡ËÍÑ¥Æ¡¼¥Ö¥ë¤Î³ÎÊÝ¤È½é´ü²½
+//		ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½Brightness/Contrastï¿½ï¿½ï¿½Ñ¥Æ¡ï¿½ï¿½Ö¥ï¿½Î³ï¿½ï¿½Ý¤È½ï¿½ï¿½ï¿½ï¿½
 //
 //
 //	Parameters:
-//		¤Ê¤·
+//		ï¿½Ê¤ï¿½
 //
 //
 //	Return values:
-//		²è¼ÁÄ´À°ÍÑ¥Æ¡¼¥Ö¥ë¤Î¥Ï¥ó¥É¥ë
+//		ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½Ñ¥Æ¡ï¿½ï¿½Ö¥ï¿½Î¥Ï¥ï¿½É¥ï¿½
 //
 //-----------------------------------------------------------------------------
-//	SetupGrayAdjust¡ÊµìSetBitmapInfo¤Î°ìÉô¡Ë
+//	SetupGrayAdjustï¿½Êµï¿½SetBitmapInfoï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½
 HANDLE
 SetupGrayAdjust( Brother_Scanner *this )
 {
@@ -443,7 +443,7 @@ SetupGrayAdjust( Brother_Scanner *this )
 
 		if( this->cmatch.hGrayTbl == NULL ){
 			//
-			// GrayTable¥Õ¥¡¥¤¥ë¤¬Â¸ºß¤·¤Ê¤¤
+			// GrayTableï¿½Õ¥ï¿½ï¿½ï¿½ï¿½ë¤¬Â¸ï¿½ß¤ï¿½ï¿½Ê¤ï¿½
 			//
 			for( lIndex = 0; lIndex < 256; lIndex++ ){
 				lGrayVal = (LONG)lIndex;
@@ -481,7 +481,7 @@ SetupGrayAdjust( Brother_Scanner *this )
 		}
 	}else{
 		//
-		// ¥á¥â¥ê³ÎÊÝ¤Ë¼ºÇÔ¤·¤¿¤Î¤Ç¡¢Brightness/ContrastÄ´À°¤ÏÌµ¸ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¤Ë¼ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½Î¤Ç¡ï¿½Brightness/ContrastÄ´ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½
 		//
 		hGrayAdj = this->cmatch.hGrayTbl;
 	}
