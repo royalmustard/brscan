@@ -1,0 +1,31 @@
+.\" Manpage for bropen-scan.
+.\" Contact draglop@graglop@proton.me to correct errors or typos.
+.TH man 1 "April 2024" "1.0" "bropen-scan man page"
+.SH NAME
+bropen-scan \- Brother scanner scan tool
+.SH SYNOPSIS
+.B bropen-scan
+[
+.I options
+]
+.I output
+.SH DESCRIPTION
+bropen-scan is a free and open source Brother scanner usb scan tool.
+.SH OPTIONS
+--force              overwrite output if it already exists
+.br
+--format=bmp|jpeg    select scan mode and output file format, default: jpeg
+.br
+--help               print this message
+.br
+--product=id         specify scanner usb product id (hexadecimal), e.g.: --product=03b5
+.SH EXAMPLES
+bropen-scan scan.jpg
+.br
+bropen-scan --format=bmp scan.bmp
+.SH CAVEATS
+Only USB scanning is supported.
+.br
+There's a slight noticeable difference in color tints between the bmp and jpeg format, probably due to the yuv to rbg conversion, the jpeg format is more 'native' and should probably be prefered.
+.SH AUTHOR
+draglop (draglop@proton.me)

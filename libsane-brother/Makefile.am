@@ -25,13 +25,15 @@ libsane_brother_la_SOURCES = brother.c brother_cmatch.c		\
 	brother_misc.c brother_modelinf.c brother_scanner.c	\
 	brother_netdev.c brother_advini.c brother_log.c		\
 	brother_bugchk.c sane_strstatus.c sanei_config.c	\
-	sanei_constrain_value.c sanei_init_debug.c
+	sanei_constrain_value.c sanei_init_debug.c	\
+	bropen_com.c bropen_sane.h bropen_scan.c bropen_types.c bropen_yuv.c
 
 noinst_HEADERS = brother.h brother_bugchk.h brother_cmatch.h	\
 	brother_devaccs.h brother_devinfo.h brother_dtype.h	\
 	brother_log.h brother_mfccmd.h brother_mfcinfo.h	\
 	brother_misc.h brother_modelinf.h brother_scanner.h	\
-	brother_netdev.h brother_advini.h
+	brother_netdev.h brother_advini.h	\
+	bropen_com.h bropen_ec.h bropen_sane.h bropen_scan.h bropen_types.h bropen_yuv.h
 
 noinst_LTLIBRARIES = libstubs.la
 
