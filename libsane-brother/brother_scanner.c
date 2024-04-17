@@ -483,7 +483,7 @@ PageScanStart( Brother_Scanner *this )
 			//
 			// send the start-scan-command
 			//
-			nCmdStrLen = MakeupScanStartCmd( this, szCmdStr );
+			nCmdStrLen = MakeupScanStartCmd( this, szCmdStr, this->modelInf.seriesNo );
 			if (WriteDeviceCommand( this->hScanner, szCmdStr, nCmdStrLen, this->modelInf.seriesNo ))
 				rc=TRUE;
 

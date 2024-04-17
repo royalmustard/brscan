@@ -81,6 +81,8 @@
 #define		GENERIC_YCBCR_NOADF	14
 #define		GENERIC_YCBCR_NOFB	15
 
+#define     BROPEN_SERIES_NO    14
+
 #define         L4CFB                   16
 
 /* Define generic model for Another endpoiont */
@@ -114,7 +116,7 @@
 #define		INIFILE_NAME	"Brsane.ini"
 
 /* define the series-name */
-#define		MAX_SERIES_NO	12	/* the number of model-series */
+#define		MAX_SERIES_NO	14	/* the number of model-series */
 
 #define		YL4_SF_TYPE		1
 #define		YL4_FB_DCP		2
@@ -128,6 +130,9 @@
 #define		BHMINI_FB_ONLY	10
 #define		BHL2_SF_TYPE	11
 #define		BHL2_FB_DCP		12
+#define		GENERIC_YCBCR_NOADF	14
+
+#define     BROPEN_SERIES_NO    14
 
 /* define the GRAY-LEVEL data file name */
 #define		YL4_SF_TYPE_NAME	"YL4/brmfgray.bin"

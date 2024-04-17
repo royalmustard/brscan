@@ -97,7 +97,7 @@ extern BOOL  bTxCancelCmd;
 void  SendCancelCommand( usb_dev_handle *hScanner,int seriesNo );
 void  MakeupColorTypeCommand( WORD nColorType, LPSTR lpszColorCmd );
 int   MakeupScanQueryCmd( Brother_Scanner *this, LPSTR lpszCmdStr );
-int   MakeupScanStartCmd( Brother_Scanner *this, LPSTR lpszCmdStr );
+int   MakeupScanStartCmd( Brother_Scanner *this, LPSTR lpszCmdStr, int seriesNo );
 void  MakePercentStr( int nPercent, LPSTR lpszStr );
 void  MakeDotStr(int nPosition, LPSTR lpszStr, BOOL bSeparator );
 

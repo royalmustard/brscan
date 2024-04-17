@@ -172,7 +172,7 @@ MakeupScanQueryCmd( Brother_Scanner *this, LPSTR lpszCmdStr )
 //-----------------------------------------------------------------------------
 //	MakeupScanStartCmd�ʵ�MakeScanCom��
 int
-MakeupScanStartCmd( Brother_Scanner *this, LPSTR lpszCmdStr )
+MakeupScanStartCmd( Brother_Scanner *this, LPSTR lpszCmdStr, int seriesNo )
 {
 	char  szCmdStrTemp[ 16 ];
 
@@ -206,7 +206,7 @@ MakeupScanStartCmd( Brother_Scanner *this, LPSTR lpszCmdStr )
 	// ���̥⡼�ɤΥ��å�
 	//
 	strcat( lpszCmdStr, MFCMD_COMPRESSION );
-	if( this->modelConfig.bCompressEnbale ){
+	if( this->modelConfig.bCompressEnbale && seriesNo < BROPEN_SERIES_NO){
 		// PackBits���̤���
 		strcat( lpszCmdStr, MFCMD_COMP_PACKBITS );
 	}else{

@@ -1027,6 +1027,7 @@ void GetSupportScanSrc(int series,PMODELINF modelInf ,PMODELCONFIG modelConfig){
 			break;
 
 		case	BHMINI_FB_ONLY:
+		case    GENERIC_YCBCR_NOADF:
 			modelConfig->SupportScanSrc.bit.FB     = TRUE;		/* FlatBed				*/
 			modelConfig->SupportScanSrc.bit.ADF    = FALSE;		/* AutoDocumentFeeder	*/
 			break;

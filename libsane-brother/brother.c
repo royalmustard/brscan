@@ -68,6 +68,8 @@ Not support (force causing compile error)
 #include "brother_log.h"
 #include "brother_bugchk.h"
 
+#include "bropen_sane.h"
+
 TDevice *g_pdev;
 
 static int      num_devices;	// USB��˸��Ф��줿Brother�ǥХ�����
@@ -996,14 +998,32 @@ sane_read (SANE_Handle handle, SANE_Byte *buf,
 
   *len=0;
 
-  if (!this->scanState.bEOF) {
-    rc=PageScan(this,(char*)buf,maxlen,len);
-    if(rc == SANE_STATUS_DUPLEX_ADVERSE  && *len == 1) //06/02/27 if 0x84 is only returned, retry PageScan.
-      //while(rc == SANE_STATUS_DUPLEX_ADVERSE  && *len == 1)
-	rc =PageScan(this,(char*)buf,maxlen,len);
+  if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
+  {
+    if (!this->scanState.bEOF)
+    {
+      rc = PageScan(this, (char *)buf, maxlen, len);
+      if (rc == SANE_STATUS_DUPLEX_ADVERSE && *len == 1) // 06/02/27 if 0x84 is only returned, retry PageScan.
+      // while(rc == SANE_STATUS_DUPLEX_ADVERSE  && *len == 1)
+        rc = PageScan(this, (char *)buf, maxlen, len);
+    }
+    else
+    {
+      rc = SANE_STATUS_EOF;
+    }
   }
-  else {
-    rc = SANE_STATUS_EOF;
+  else
+  {
+    bropen_com_params_t com_params;
+
+    bropen_com_params_init(&com_params);
+    com_params.endpoint_dth = this->hScanner->usb_r_ep;
+    com_params.endpoint_htd = this->hScanner->usb_w_ep;
+    com_params.usb_handle = this->hScanner->usb;
+
+    rc = bropen_sane_read(handle, buf, maxlen, len, &com_params);
+
+    bropen_com_params_end(&com_params);
   }
 
   WriteLog( "<<< sane_read End >>> rc = %d, len = %d", rc, *len);
@@ -1026,6 +1046,8 @@ sane_cancel (SANE_Handle handle)
 
   }
   ScanEnd( this );
+
+  bropen_sane_cancel(handle);
 
   WriteLog( "sane_cancel end");
 

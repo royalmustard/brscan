@@ -470,8 +470,16 @@ QueryScanInfoProc(
 #elif  BRSANESUFFIX == 1
 		LPSTR  lpDataBuff;
 
-		lpDataBuff = pReadBuf+2; // ¥µ¥¤¥º¤ÎÎÎ°èÊ¬¡¢¥Ý¥¤¥ó¥¿¤ò¿Ê¤á¤ë¡£
-		wReadSize = nRealReadSize-2;
+		if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
+		{
+			lpDataBuff = pReadBuf+2; // ¥µ¥¤¥º¤ÎÎÎ°èÊ¬¡¢¥Ý¥¤¥ó¥¿¤ò¿Ê¤á¤ë¡£
+			wReadSize = nRealReadSize-2;
+		}
+		else
+		{
+			lpDataBuff = pReadBuf+3;
+			wReadSize = nRealReadSize-3;
+		}
 		//
 		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Î¥ê¡¼ï¿½ï¿½
 		//
