@@ -660,9 +660,12 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     //
     // Scan Decode DLLï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
     //
-    rc = LoadScanDecDll( this );
-    if ( !rc )  // Scan Decode DLL¤Î¥í¡¼¥É¼ºÇÔ
-	return SANE_STATUS_INVAL;
+    if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
+    {
+        rc = LoadScanDecDll( this );
+        if ( !rc )  // Scan Decode DLL¤Î¥í¡¼¥É¼ºÇÔ
+            return SANE_STATUS_INVAL;
+    }
 
     // GrayTableï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
     LoadGrayTable( this, GRAY_TABLE_NO );

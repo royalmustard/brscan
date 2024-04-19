@@ -52,6 +52,8 @@
 
 #include "brother_scanner.h"
 
+#include "bropen_debug.h"
+
 #ifdef NO39_DEBUG
 #include <sys/time.h>
 #endif
@@ -294,12 +296,30 @@ ScanStart( Brother_Scanner *this )
 			(this->scanInfo.ScanAreaMm.top >= (LONG)(this->devScanInfo.dwMaxScanHeight - 80)) )
 			return SANE_STATUS_INVAL;
 
+		if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
+		{
+			bResult = StartDecodeStretchProc(this);
+			if (!bResult)
+				return SANE_STATUS_INVAL;
+		}
+		else
+		{
+			switch (this->devScanInfo.wColorType)
+			{
+				case COLOR_FUL:
+					this->scanInfo.ScanAreaSize.lWidth = this->devScanInfo.ScanAreaSize.lWidth;
+					this->scanInfo.ScanAreaByte.lWidth = this->devScanInfo.ScanAreaSize.lWidth * 3;
+					this->scanInfo.ScanAreaSize.lHeight = this->devScanInfo.ScanAreaSize.lHeight;
+					this->scanInfo.ScanAreaByte.lHeight = this->devScanInfo.ScanAreaByte.lHeight;
+					break;
+				default:
+					BROPEN_PRINT_USER_ERROR("only [%s] mode is suppored", "24bit Color");
+					return SANE_STATUS_INVAL;
+					break;
+			}
+		}
 
-		bResult = StartDecodeStretchProc( this );
-		if (!bResult)
-			return SANE_STATUS_INVAL;
-
-		//
+			//
 		// Initialize the ColorMatch
 		//
 		InitColorMatchingFunc( this, this->devScanInfo.wColorType, CMATCH_DATALINE_RGB );
@@ -420,17 +440,21 @@ ScanStart( Brother_Scanner *this )
 		}
 	}
 
-	// Start the process of expanding the compressed data
-	if (this->scanDec.lpfnScanDecSetTbl != NULL && this->scanDec.lpfnScanDecPageStart != NULL) {
-		this->scanDec.lpfnScanDecSetTbl( hGray, NULL );
-		bResult = this->scanDec.lpfnScanDecPageStart();
-		if (!bResult)
+	if (this->modelInf.seriesNo < BROPEN_SERIES_NO) {
+		// Start the process of expanding the compressed data
+		if (this->scanDec.lpfnScanDecSetTbl != NULL && this->scanDec.lpfnScanDecPageStart != NULL) {
+			this->scanDec.lpfnScanDecSetTbl( hGray, NULL );
+			bResult = this->scanDec.lpfnScanDecPageStart();
+			if (!bResult)
+				return SANE_STATUS_INVAL;
+			else
+				bResult = SANE_STATUS_GOOD;
+		}
+		else {
 			return SANE_STATUS_INVAL;
-		else
-			bResult = SANE_STATUS_GOOD;
 	}
-	else {
-		return SANE_STATUS_INVAL;
+	} else {
+		bResult = SANE_STATUS_GOOD;
 	}
 
 	nPageScanCnt = 0;	// clear the debug-counter
@@ -1643,10 +1667,14 @@ ScanEnd( Brother_Scanner *this )
 	FREE(lpFwTempBuff);
 	lpFwTempBuff = NULL;
     }
-    //
-    // end of the decode/stretch process
-    //
-    this->scanDec.lpfnScanDecClose();
+
+    if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
+    {
+        //
+        // end of the decode/stretch process
+        //
+        this->scanDec.lpfnScanDecClose();
+    }
 
     WriteLog( "<<<<< Terminate Scanning <<<<<" );
 }
@@ -1831,11 +1859,12 @@ StartDecodeStretchProc( Brother_Scanner *this )
 	//
 	// Initialize the scanned-data-expanding-modules/resolution-exchange-module
 	//
-	if (this->scanDec.lpfnScanDecOpen) {
-		bResult = this->scanDec.lpfnScanDecOpen( &ImageProcInfo );
-		WriteLog( "Result from ScanDecOpen is %d", bResult );
+	if (this->modelInf.seriesNo < BROPEN_SERIES_NO) {
+		if (this->scanDec.lpfnScanDecOpen) {
+			bResult = this->scanDec.lpfnScanDecOpen( &ImageProcInfo );
+			WriteLog( "Result from ScanDecOpen is %d", bResult );
+		}
 	}
-
 	dwImageBuffSize = ImageProcInfo.dwOutWriteMaxSize;
 	WriteLog( "ScanDec Func needs maximum size is %d", dwImageBuffSize );
 
