@@ -94,7 +94,12 @@ sanei_debug_msg
 	
   if (max_level >= level)
     {
-      if ( 1 == isfdtype(fileno(stderr), S_IFSOCK) )
+	struct stat buf;
+    	int rc;
+	rc = fstat( fileno(stderr), &buf );
+	//TODO: handle if RC is errorcode
+	
+      if ( (buf.st_mode & S_IFMT) == S_IFSOCK)
 	{
 	  msg = (char *)malloc (sizeof(char) * (strlen(be) + strlen(fmt) + 4));
 	  if (msg == NULL)
