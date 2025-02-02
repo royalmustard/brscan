@@ -38,7 +38,7 @@ Start: 2.4.2001
 #include <errno.h>
 
 #include <usb.h>
-
+#include <dlfcn.h>
 #define BUILD	1
 
 #ifndef BACKEND_NAME
@@ -591,7 +591,11 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 
     // ï¿½Ç¥Ð¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¥ï¿½
     rc= OpenDevice(this->hScanner, pdev->modelInf.seriesNo);
-    if (!rc) return SANE_STATUS_INVAL;
+    WriteLog("Open device return code %d", rc);
+    if (!rc){ 
+	    WriteLog("OpenDevice failed");
+	    return SANE_STATUS_INVAL;
+	}
 
     // ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ï¿½
     this->scanState.bEOF = FALSE;
@@ -610,9 +614,9 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     this->modelInf.modelTypeName = pdev->modelInf.modelTypeName;
 
     get_model_config(&this->modelInf, &this->modelConfig);
-
-    GetLogSwitch( this );
-
+	WriteLog("Got model config");	
+	//GetLogSwitch( this );
+	WriteLog("Got log switch");
     // Frontendï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¤ò¥»¥Ã¥ï¿½
     this->uiSetting.ResoList.val = this->modelConfig.SupportReso.val;
     this->uiSetting.ScanModeList.val = this->modelConfig.SupportScanMode.val;
@@ -627,9 +631,12 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     this->mfcModelInfo.bQcmdEnable = TRUE;
 
     GetDeviceAccessParam( this );
-
-    if (!QueryDeviceInfo(this)) // Q¥³¥Þ¥ó¥É¤òÈ¯¹Ô¤·¤Æ¡¢¥Ç¥Ð¥¤¥¹¾ðÊó¤ò¼èÆÀ
-	return SANE_STATUS_INVAL;
+	WriteLog("Got device access param");
+    if (!QueryDeviceInfo(this))// Q¥³¥Þ¥ó¥É¤òÈ¯¹Ô¤·¤Æ¡¢¥Ç¥Ð¥¤¥¹¾ðÊó¤ò¼èÆÀ
+	{
+		WriteLog("QueryDeviceInfo failed");
+	    return SANE_STATUS_INVAL;
+	}
 
 #ifndef DEBUG_No39
     if (IFTYPE_USB == this->hScanner->device){       //check i/f
@@ -654,6 +661,7 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     ///
     /// ColorMatch DLLï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
     ///
+    WriteLog("Load ColorMatch dll");
     this->modelInf.index = pdev->modelInf.index;     // cp index
     LoadColorMatchDll( this ,this->modelInf.index);  // load dll
 
@@ -663,8 +671,10 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
     {
         rc = LoadScanDecDll( this );
-        if ( !rc )  // Scan Decode DLL¤Î¥í¡¼¥É¼ºÇÔ
-            return SANE_STATUS_INVAL;
+        if ( !rc ){  // Scan Decode DLL¤Î¥í¡¼¥É¼ºÇÔ
+            WriteLog("Failed loading dec dll: %s", dlerror());
+		return SANE_STATUS_INVAL;
+	}
     }
 
     // GrayTableï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½

@@ -64,7 +64,7 @@ sane_strstatus (SANE_Status status)
       return "Device busy";
 
     case SANE_STATUS_INVAL:
-      return "Invalid argument";
+      return "Invalid argument/status_inval";
 
     case SANE_STATUS_EOF:
       return "End of file reached";

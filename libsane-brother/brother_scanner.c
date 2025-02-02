@@ -132,9 +132,10 @@ LoadScanDecDll( Brother_Scanner *this )
 {
 	BOOL  bResult = TRUE;
 
+	WriteLog("Loading scanDec dll...");
 
 	this->scanDec.hScanDec = dlopen ( szScanDecDl, RTLD_LAZY );
-
+	
 	if( this->scanDec.hScanDec != NULL ){
 		//
 		// get the procedure addresses  of scanDec
@@ -286,21 +287,28 @@ ScanStart( Brother_Scanner *this )
 
 		bResult = QueryScannerInfo( this );
 		if (!bResult)
+		{
+			WriteLog("QueryScannerInfo failed, returning INVAL");
 			return SANE_STATUS_INVAL;
-
+		}
 		GetScanAreaParam( this );
 
 
 		// treat as error when the start position of the scan area is out of the MAX scan area 
 		if ( (this->devScanInfo.wScanSource == MFCSCANSRC_FB) &&
 			(this->scanInfo.ScanAreaMm.top >= (LONG)(this->devScanInfo.dwMaxScanHeight - 80)) )
+		{
+			WriteLog("start position of scan area is outside of MAX scan area, returning INVAL");
 			return SANE_STATUS_INVAL;
-
+		}
 		if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
 		{
 			bResult = StartDecodeStretchProc(this);
 			if (!bResult)
+			{
+				WriteLog("StartDecodeStretchProc failed, returning INVAL");
 				return SANE_STATUS_INVAL;
+			}
 		}
 		else
 		{

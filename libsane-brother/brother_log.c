@@ -85,7 +85,7 @@ WriteLogFileString(LPSTR lpszLogStr)
 	if (nNewLog == 0){
 	    hLogFile = fopen(szLogFile,"a");
 	} else {
-	    hLogFile = fopen(szLogFile,"w");
+	    hLogFile = fopen(szLogFile,"a");
 	}
     }
 

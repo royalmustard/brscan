@@ -298,7 +298,7 @@ OpenDevice(usb_dev_handle *hScanner, int seriesNo)
 	FREE(lpBrBuff);
 
 	} //  end of recovery proccess
-
+	WriteLog("OpenDevice return");
 	return TRUE;
 }
 
