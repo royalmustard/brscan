@@ -1,572 +1,206 @@
-//#pragma GCC diagnostic ignored "-Wint-conversion"
-
+#include "brother_dtype.h"
 #include "brother_scandec.h"
 #include "brother_bugchk.h"
-#include "brother_chreso.h"
-#include "brother_log.h"
-#include <string.h>
 
-static HANDLE DAT_00208f00;
-static HANDLE DAT_00208f08;
-static HANDLE DAT_00208f10;
-static byte* DAT_00208f18;
-static long malloc_size;
-void* bugchk;
-void* DAT_00208ef0;
 
-static byte* FUN_001063f3(SCANDEC_WRITE *param_1,size_t *param_2);
-static byte* FUN_00106751(SCANDEC_WRITE *param_1,size_t *param_2);
-byte* (*DAT_00208f20)(SCANDEC_WRITE *param_1,size_t *param_2);
 
-BOOL ScanDecOpen(SCANDEC_OPEN *param_1)
+static DWORD InLinePixelCnt;
+static void* pix_buf;
+static HANDLE HANDLE_1;
+static HANDLE HANDLE_2;
+static int some_flag_1;
+static int some_flag_2;
+static void* some_function;
+BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open)
 {
-  ulong uVar1;
-  uint local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined8 local_40;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined8 local_30;
-  undefined8 local_28;
-  undefined8 local_20;
-  undefined4 *local_10;
-
-  if ((param_1->nColorType >> 8 & 1) == 0) {
-    if ((param_1->nColorType >> 9 & 1) == 0) {
-      malloc_size = param_1->nOutDataKind * 3;
-    }
-    else {
-      malloc_size = param_1->nOutDataKind;
-    }
-  }
-  else {
-    malloc_size = param_1->nOutDataKind;
-  }
-  local_10 = (undefined4 *)param_1;
-  bugchk = bugchk_malloc(malloc_size, __FILE__, __LINE__);
-  if (bugchk == 0x0) {
-    local_5c = 0;
-  }
-  else {
-    local_58 = *local_10;
-    local_54 = local_10[1];
-    local_50 = local_10[2];
-    local_4c = local_10[3];
-    local_48 = local_10[4];
-    local_40 = *(undefined8 *)(local_10 + 6);
-    local_38 = local_10[8];
-    local_34 = local_10[9];
-    uVar1 = ChangeResoInit((undefined8 *)&local_58);
-    if ((int)uVar1 == 0) {
-      bugchk_free(bugchk, __FILE__, __LINE__);
-      bugchk = (undefined8 *)0x0;
-      local_5c = 0;
-    }
-    else {
-      *(undefined8 *)(local_10 + 10) = local_30;
-      *(undefined8 *)(local_10 + 0xc) = local_28;
-      *(undefined8 *)(local_10 + 0xe) = local_20;
-      DAT_00208f00 = 0;
-      DAT_00208f08 = 0;
-      DAT_00208f10 = 0;
-      DAT_00208f18 = 0;
-      DAT_00208f20 = FUN_001063f3;
-      local_5c = 1;
-    }
-  }
-  return (ulong)local_5c;
-}
-
-BOOL ScanDecClose(void)
-{ 
-  if (bugchk != 0) {
-    bugchk_free(bugchk, __FILE__, __LINE__);
-    bugchk = 0;
-  }
-  ChangeResoClose();
-  return 1;
-}
-
-DWORD ScanDecPageEnd(SCANDEC_WRITE *param_1, INT *param_2)
-{
-  long lVar1;
-  INT local_58 [2];
-  undefined8 local_50;
-  undefined8 local_48;
-  undefined8 local_40;
-  undefined8 local_38;
-  undefined4 local_30;
-  undefined4 *local_18;
-  long local_10;
-
-  local_58[0] = param_1->dwLineDataSize;
-  local_50 = 0;
-  local_48 = 0;
-  local_40 = *(undefined8 *)(param_1 + 0x18);
-  local_38 = *(undefined8 *)(param_1 + 0x20);
-  local_30 = *(undefined4 *)(param_1 + 0x28);
-  *param_2 = 0;
-  local_18 = param_2;
-  local_10 = (long)param_1;
-  lVar1 = ChangeResoWriteEnd((long)local_58,param_2);
-  if (DAT_00208f08 != 0) {
-    DAT_00208f08 = 0;
-  }
-  if (DAT_00208f18 != 0) {
-    DAT_00208f18 = 0;
-  }
-  DAT_00208ef0 = 0;
-  return lVar1;
-}
-
-BOOL ScanDecPageStart(void)
-{
-  DAT_00208ef0 = bugchk;
-  if (!bugchk) return 0;
-
-  if ((DAT_00208f00 == 0) || (DAT_00208f08 = DAT_00208f00, DAT_00208f00 != 0)) {
-    DAT_00208f20 = FUN_001063f3;
-    if (DAT_00208f10 != 0) {
-      DAT_00208f18 = DAT_00208f10;
-      if ((DAT_00208f10 == 0) && (DAT_00208ef0 = 0, DAT_00208f08 != 0)) {
-        DAT_00208f08 = 0;
-      }
-      DAT_00208f20 = FUN_00106751;
-    }
-    if (ChangeResoWriteStart() == 0) {
-      DAT_00208ef0 = 0;
-      if (DAT_00208f08 != 0) {
-        DAT_00208f08 = 0;
-      }
-      if (DAT_00208f18 != 0) {
-        DAT_00208f18 = 0;
-      }
-      return 0;
-    }
-    return 1;
-  }
-
-  DAT_00208ef0 = 0;
-  return 0;
-}
-
-void ScanDecSetTblHandle(HANDLE param_1, HANDLE param_2)
-{
-  DAT_00208f00 = param_1;
-  DAT_00208f10 = param_2;
-  return;
-}
-
-DWORD ScanDecWrite(SCANDEC_WRITE *param_1, INT * param_2)
-{
-  undefined8 uVar1;
-  undefined4 local_58 [2];
-  byte *local_50;
-  undefined8 local_48;
-  undefined8 local_40;
-  undefined8 local_38;
-  undefined4 local_30;
-  undefined8 local_28 [2];
-  undefined4 *local_18;
-  long local_10;
+  BOOL BVar1;
+  BOOL ret_val;
+  SCANDEC_OPEN scandec_open_2;
+  SCANDEC_OPEN *scandec_open_local;
   
-  local_18 = param_2;
-  local_10 = (long)param_1;
-  local_50 = (*DAT_00208f20)(param_1,local_28);
-  local_58[0] = *(undefined4 *)(local_10 + 4);
-  local_48 = local_28[0];
-  local_40 = *(undefined8 *)(local_10 + 0x18);
-  local_38 = *(undefined8 *)(local_10 + 0x20);
-  local_30 = *(undefined4 *)(local_10 + 0x28);
-  *local_18 = 0;
-  uVar1 = ChangeResoWrite((long)local_58,local_18);
-  return uVar1;
+  if ((scandec_open->nColorType >> 8 & 1) == 0) {
+    if ((scandec_open->nColorType >> 9 & 1) == 0) {
+      InLinePixelCnt = scandec_open->dwInLinePixCnt * 3;
+    }
+    else {
+      InLinePixelCnt = scandec_open->dwInLinePixCnt;
+    }
+  }
+  else {
+    InLinePixelCnt = scandec_open->dwInLinePixCnt;
+  }
+  scandec_open_local = scandec_open;
+  pix_buf = bugchk_malloc(InLinePixelCnt,69,"brother_scandec.c");
+  if (pix_buf == (void *)0x0) {
+    ret_val = 0;
+  }
+  else {
+    scandec_open_2.nInResoX = scandec_open_local->nInResoX;
+    scandec_open_2.nInResoY = scandec_open_local->nInResoY;
+    scandec_open_2.nOutResoX = scandec_open_local->nOutResoX;
+    scandec_open_2.nOutResoY = scandec_open_local->nOutResoY;
+    scandec_open_2.nColorType = scandec_open_local->nColorType;
+    scandec_open_2.dwInLinePixCnt = scandec_open_local->dwInLinePixCnt;
+    scandec_open_2.nOutDataKind = scandec_open_local->nOutDataKind;
+    scandec_open_2.bLongBoundary = scandec_open_local->bLongBoundary;
+    BVar1 = ChangeResoInit(&scandec_open_2);
+    if (BVar1 == 0) {
+      bugchk_free(pix_buf,0x59,-0x70);
+      pix_buf = (void *)0x0;
+      ret_val = 0;
+    }
+    else {
+      scandec_open_local->dwOutLinePixCnt = scandec_open_2.dwOutLinePixCnt;
+      scandec_open_local->dwOutLineByte = scandec_open_2.dwOutLineByte;
+      scandec_open_local->dwOutWriteMaxSize = scandec_open_2.dwOutWriteMaxSize;
+      HANDLE_1 = (HANDLE)0x0;
+      some_flag_1 = 0;
+      HANDLE_2 = (HANDLE)0x0;
+      some_flag_2 = 0;
+      some_function = set_buffer_and_do_something;
+      ret_val = 1;
+    }
+  }
+  return ret_val;
 }
 
-byte * FUN_001063f3(SCANDEC_WRITE *param_1,size_t *param_2)
+static void* pix_buf_2;
+char* set_buffer_and_do_something(SCANDEC_WRITE *param_1,size_t *param_2)
+
 {
-  byte bVar1;
-  size_t sVar2;
-  byte *pbVar3;
-  byte *pbVar4;
+  size_t sVar1;
+  char *pbVar2;
+  char bVar3;
+  void *pvVar4;
   size_t local_48;
   size_t local_40;
   char local_32;
-  byte *local_30;
-  byte *local_28;
-  CHAR *local_20;
-
-  local_20 = param_1->pLineData;
+  char *local_30;
+  char *local_pix_buf_2;
+  char *local_20;
+  
+  local_20 = (char*)param_1->pLineData;
   local_40 = param_1->dwLineDataSize;
   *param_2 = 0;
-  pbVar4 = DAT_00208ef0;
+  pvVar4 = pix_buf_2;
   if (param_1->nInDataComp == 1) {
-    memset(DAT_00208ef0,0,malloc_size);
-    local_28 = DAT_00208ef0;
-    *param_2 = malloc_size;
+    memset(pix_buf_2,0,InLinePixelCnt);
+    local_pix_buf_2 = (char *)pix_buf_2;
+    *param_2 = InLinePixelCnt;
   }
-  else {
-    if (param_1->nInDataComp == 3) {
-      local_30 = DAT_00208ef0;
-      local_28 = DAT_00208ef0;
-      local_48 = malloc_size;
-      if (DAT_00208f08 == 0) {
-        do {
-          if (local_48 == 0) {
-            return pbVar4;
-          }
-          sVar2 = local_40 - 1;
-          if (sVar2 == 0) {
-            return pbVar4;
-          }
-          bVar1 = *local_20;
-          pbVar3 = local_20 + 1;
-          if ((char)bVar1 < '\0') {
-            if (bVar1 != 0x80) {
-              local_32 = '\x01' - bVar1;
-              bVar1 = *pbVar3;
-              while ((local_32 != '\0' && (local_48 != 0))) {
-                *local_30 = bVar1;
-                local_30 = local_30 + 1;
-                local_32 = local_32 + -1;
-                local_48 = local_48 - 1;
-                *param_2 = *param_2 + 1;
-              }
-              sVar2 = local_40 - 2;
-              pbVar3 = local_20 + 2;
-            }
-          }
-          else {
-            local_32 = bVar1 + 1;
-            local_40 = sVar2;
-            local_20 = pbVar3;
-            while (((sVar2 = local_40, pbVar3 = local_20, local_32 != '\0' && (local_48 != 0)) &&
-                   (local_40 != 0))) {
-              *local_30 = *local_20;
+  else if (param_1->nInDataComp == 3) {
+    local_30 = (char *)pix_buf_2;
+    local_pix_buf_2 = (char *)pix_buf_2;
+    local_48 = InLinePixelCnt;
+    if (some_flag_1 == 0) {
+      do {
+        if (local_48 == 0) {
+          return (char *)pvVar4;
+        }
+        sVar1 = local_40 - 1;
+        if (sVar1 == 0) {
+          return (char *)pvVar4;
+        }
+        bVar3 = *local_20;
+        pbVar2 = local_20 + 1;
+        if ((char)bVar3 < '\0') {
+          if (bVar3 != 0x80) {
+            local_32 = '\x01' - bVar3;
+            bVar3 = *pbVar2;
+            while ((local_32 != '\0' && (local_48 != 0))) {
+              *local_30 = bVar3;
               local_30 = local_30 + 1;
               local_32 = local_32 + -1;
               local_48 = local_48 - 1;
-              local_40 = local_40 - 1;
               *param_2 = *param_2 + 1;
-              local_20 = local_20 + 1;
             }
+            sVar1 = local_40 - 2;
+            pbVar2 = local_20 + 2;
           }
-          local_20 = pbVar3;
-          local_40 = sVar2;
-        } while (local_40 != 0);
-      }
-      else {
-        do {
-          if (local_48 == 0) {
-            return pbVar4;
+        }
+        else {
+          local_32 = bVar3 + 1;
+          local_40 = sVar1;
+          local_20 = pbVar2;
+          while (((sVar1 = local_40, pbVar2 = local_20, local_32 != '\0' && (local_48 != 0)) &&
+                 (local_40 != 0))) {
+            *local_30 = *local_20;
+            local_30 = local_30 + 1;
+            local_32 = local_32 + -1;
+            local_48 = local_48 - 1;
+            local_40 = local_40 - 1;
+            *param_2 = *param_2 + 1;
+            local_20 = local_20 + 1;
           }
-          sVar2 = local_40 - 1;
-          if (sVar2 == 0) {
-            return pbVar4;
-          }
-          bVar1 = *local_20;
-          pbVar3 = local_20 + 1;
-          if ((char)bVar1 < '\0') {
-            if (bVar1 != 0x80) {
-              local_32 = '\x01' - bVar1;
-              bVar1 = *pbVar3;
-              while ((local_32 != '\0' && (local_48 != 0))) {
-                *local_30 = *(byte *)((ulong)bVar1 + DAT_00208f08);
-                local_30 = local_30 + 1;
-                local_32 = local_32 + -1;
-                local_48 = local_48 - 1;
-                *param_2 = *param_2 + 1;
-              }
-              sVar2 = local_40 - 2;
-              pbVar3 = local_20 + 2;
-            }
-          }
-          else {
-            local_32 = bVar1 + 1;
-            local_40 = sVar2;
-            local_20 = pbVar3;
-            while (((sVar2 = local_40, pbVar3 = local_20, local_32 != '\0' && (local_48 != 0)) &&
-                   (local_40 != 0))) {
-              bVar1 = *local_20;
-              local_20 = local_20 + 1;
-              *local_30 = *(byte *)((ulong)bVar1 + DAT_00208f08);
+        }
+        local_20 = pbVar2;
+        local_40 = sVar1;
+      } while (local_40 != 0);
+    }
+    else {
+      do {
+        if (local_48 == 0) {
+          return (char *)pvVar4;
+        }
+        sVar1 = local_40 - 1;
+        if (sVar1 == 0) {
+          return (char *)pvVar4;
+        }
+        bVar3 = *local_20;
+        pbVar2 = local_20 + 1;
+        if ((char)bVar3 < '\0') {
+          if (bVar3 != 0x80) {
+            local_32 = '\x01' - bVar3;
+            bVar3 = *pbVar2;
+            while ((local_32 != '\0' && (local_48 != 0))) {
+              *local_30 = *(char *)((unsigned long)bVar3 + some_flag_1);
               local_30 = local_30 + 1;
               local_32 = local_32 + -1;
               local_48 = local_48 - 1;
-              local_40 = local_40 - 1;
               *param_2 = *param_2 + 1;
             }
+            sVar1 = local_40 - 2;
+            pbVar2 = local_20 + 2;
           }
-          local_20 = pbVar3;
-          local_40 = sVar2;
-        } while (local_40 != 0);
-      }
-    }
-    else {
-      if (DAT_00208f08 == 0) {
-        *param_2 = local_40;
-        local_28 = local_20;
-      }
-      else {
-        local_30 = DAT_00208ef0;
-        local_28 = DAT_00208ef0;
-        local_48 = malloc_size;
-        while ((local_48 != 0 && (local_40 != 0))) {
-          bVar1 = *local_20;
-          local_20 = local_20 + 1;
-          *local_30 = *(byte *)((ulong)bVar1 + DAT_00208f08);
-          local_30 = local_30 + 1;
-          local_48 = local_48 - 1;
-          local_40 = local_40 - 1;
-          *param_2 = *param_2 + 1;
         }
-      }
+        else {
+          local_32 = bVar3 + 1;
+          local_40 = sVar1;
+          local_20 = pbVar2;
+          while (((sVar1 = local_40, pbVar2 = local_20, local_32 != '\0' && (local_48 != 0)) &&
+                 (local_40 != 0))) {
+            bVar3 = *local_20;
+            local_20 = local_20 + 1;
+            *local_30 = *(char *)((unsigned long)bVar3 + some_flag_1);
+            local_30 = local_30 + 1;
+            local_32 = local_32 + -1;
+            local_48 = local_48 - 1;
+            local_40 = local_40 - 1;
+            *param_2 = *param_2 + 1;
+          }
+        }
+        local_20 = pbVar2;
+        local_40 = sVar1;
+      } while (local_40 != 0);
     }
   }
-  return local_28;
-}
-
-undefined * FUN_00106751(SCANDEC_WRITE *param_1,size_t *param_2)
-{
-  byte bVar1;
-  byte bVar2;
-  long lVar3;
-  byte *pbVar4;
-  undefined *puVar5;
-  byte local_62;
-  byte *local_60;
-  byte *local_58;
-  size_t local_50;
-  DWORD local_48;
-  char local_3a;
-  undefined *local_38;
-  undefined *local_30;
-  CHAR *local_28;
-
-  local_28 = param_1->pLineData;
-  local_48 = param_1->dwLineDataSize;
-  local_58 = DAT_00208f18;
-  local_60 = DAT_00208f18 + local_48;
-  *param_2 = 0;
-  puVar5 = DAT_00208ef0;
-  if (param_1->nInDataComp == 1) {
-    memset(DAT_00208ef0,0,malloc_size);
-    local_30 = DAT_00208ef0;
-    *param_2 = malloc_size;
+  else if (some_flag_1 == 0) {
+    *param_2 = local_40;
+    local_pix_buf_2 = local_20;
   }
   else {
-    if (param_1->nInDataComp == 3) {
-      local_38 = DAT_00208ef0;
-      local_30 = DAT_00208ef0;
-      local_50 = malloc_size;
-      if (DAT_00208f08 == 0) {
-        do {
-          if (local_50 == 0) {
-            return puVar5;
-          }
-          lVar3 = local_48 + -1;
-          if (lVar3 == 0) {
-            return puVar5;
-          }
-          bVar2 = *local_28;
-          pbVar4 = local_28 + 1;
-          if ((char)bVar2 < '\0') {
-            if (bVar2 != 0x80) {
-              local_3a = '\x01' - bVar2;
-              bVar2 = *pbVar4;
-              while ((local_3a != '\0' && (local_50 != 0))) {
-                local_62 = *local_60;
-                local_60 = local_60 + 1;
-                if (local_62 < bVar2) {
-                  local_62 = bVar2 - local_62;
-                }
-                bVar1 = *local_58;
-                local_58 = local_58 + 1;
-                if (local_62 < bVar1) {
-                  *local_38 = (char)((int)((uint)local_62 * 0x100 - (uint)local_62) /
-                                    (int)(uint)bVar1);
-                }
-                else {
-                  *local_38 = 0xff;
-                }
-                local_38 = local_38 + 1;
-                local_3a = local_3a + -1;
-                local_50 = local_50 - 1;
-                *param_2 = *param_2 + 1;
-              }
-              lVar3 = local_48 + -2;
-              pbVar4 = local_28 + 2;
-            }
-          }
-          else {
-            local_3a = bVar2 + 1;
-            local_48 = lVar3;
-            local_28 = pbVar4;
-            while (((lVar3 = local_48, pbVar4 = local_28, local_3a != '\0' && (local_50 != 0)) &&
-                   (local_48 != 0))) {
-              bVar2 = *local_28;
-              local_28 = local_28 + 1;
-              local_62 = *local_60;
-              local_60 = local_60 + 1;
-              if (local_62 < bVar2) {
-                local_62 = bVar2 - local_62;
-              }
-              bVar2 = *local_58;
-              local_58 = local_58 + 1;
-              if (local_62 < bVar2) {
-                *local_38 = (char)((int)((uint)local_62 * 0x100 - (uint)local_62) / (int)(uint)bVar2
-                                  );
-              }
-              else {
-                *local_38 = 0xff;
-              }
-              local_38 = local_38 + 1;
-              local_3a = local_3a + -1;
-              local_50 = local_50 - 1;
-              local_48 = local_48 + -1;
-              *param_2 = *param_2 + 1;
-            }
-          }
-          local_28 = pbVar4;
-          local_48 = lVar3;
-        } while (local_48 != 0);
-      }
-      else {
-        do {
-          if (local_50 == 0) {
-            return puVar5;
-          }
-          lVar3 = local_48 + -1;
-          if (lVar3 == 0) {
-            return puVar5;
-          }
-          bVar2 = *local_28;
-          pbVar4 = local_28 + 1;
-          if ((char)bVar2 < '\0') {
-            if (bVar2 != 0x80) {
-              local_3a = '\x01' - bVar2;
-              bVar2 = *pbVar4;
-              while ((local_3a != '\0' && (local_50 != 0))) {
-                local_62 = *local_60;
-                local_60 = local_60 + 1;
-                if (local_62 < bVar2) {
-                  local_62 = bVar2 - local_62;
-                }
-                bVar1 = *local_58;
-                local_58 = local_58 + 1;
-                if (local_62 < bVar1) {
-                  *local_38 = *(undefined *)
-                               ((int)((uint)local_62 * 0x100 - (uint)local_62) / (int)(uint)bVar1 +
-                               DAT_00208f08);
-                }
-                else {
-                  *local_38 = *(undefined *)(DAT_00208f08 + 0xff);
-                }
-                local_38 = local_38 + 1;
-                local_3a = local_3a + -1;
-                local_50 = local_50 - 1;
-                *param_2 = *param_2 + 1;
-              }
-              lVar3 = local_48 + -2;
-              pbVar4 = local_28 + 2;
-            }
-          }
-          else {
-            local_3a = bVar2 + 1;
-            local_48 = lVar3;
-            local_28 = pbVar4;
-            while (((lVar3 = local_48, pbVar4 = local_28, local_3a != '\0' && (local_50 != 0)) &&
-                   (local_48 != 0))) {
-              bVar2 = *local_28;
-              local_28 = local_28 + 1;
-              local_62 = *local_60;
-              local_60 = local_60 + 1;
-              if (local_62 < bVar2) {
-                local_62 = bVar2 - local_62;
-              }
-              bVar2 = *local_58;
-              local_58 = local_58 + 1;
-              if (local_62 < bVar2) {
-                *local_38 = *(undefined *)
-                             ((int)((uint)local_62 * 0x100 - (uint)local_62) / (int)(uint)bVar2 +
-                             DAT_00208f08);
-              }
-              else {
-                *local_38 = *(undefined *)(DAT_00208f08 + 0xff);
-              }
-              local_38 = local_38 + 1;
-              local_3a = local_3a + -1;
-              local_50 = local_50 - 1;
-              local_48 = local_48 + -1;
-              *param_2 = *param_2 + 1;
-            }
-          }
-          local_28 = pbVar4;
-          local_48 = lVar3;
-        } while (local_48 != 0);
-      }
-    }
-    else {
-      if (DAT_00208f08 == 0) {
-        local_38 = DAT_00208ef0;
-        local_30 = DAT_00208ef0;
-        local_50 = malloc_size;
-        while ((local_50 != 0 && (local_48 != 0))) {
-          bVar2 = *local_28;
-          local_28 = local_28 + 1;
-          local_62 = *local_60;
-          local_60 = local_60 + 1;
-          if (local_62 < bVar2) {
-            local_62 = bVar2 - local_62;
-          }
-          bVar2 = *local_58;
-          local_58 = local_58 + 1;
-          if (local_62 < bVar2) {
-            *local_38 = (char)((int)((uint)local_62 * 0x100 - (uint)local_62) / (int)(uint)bVar2);
-          }
-          else {
-            *local_38 = 0xff;
-          }
-          local_38 = local_38 + 1;
-          local_50 = local_50 - 1;
-          local_48 = local_48 + -1;
-          *param_2 = *param_2 + 1;
-        }
-      }
-      else {
-        local_38 = DAT_00208ef0;
-        local_30 = DAT_00208ef0;
-        local_50 = malloc_size;
-        while ((local_50 != 0 && (local_48 != 0))) {
-          bVar2 = *local_28;
-          local_28 = local_28 + 1;
-          local_62 = *local_60;
-          local_60 = local_60 + 1;
-          if (local_62 < bVar2) {
-            local_62 = bVar2 - local_62;
-          }
-          bVar2 = *local_58;
-          local_58 = local_58 + 1;
-          if (local_62 < bVar2) {
-            *local_38 = *(undefined *)
-                         ((int)((uint)local_62 * 0x100 - (uint)local_62) / (int)(uint)bVar2 +
-                         DAT_00208f08);
-          }
-          else {
-            *local_38 = *(undefined *)(DAT_00208f08 + 0xff);
-          }
-          local_38 = local_38 + 1;
-          local_50 = local_50 - 1;
-          local_48 = local_48 + -1;
-          *param_2 = *param_2 + 1;
-        }
-      }
+    local_30 = (char *)pix_buf_2;
+    local_pix_buf_2 = (char *)pix_buf_2;
+    local_48 = InLinePixelCnt;
+    while ((local_48 != 0 && (local_40 != 0))) {
+      bVar3 = *local_20;
+      local_20 = local_20 + 1;
+      *local_30 = *(char *)((unsigned long)bVar3 + some_flag_1);
+      local_30 = local_30 + 1;
+      local_48 = local_48 - 1;
+      local_40 = local_40 - 1;
+      *param_2 = *param_2 + 1;
     }
   }
-  return local_30;
+  return local_pix_buf_2;
 }
-

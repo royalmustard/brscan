@@ -1,13 +1,13 @@
 /*******************************************************************************
  *
- *	Scan Decode ¶¦ÄÌ¥Ø¥Ã¥À¡¼¥Õ¥¡¥¤¥ë
+ *	Scan Decode ï¿½ï¿½ï¿½Ì¥Ø¥Ã¥ï¿½ï¿½ï¿½ï¿½Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  *	Copyright: 2000 brother Industries , Ltd.
  *
- *	ver 1.0.0 : 2000.04.13 : °ðÅÄ : ¿·µ¬ºîÀ®
+ *	ver 1.0.0 : 2000.04.13 : ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  ******************************************************************************/
 
-/* ¥«¥é¡¼¼ïÊÌ */
+/* ï¿½ï¿½ï¿½é¡¼ï¿½ï¿½ï¿½ï¿½ */
 #define	SC_BW		0x01
 #define	SC_ED		0x02
 #define	SC_DTH		0x04
@@ -29,17 +29,17 @@
 #define	SCCLR_TYPE_FUL		(SC_FUL | SC_24BIT)		// 24bit Full Color
 #define	SCCLR_TYPE_FULNOCM	(SC_FULNOCM | SC_24BIT)	// 24bit Full Color(do not colormatch)
 
-/* ÆþÎÏ¥Ç¡¼¥¿¼ïÊÌ */
-#define	SCIDK_MONO		1	/* ¥â¥Î¥¯¥í */
-#define	SCIDK_R			2	/* R¥Ç¡¼¥¿ */
-#define	SCIDK_G			3	/* G¥Ç¡¼¥¿ */
-#define	SCIDK_B			4	/* B¥Ç¡¼¥¿ */
-#define	SCIDK_RGB		5	/* RGB²èÁÇ½ç */
-#define	SCIDK_BGR		6	/* BGR²èÁÇ½ç */
-#define	SCIDK_256		7	/* 256¿§¥«¥é¡¼ */
+/* ï¿½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+#define	SCIDK_MONO		1	/* ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ */
+#define	SCIDK_R			2	/* Rï¿½Ç¡ï¿½ï¿½ï¿½ */
+#define	SCIDK_G			3	/* Gï¿½Ç¡ï¿½ï¿½ï¿½ */
+#define	SCIDK_B			4	/* Bï¿½Ç¡ï¿½ï¿½ï¿½ */
+#define	SCIDK_RGB		5	/* RGBï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCIDK_BGR		6	/* BGRï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCIDK_256		7	/* 256ï¿½ï¿½ï¿½ï¿½ï¿½é¡¼ */
 
-/* 24BitColor»þ¤ÎRGB½ÐÎÏ·Á¼° */
-#define	SCODK_PIXEL_RGB		1	/* RGB RGB RGB²èÁÇ½ç */
-#define	SCODK_PLANE			2	/* RRR GGG BBB²èÁÇ½ç */
-#define	SCODK_PIXEL_BGR		3	/* BGR BGR BGR²èÁÇ½ç */
+/* 24BitColorï¿½ï¿½ï¿½ï¿½RGBï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ */
+#define	SCODK_PIXEL_RGB		1	/* RGB RGB RGBï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCODK_PLANE			2	/* RRR GGG BBBï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCODK_PIXEL_BGR		3	/* BGR BGR BGRï¿½ï¿½ï¿½Ç½ï¿½ */
 

@@ -1,56 +1,56 @@
 /*******************************************************************************
  *
- *	Scan Decode ¥Ø¥Ã¥À¡¼¥Õ¥¡¥¤¥ë
+ *	Scan Decode ï¿½Ø¥Ã¥ï¿½ï¿½ï¿½ï¿½Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  *	Copyright: 2000 brother Industries , Ltd.
  *
- *	ver 1.0.0 : 2000.04.13 : °ðÅÄ : ¿·µ¬ºîÀ®
+ *	ver 1.0.0 : 2000.04.13 : ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  ******************************************************************************/
 #ifndef	__BROTHER_SCAN_DECODE_H
 #define	__BROTHER_SCAN_DECODE_H
 
 typedef	struct {
-	INT		nInResoX ;		/* ÆþÎÏ²òÁüÅÙ */
-	INT		nInResoY ;		/* ÆþÎÏ²òÁüÅÙ */
-	INT		nOutResoX ;		/* ½ÐÎÏ²òÁüÅÙ */
-	INT		nOutResoY ;		/* ½ÐÎÏ²òÁüÅÙ */
-	INT		nColorType ;	/* ¥«¥é¡¼¼ïÊÌ */
-	DWORD	dwInLinePixCnt ;	/* 1¥é¥¤¥óÆþÎÏPixel¿ô */
-	INT		nOutDataKind ;	/* 24BitColor»þ¤ÎRGB½ÐÎÏ·Á¼° */
-#if 0	/* brother_deccom.h¤Ëµ­½Ò */
-#define	SCODK_PIXEL		1	/* RGB RGB RGB²èÁÇ½ç */
-#define	SCODK_PLANE		2	/* RRR GGG BBB²èÁÇ½ç */
+	INT		nInResoX ;		/* ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	INT		nInResoY ;		/* ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	INT		nOutResoX ;		/* ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	INT		nOutResoY ;		/* ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	INT		nColorType ;	/* ï¿½ï¿½ï¿½é¡¼ï¿½ï¿½ï¿½ï¿½ */
+	DWORD	dwInLinePixCnt ;	/* 1ï¿½é¥¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pixelï¿½ï¿½ */
+	INT		nOutDataKind ;	/* 24BitColorï¿½ï¿½ï¿½ï¿½RGBï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ */
+#if 0	/* brother_deccom.hï¿½Ëµï¿½ï¿½ï¿½ */
+#define	SCODK_PIXEL		1	/* RGB RGB RGBï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCODK_PLANE		2	/* RRR GGG BBBï¿½ï¿½ï¿½Ç½ï¿½ */
 #endif
-	BOOL	bLongBoundary ;	/* Long Boundary»ØÄê */
+	BOOL	bLongBoundary ;	/* Long Boundaryï¿½ï¿½ï¿½ï¿½ */
 
-/* ScanDecOpenÆâ¤ÇÀßÄê¤µ¤ì¤ë */
-	DWORD	dwOutLinePixCnt ;	/* 1¥é¥¤¥ó½ÐÎÏPixel¿ô */
-	DWORD	dwOutLineByte ;		/* 1¥é¥¤¥ó½ÐÎÏByte¿ô */
-	DWORD	dwOutWriteMaxSize ;	/* ºÇÂç½ñ¤­¹þ¤ß¥Ð¥Ã¥Õ¥¡¥µ¥¤¥º */
+/* ScanDecOpenï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¤µï¿½ï¿½ï¿½ */
+	DWORD	dwOutLinePixCnt ;	/* 1ï¿½é¥¤ï¿½ï¿½ï¿½ï¿½ï¿½Pixelï¿½ï¿½ */
+	DWORD	dwOutLineByte ;		/* 1ï¿½é¥¤ï¿½ï¿½ï¿½ï¿½ï¿½Byteï¿½ï¿½ */
+	DWORD	dwOutWriteMaxSize ;	/* ï¿½ï¿½ï¿½ï¿½ñ¤­¹ï¿½ï¿½ß¥Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
 } SCANDEC_OPEN ;
 
 typedef	struct {
-	INT		nInDataComp ;		/* ÆþÎÏ¥Ç¡¼¥¿°µ½Ì¼ïÊÌ */
-#define	SCIDC_WHITE		1	/* Á´Çò¥é¥¤¥ó */
-#define	SCIDC_NONCOMP	2	/* Èó°µ½Ì */
-#define	SCIDC_PACK		3	/* ¥Ñ¥Ã¥¯¥Ó¥Ã¥Ä°µ½Ì */
+	INT		nInDataComp ;		/* ï¿½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ */
+#define	SCIDC_WHITE		1	/* ï¿½ï¿½ï¿½ï¿½é¥¤ï¿½ï¿½ */
+#define	SCIDC_NONCOMP	2	/* ï¿½ó°µ½ï¿½ */
+#define	SCIDC_PACK		3	/* ï¿½Ñ¥Ã¥ï¿½ï¿½Ó¥Ã¥Ä°ï¿½ï¿½ï¿½ */
 
-	INT		nInDataKind ;		/* ÆþÎÏ¥Ç¡¼¥¿³ÊÇ¼¾ðÊó */
-#if 0	/* brother_deccom.h¤Ëµ­½Ò */
-#define	SCIDK_MONO		1	/* ¥â¥Î¥¯¥í */
-#define	SCIDK_R			2	/* R¥Ç¡¼¥¿ */
-#define	SCIDK_G			3	/* G¥Ç¡¼¥¿ */
-#define	SCIDK_B			4	/* B¥Ç¡¼¥¿ */
-#define	SCIDK_RGB		5	/* RGB²èÁÇ½ç */
-#define	SCIDK_BGR		6	/* BGR²èÁÇ½ç */
-#define	SCIDK_256		7	/* 256¿§¥«¥é¡¼ */
+	INT		nInDataKind ;		/* ï¿½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ */
+#if 0	/* brother_deccom.hï¿½Ëµï¿½ï¿½ï¿½ */
+#define	SCIDK_MONO		1	/* ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ */
+#define	SCIDK_R			2	/* Rï¿½Ç¡ï¿½ï¿½ï¿½ */
+#define	SCIDK_G			3	/* Gï¿½Ç¡ï¿½ï¿½ï¿½ */
+#define	SCIDK_B			4	/* Bï¿½Ç¡ï¿½ï¿½ï¿½ */
+#define	SCIDK_RGB		5	/* RGBï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCIDK_BGR		6	/* BGRï¿½ï¿½ï¿½Ç½ï¿½ */
+#define	SCIDK_256		7	/* 256ï¿½ï¿½ï¿½ï¿½ï¿½é¡¼ */
 #endif
-	CHAR	*pLineData ;	/* ÆþÎÏ£±¥é¥¤¥ó¥Ç¡¼¥¿³ÊÇ¼Àè */
-	DWORD	dwLineDataSize ;	/* ÆþÎÏ£±¥é¥¤¥ó¥Ç¡¼¥¿¥µ¥¤¥º */
-	CHAR	*pWriteBuff ;	/* ½ÐÎÏ¥Ç¡¼¥¿³ÊÇ¼Àè */
-	DWORD	dwWriteBuffSize ;	/* ½ÐÎÏ¥Ç¡¼¥¿¥Ð¥Ã¥Õ¥¡¥µ¥¤¥º */
-	BOOL	bReverWrite ;	/* ½ÐÎÏ¥Ç¡¼¥¿³ÊÇ¼ÊýË¡ */
+	CHAR	*pLineData ;	/* ï¿½ï¿½ï¿½Ï£ï¿½ï¿½é¥¤ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ */
+	DWORD	dwLineDataSize ;	/* ï¿½ï¿½ï¿½Ï£ï¿½ï¿½é¥¤ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	CHAR	*pWriteBuff ;	/* ï¿½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ */
+	DWORD	dwWriteBuffSize ;	/* ï¿½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	BOOL	bReverWrite ;	/* ï¿½ï¿½ï¿½Ï¥Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½Ë¡ */
 
 } SCANDEC_WRITE ;
 

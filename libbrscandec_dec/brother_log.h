@@ -26,7 +26,7 @@
 //
 //
 //	Abstract:
-//			¥í¥°¥Õ¥¡¥¤¥ë½èÍý¥â¥¸¥å¡¼¥ë¡¦¥Ø¥Ã¥À¡¼
+//			ï¿½ï¿½ï¿½ï¿½ï¿½Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â¥¸ï¿½å¡¼ï¿½ë¡¦ï¿½Ø¥Ã¥ï¿½ï¿½ï¿½
 //
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -34,14 +34,14 @@
 #ifndef _BROTHER_LOG_H_
 #define _BROTHER_LOG_H_
 
-#include "brother.h"
 
-#define LOGFILENAME  "/BrMfc32.log"
+
+#define LOGFILENAME  "/br_scandec.log"
 
 #define LOGSTRMAXLEN  1024
 
 //
-// ´Ø¿ô¤Î¥×¥í¥È¥¿¥¤¥×Àë¸À
+// ï¿½Ø¿ï¿½ï¿½Î¥×¥ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 void  WriteLogFileString( LPSTR lpszLogStr );
 void  WriteLog( LPSTR first, ... );
