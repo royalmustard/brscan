@@ -71,4 +71,6 @@ typedef DWORD (*SCANDECPAGEEND) ( SCANDEC_WRITE *, INT * );
 typedef BOOL  (*SCANDECCLOSE) ( void );
 
 typedef DWORD (*THIRD_FN)(float, CHAR *);
+typedef DWORD (*FOURTH_FN)(CHAR *, DWORD, CHAR *, int);
+typedef DWORD (*FIFTH_FN)(CHAR *, DWORD, CHAR *);
 #endif	/* ! __BROTHER_SCAN_DECODE_H */

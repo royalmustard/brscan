@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 // #include "third_fn_impls.h"
 int NAN(float x) { return x != x; }
 static void *RESO_BUFFR;
@@ -37,8 +38,8 @@ static int some_flag_2;
 static void *some_function;
 static void *some_fn_write;
 static THIRD_FN third_fn;
-static void *fourth_fn;
-static void *fifth_fn;
+static FOURTH_FN fourth_fn;
+static FIFTH_FN fifth_fn;
 static int counter_2;
 static int counter_3;
 static int some_counter;
@@ -1399,6 +1400,362 @@ DWORD FUN_00102944(float param_1, CHAR *param_2)
   }
   return dwOutLineByte;
 }
+//------------------------------End
+//third_fn--------------------------------------------
+
+//------------------------------start
+//some_fn_write-------------------------------------
+void copy_something_to_buf(char *src)
+
+{
+  int iVar1;
+  int local_18;
+
+  iVar1 = some_counter;
+  some_counter = some_counter + 1;
+  if (src == (char *)0x0) {
+    local_18 = iVar1 + -1;
+    if (local_18 < 0) {
+      local_18 = extra_bytes + -1;
+    }
+    memcpy((&some_buf)[iVar1], (&some_buf)[local_18], dwInLinePixCnt);
+  } else {
+    memcpy((&some_buf)[iVar1], src, dwInLinePixCnt);
+  }
+  counter_3 = counter_3 + 1;
+  if (counter_3 == 1) {
+    memcpy(*(void **)(&counter_2 + (long)extra_bytes * 2), src, dwInLinePixCnt);
+  }
+  if (extra_bytes <= some_counter) {
+    some_counter = 0;
+  }
+  return;
+}
+
+long FUN_00101cba(long buf, int *param_2)
+
+{
+  CHAR *pCVar1;
+  long lVar2;
+  float fVar3;
+  float fVar4;
+  int local_38;
+  int i;
+  float local_2c;
+  long local_28;
+
+  local_28 = 0;
+  copy_something_to_buf(*(char **)(buf + 8));
+  if (2 < counter_3) {
+    fVar4 = (float)inResY;
+    fVar3 = (float)outResY;
+    counter_3 = 0;
+    if ((int)(counter_3 - 3) % inResY == 0) {
+      local_2c = 1.0;
+    } else {
+      for (local_2c = 0.0; local_2c < (float)((int)(counter_3 - 3) % inResY);
+           local_2c = local_2c + fVar4 / fVar3) {
+        counter_3 = counter_3 + 1;
+      }
+      local_2c = (local_2c + 1.0) - (float)((int)(counter_3 - 3) % inResY);
+    }
+    local_38 = 0;
+    for (i = 0; i < outResY; i = i + 1) {
+      if (((int)(counter_3 - 3) % inResY <= (i * inResY) / outResY) &&
+          ((i * inResY) / outResY < (int)(counter_3 - 3) % inResY + 1)) {
+        local_38 = local_38 + 1;
+      }
+    }
+    i = 0;
+    while (i < local_38) {
+      pCVar1 = invert_buffer_offset(*(BOOL *)(buf + 0x28),
+                                    *(CHAR **)(buf + 0x18), *param_2);
+      lVar2 = (*third_fn)(local_2c, pCVar1);
+      local_28 = local_28 + lVar2;
+      i = i + 1;
+      local_2c = local_2c + fVar4 / fVar3;
+      counter_3 = counter_3 + 1;
+      *param_2 = *param_2 + 1;
+    }
+  }
+  return local_28;
+}
+
+long FUN_00101bd8(SCANDEC_WRITE *param_1, int *param_2)
+
+{
+  CHAR *pCVar1;
+  long lVar2;
+  long local_28;
+  ushort flag;
+
+  flag = counter_3;
+  local_28 = 0;
+  counter_3 = counter_3 + 1;
+  if ((Y_scaling_factor != 5) || ((flag & 1) == 0)) {
+    while (*param_2 < outResY) {
+      pCVar1 = invert_buffer_offset(param_1->bReverWrite, param_1->pWriteBuff,
+                                    *param_2);
+      if (inResX == 1) {
+        lVar2 = (*fourth_fn)(param_1->pLineData, param_1->dwLineDataSize,
+                             pCVar1, outResX);
+      } else {
+        lVar2 = (*fourth_fn)(param_1->pLineData, param_1->dwLineDataSize,
+                             pCVar1, inResX);
+      }
+      local_28 = local_28 + lVar2;
+      *param_2 = *param_2 + 1;
+    }
+  }
+  return local_28;
+}
+
+DWORD FUN_00104412(CHAR *param_1, DWORD param_2, CHAR *param_3, int param_4)
+
+{
+  ulong uVar1;
+  ulong local_30;
+  CHAR *local_20;
+  char *local_10;
+
+  uVar1 = dwOutLineByte / (ulong)(long)param_4;
+  local_20 = param_3;
+  local_10 = (char *)param_1;
+  for (local_30 = 0; local_30 < uVar1; local_30 = local_30 + 1) {
+    memset(local_20, (uint)*local_10, (long)param_4);
+    local_10 = local_10 + 1;
+    local_20 = local_20 + param_4;
+  }
+  if (dwOutLineByte % (ulong)(long)param_4 != 0) {
+    memset(local_20, (uint)*local_10, dwOutLineByte % (ulong)(long)param_4);
+  }
+  return dwOutLineByte;
+}
+
+DWORD FUN_00104399(CHAR *param_1, DWORD param_2, CHAR *param_3, int param_4)
+
+{
+  ulong i;
+  CHAR *local_20;
+  CHAR *local_10;
+
+  local_20 = param_3;
+  local_10 = param_1;
+  for (i = 0; (i < param_2 / (ulong)(long)param_4 && (i < dwOutLineByte));
+       i = i + 1) {
+    *local_20 = *local_10;
+    local_20 = local_20 + 1;
+    local_10 = local_10 + param_4;
+  }
+  return dwOutLineByte;
+}
+//--------------------------------------End fourth_fn impl---------------------------------------------
+
+void FUN_001044ca(INT *param_1)
+
+{
+  int iVar1;
+  ulong j;
+  ulong i;
+  int local_18;
+
+  iVar1 = some_counter;
+  some_counter = some_counter + 1;
+  if (param_1 == (INT *)0x0) {
+    local_18 = iVar1 + -1;
+    if (local_18 < 0) {
+      local_18 = extra_bytes + -1;
+    }
+    memcpy((&some_buf)[iVar1], (&some_buf)[local_18], dwInLinePixCnt);
+  } else {
+    for (i = 0; i < dwInLinePixCnt; i = i + 1) {
+      for (j = 0; j < 8; j = j + 1) {
+        if (((int)(uint) * (char *)(i + (long)param_1) >>
+                 (7U - (char)j & 0x1f) &
+             1U) == 0) {
+          *(char *)((long)(&some_buf)[iVar1] + j + i * 8) = 0;
+        } else {
+          *(char *)((long)(&some_buf)[iVar1] + j + i * 8) = 10;
+        }
+      }
+    }
+  }
+  counter_3 = counter_3 + 1;
+  if (counter_3 == 1) {
+    memcpy(*(void **)(&counter_2 + (long)extra_bytes * 2),param_1,dwInLinePixCnt);
+  }
+  if (extra_bytes <= some_counter) {
+    some_counter = 0;
+  }
+  return;
+}
+
+long write_impl_2(INT *data_kind, int *ptr) {
+  CHAR *pCVar1;
+  long lVar2;
+  float l_outResY;
+  float l_inResY;
+  int local_38;
+  int local_34;
+  float i;
+  long local_28;
+
+  local_28 = 0;
+  FUN_001044ca(*(INT **)(data_kind + 2));
+  if (2 < counter_3) {
+    l_inResY = (float)inResY;
+    l_outResY = (float)outResY;
+    counter_3 = 0;
+    if ((int)(counter_3 - 3) % inResY == 0) {
+      i = 1.0;
+    } else {
+      for (i = 0.0; i < (float)((int)(counter_3 - 3) % inResY);
+           i = i + l_inResY / l_outResY) {
+        counter_3 = counter_3 + 1;
+      }
+      i = (i + 1.0) - (float)((int)(counter_3 - 3) % inResY);
+    }
+    local_38 = 0;
+    for (local_34 = 0; local_34 < outResY; local_34 = local_34 + 1) {
+      if (((int)(counter_3 - 3) % inResY <= (local_34 * inResY) / outResY) &&
+          ((local_34 * inResY) / outResY < (int)(counter_3 - 3) % inResY + 1)) {
+        local_38 = local_38 + 1;
+      }
+    }
+    local_34 = 0;
+    while (local_34 < local_38) {
+      pCVar1 =
+          invert_buffer_offset(data_kind[10], *(CHAR **)(data_kind + 6), *ptr);
+      lVar2 = (*third_fn)(i, pCVar1);
+      local_28 = local_28 + lVar2;
+      local_34 = local_34 + 1;
+      i = i + l_inResY / l_outResY;
+      counter_3 = counter_3 + 1;
+      *ptr = *ptr + 1;
+    }
+  }
+  return local_28;
+}
+
+
+long write_impl_1(SCANDEC_WRITE *param_1,int *param_2)
+
+{
+  ushort uVar1;
+  CHAR *pCVar2;
+  long lVar3;
+  long local_28;
+  
+  uVar1 = counter_3;
+  local_28 = 0;
+  counter_3 = counter_3 + 1;
+  if ((Y_scaling_factor != 5) || ((uVar1 & 1) == 0)) {
+    while (*param_2 < outResY) {
+      pCVar2 = invert_buffer_offset(param_1->bReverWrite,param_1->pWriteBuff,*param_2);
+      lVar3 = (*fifth_fn)(param_1->pLineData,param_1->dwLineDataSize,pCVar2);
+      local_28 = local_28 + lVar3;
+      *param_2 = *param_2 + 1;
+    }
+  }
+  return local_28;
+}
+
+//-----------------------start fifth_fn impl-----------------------------------------------
+DWORD FUN_00104153(CHAR *line_data,DWORD line_data_size,CHAR *buf)
+
+{
+  // ulong uVar1;
+  // ulong local_28;
+  // CHAR *local_20;
+  // char *local_10;
+  
+  // uVar1 = dwOutLineByte / 3;
+  // local_20 = buf;
+  // local_10 = (char *)line_data;
+  // for (local_28 = 0; local_28 < uVar1; local_28 = local_28 + 1) {
+  //   *local_20 = (&DAT_002087a0)[*local_10];
+  //   local_20[1] = (&DAT_002086a0)[*local_10];
+  //   local_20[2] = (&DAT_002085a0)[*local_10];
+  //   local_20 = local_20 + 3;
+  //   local_10 = local_10 + 1;
+  // }
+  // uVar1 = dwOutLineByte % 3;
+  // if (uVar1 != 0) {
+  //   *local_20 = (&DAT_002087a0)[*local_10];
+  //   if (1 < uVar1) {
+  //     local_20[1] = (&DAT_002086a0)[*local_10];
+  //   }
+  // }
+  return dwOutLineByte;
+}
+
+
+ulong FUN_001040d6(CHAR *param_1,DWORD param_2,CHAR *param_3)
+
+{
+  // CHAR *local_30;
+  // ulong local_28;
+  // char *local_10;
+  
+  // local_30 = param_3;
+  // local_10 = (char *)param_1;
+  // for (local_28 = 0; (local_28 < param_2 * 2 && (local_28 < dwOutLineByte)); local_28 = local_28 + 2
+  //     ) {
+  //   *local_30 = *(CHAR *)(&DAT_002083a0 + (ulong)*local_10 * 2);
+  //   local_30 = local_30 + 1;
+  //   local_10 = local_10 + 1;
+  // }
+  return dwOutLineByte;
+}
+
+
+ulong FUN_00104296(char *param_1,DWORD param_2,CHAR *param_3)
+{
+  // undefined2 uVar1;
+  // undefined2 *local_30;
+  // ulong local_28;
+  // byte *local_10;
+  
+  // local_30 = (undefined2 *)param_3;
+  // local_10 = (byte *)param_1;
+  // for (local_28 = 0; (local_28 < param_2 << 2 && (local_28 < dwOutLineByte));
+  //     local_28 = local_28 + 4) {
+  //   uVar1 = *(undefined2 *)(&DAT_002083a0 + (ulong)*local_10 * 2);
+  //   *local_30 = *(undefined2 *)(&DAT_002083a0 + (ulong)(byte)uVar1 * 2);
+  //   local_30[1] = *(undefined2 *)(&DAT_002083a0 + (ulong)(byte)((ushort)uVar1 >> 8) * 2);
+  //   local_30 = local_30 + 2;
+  //   local_10 = local_10 + 1;
+  // }
+  return dwOutLineByte;
+}
+
+
+ulong FUN_0010404d(CHAR *param_1,DWORD param_2,char *param_3)
+
+{
+  ulong local_28;
+  CHAR *local_20;
+  CHAR *local_10;
+  
+  local_20 = param_3;
+  local_10 = param_1;
+  for (local_28 = 0; (local_28 < param_2 >> 1 && (local_28 < dwOutLineByte));
+      local_28 = local_28 + 1) {
+    //*local_20 = (&DAT_002082a0)[local_10[1]] | (&DAT_002082a0)[*local_10] << 4;
+    local_20 = local_20 + 1;
+    local_10 = local_10 + 2;
+  }
+  return local_28;
+}
+
+ulong FUN_00104365(CHAR *param_1,DWORD param_2,CHAR *param_3)
+
+{
+  memcpy(param_3,param_1,dwOutLineByte);
+  return dwOutLineByte & 0xffff;
+}
+
+
 
 int assign_global_fn_pointers(int *assigned_type) {
   if ((inResoX == outResoX) && (inResoY == outResoY)) {
@@ -1542,6 +1899,87 @@ void find_int_ratio(int inResX, int outResX, int *global_in_res_X,
   *global_in_res_X = i;
   *global_out_res_x = intRatio;
   return;
+}
+
+float FUN_00105413(float param_1)
+
+{
+  float local_14;
+  float local_10;
+  
+  local_10 = param_1;
+  if (param_1 < 0.0) {
+    local_10 = local_10 * -1.0;
+  }
+  if ((local_10 < 0.0) || (1.0 <= local_10)) {
+    if ((local_10 < 1.0) || (2.0 <= local_10)) {
+      local_14 = 0.0;
+    }
+    else {
+      local_14 = ((4.0 - local_10 * 8.0) + local_10 * 5.0 * local_10) -
+                 local_10 * local_10 * local_10;
+    }
+  }
+  else {
+    local_14 = local_10 * local_10 * local_10 + (1.0 - (local_10 + local_10) * local_10);
+  }
+  return local_14;
+}
+
+
+static float FLOAT_ARRAY_002089c0[32];
+static float FLOAT_ARRAY_00208c60[32];
+int check_res_ratios(void)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  int i;
+  
+  fVar5 = (float)inResX;
+  fVar1 = (float)outResX;
+  fVar6 = (float)inResY;
+  fVar2 = (float)outResY;
+  for (i = 0; i < outResX; i = i + 1) {
+    fVar3 = (float)i * (fVar5 / fVar1);
+    fVar3 = fVar3 - (float)(int)fVar3;
+    if (31 < i) {
+      return 0;
+    }
+    FLOAT_ARRAY_002089c0[(long)i * 5] = fVar3;
+    fVar4 = FUN_00105413(fVar3 + 1.0);
+    FLOAT_ARRAY_002089c0[(long)i * 5 + 1] = fVar4;
+    fVar4 = FUN_00105413(fVar3);
+    FLOAT_ARRAY_002089c0[(long)i * 5 + 2] = fVar4;
+    fVar4 = FUN_00105413(1.0 - fVar3);
+    FLOAT_ARRAY_002089c0[(long)i * 5 + 3] = fVar4;
+    fVar3 = FUN_00105413(2.0 - fVar3);
+    FLOAT_ARRAY_002089c0[(long)i * 5 + 4] = fVar3;
+  }
+  i = 0;
+  while( 1 ) {
+    if (outResY <= i) {
+      return 1;
+    }
+    fVar1 = (float)i * (fVar6 / fVar2);
+    fVar1 = fVar1 - (float)(int)fVar1;
+    if (0x1f < i) break;
+    FLOAT_ARRAY_00208c60[(long)i * 5] = fVar1;
+    fVar5 = FUN_00105413(fVar1 + 1.0);
+    FLOAT_ARRAY_00208c60[(long)i * 5 + 1] = fVar5;
+    fVar5 = FUN_00105413(fVar1);
+    FLOAT_ARRAY_00208c60[(long)i * 5 + 2] = fVar5;
+    fVar5 = FUN_00105413(1.0 - fVar1);
+    FLOAT_ARRAY_00208c60[(long)i * 5 + 3] = fVar5;
+    fVar1 = FUN_00105413(2.0 - fVar1);
+    FLOAT_ARRAY_00208c60[(long)i * 5 + 4] = fVar1;
+    i = i + 1;
+  }
+  return 0;
 }
 
 BOOL ChangeResoInit(SCANDEC_OPEN *param_1)
