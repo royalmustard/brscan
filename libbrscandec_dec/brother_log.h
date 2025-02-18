@@ -34,7 +34,7 @@
 #ifndef _BROTHER_LOG_H_
 #define _BROTHER_LOG_H_
 
-
+#include "brother_dtype.h"
 
 #define LOGFILENAME  "/br_scandec.log"
 
@@ -50,7 +50,7 @@ void  CloseLogFile( void );
 void  OpenRawData( void );
 void  CloseRawData( void );
 void  SaveRawData( BYTE *lpRawData, int nDataSize );
-void  GetLogSwitch( Brother_Scanner *this );
+//void  GetLogSwitch( Brother_Scanner *this );
 
 #endif //_BROTHER_LOG_H_
 

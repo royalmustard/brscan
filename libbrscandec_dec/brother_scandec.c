@@ -1,9 +1,10 @@
 #include "brother_scandec.h"
 #include "brother_dtype.h"
+#include "brother_log.h"
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdint.h>
 // #include "third_fn_impls.h"
 int NAN(float x) { return x != x; }
 static void *RESO_BUFFR;
@@ -1401,10 +1402,10 @@ DWORD FUN_00102944(float param_1, CHAR *param_2)
   return dwOutLineByte;
 }
 //------------------------------End
-//third_fn--------------------------------------------
+// third_fn--------------------------------------------
 
 //------------------------------start
-//some_fn_write-------------------------------------
+// some_fn_write-------------------------------------
 void copy_something_to_buf(char *src)
 
 {
@@ -1549,7 +1550,8 @@ DWORD FUN_00104399(CHAR *param_1, DWORD param_2, CHAR *param_3, int param_4)
   }
   return dwOutLineByte;
 }
-//--------------------------------------End fourth_fn impl---------------------------------------------
+//--------------------------------------End fourth_fn
+//impl---------------------------------------------
 
 void FUN_001044ca(INT *param_1)
 
@@ -1582,7 +1584,8 @@ void FUN_001044ca(INT *param_1)
   }
   counter_3 = counter_3 + 1;
   if (counter_3 == 1) {
-    memcpy(*(void **)(&counter_2 + (long)extra_bytes * 2),param_1,dwInLinePixCnt);
+    memcpy(*(void **)(&counter_2 + (long)extra_bytes * 2), param_1,
+           dwInLinePixCnt);
   }
   if (extra_bytes <= some_counter) {
     some_counter = 0;
@@ -1637,22 +1640,22 @@ long write_impl_2(INT *data_kind, int *ptr) {
   return local_28;
 }
 
-
-long write_impl_1(SCANDEC_WRITE *param_1,int *param_2)
+long write_impl_1(SCANDEC_WRITE *param_1, int *param_2)
 
 {
   ushort uVar1;
   CHAR *pCVar2;
   long lVar3;
   long local_28;
-  
+
   uVar1 = counter_3;
   local_28 = 0;
   counter_3 = counter_3 + 1;
   if ((Y_scaling_factor != 5) || ((uVar1 & 1) == 0)) {
     while (*param_2 < outResY) {
-      pCVar2 = invert_buffer_offset(param_1->bReverWrite,param_1->pWriteBuff,*param_2);
-      lVar3 = (*fifth_fn)(param_1->pLineData,param_1->dwLineDataSize,pCVar2);
+      pCVar2 = invert_buffer_offset(param_1->bReverWrite, param_1->pWriteBuff,
+                                    *param_2);
+      lVar3 = (*fifth_fn)(param_1->pLineData, param_1->dwLineDataSize, pCVar2);
       local_28 = local_28 + lVar3;
       *param_2 = *param_2 + 1;
     }
@@ -1660,15 +1663,16 @@ long write_impl_1(SCANDEC_WRITE *param_1,int *param_2)
   return local_28;
 }
 
-//-----------------------start fifth_fn impl-----------------------------------------------
-DWORD FUN_00104153(CHAR *line_data,DWORD line_data_size,CHAR *buf)
+//-----------------------start fifth_fn
+//impl-----------------------------------------------
+DWORD FUN_00104153(CHAR *line_data, DWORD line_data_size, CHAR *buf)
 
 {
   // ulong uVar1;
   // ulong local_28;
   // CHAR *local_20;
   // char *local_10;
-  
+
   // uVar1 = dwOutLineByte / 3;
   // local_20 = buf;
   // local_10 = (char *)line_data;
@@ -1689,17 +1693,17 @@ DWORD FUN_00104153(CHAR *line_data,DWORD line_data_size,CHAR *buf)
   return dwOutLineByte;
 }
 
-
-ulong FUN_001040d6(CHAR *param_1,DWORD param_2,CHAR *param_3)
+ulong FUN_001040d6(CHAR *param_1, DWORD param_2, CHAR *param_3)
 
 {
   // CHAR *local_30;
   // ulong local_28;
   // char *local_10;
-  
+
   // local_30 = param_3;
   // local_10 = (char *)param_1;
-  // for (local_28 = 0; (local_28 < param_2 * 2 && (local_28 < dwOutLineByte)); local_28 = local_28 + 2
+  // for (local_28 = 0; (local_28 < param_2 * 2 && (local_28 < dwOutLineByte));
+  // local_28 = local_28 + 2
   //     ) {
   //   *local_30 = *(CHAR *)(&DAT_002083a0 + (ulong)*local_10 * 2);
   //   local_30 = local_30 + 1;
@@ -1708,54 +1712,49 @@ ulong FUN_001040d6(CHAR *param_1,DWORD param_2,CHAR *param_3)
   return dwOutLineByte;
 }
 
-
-ulong FUN_00104296(char *param_1,DWORD param_2,CHAR *param_3)
-{
+ulong FUN_00104296(char *param_1, DWORD param_2, CHAR *param_3) {
   // undefined2 uVar1;
   // undefined2 *local_30;
   // ulong local_28;
   // byte *local_10;
-  
+
   // local_30 = (undefined2 *)param_3;
   // local_10 = (byte *)param_1;
   // for (local_28 = 0; (local_28 < param_2 << 2 && (local_28 < dwOutLineByte));
   //     local_28 = local_28 + 4) {
   //   uVar1 = *(undefined2 *)(&DAT_002083a0 + (ulong)*local_10 * 2);
   //   *local_30 = *(undefined2 *)(&DAT_002083a0 + (ulong)(byte)uVar1 * 2);
-  //   local_30[1] = *(undefined2 *)(&DAT_002083a0 + (ulong)(byte)((ushort)uVar1 >> 8) * 2);
-  //   local_30 = local_30 + 2;
-  //   local_10 = local_10 + 1;
+  //   local_30[1] = *(undefined2 *)(&DAT_002083a0 + (ulong)(byte)((ushort)uVar1
+  //   >> 8) * 2); local_30 = local_30 + 2; local_10 = local_10 + 1;
   // }
   return dwOutLineByte;
 }
 
-
-ulong FUN_0010404d(CHAR *param_1,DWORD param_2,char *param_3)
+ulong FUN_0010404d(CHAR *param_1, DWORD param_2, char *param_3)
 
 {
   ulong local_28;
   CHAR *local_20;
   CHAR *local_10;
-  
+
   local_20 = param_3;
   local_10 = param_1;
   for (local_28 = 0; (local_28 < param_2 >> 1 && (local_28 < dwOutLineByte));
-      local_28 = local_28 + 1) {
-    //*local_20 = (&DAT_002082a0)[local_10[1]] | (&DAT_002082a0)[*local_10] << 4;
+       local_28 = local_28 + 1) {
+    //*local_20 = (&DAT_002082a0)[local_10[1]] | (&DAT_002082a0)[*local_10] <<
+    //4;
     local_20 = local_20 + 1;
     local_10 = local_10 + 2;
   }
   return local_28;
 }
 
-ulong FUN_00104365(CHAR *param_1,DWORD param_2,CHAR *param_3)
+ulong FUN_00104365(CHAR *param_1, DWORD param_2, CHAR *param_3)
 
 {
-  memcpy(param_3,param_1,dwOutLineByte);
+  memcpy(param_3, param_1, dwOutLineByte);
   return dwOutLineByte & 0xffff;
 }
-
-
 
 int assign_global_fn_pointers(int *assigned_type) {
   if ((inResoX == outResoX) && (inResoY == outResoY)) {
@@ -1906,7 +1905,7 @@ float FUN_00105413(float param_1)
 {
   float local_14;
   float local_10;
-  
+
   local_10 = param_1;
   if (param_1 < 0.0) {
     local_10 = local_10 * -1.0;
@@ -1914,18 +1913,16 @@ float FUN_00105413(float param_1)
   if ((local_10 < 0.0) || (1.0 <= local_10)) {
     if ((local_10 < 1.0) || (2.0 <= local_10)) {
       local_14 = 0.0;
-    }
-    else {
+    } else {
       local_14 = ((4.0 - local_10 * 8.0) + local_10 * 5.0 * local_10) -
                  local_10 * local_10 * local_10;
     }
-  }
-  else {
-    local_14 = local_10 * local_10 * local_10 + (1.0 - (local_10 + local_10) * local_10);
+  } else {
+    local_14 = local_10 * local_10 * local_10 +
+               (1.0 - (local_10 + local_10) * local_10);
   }
   return local_14;
 }
-
 
 static float FLOAT_ARRAY_002089c0[32];
 static float FLOAT_ARRAY_00208c60[32];
@@ -1939,7 +1936,7 @@ int check_res_ratios(void)
   float fVar5;
   float fVar6;
   int i;
-  
+
   fVar5 = (float)inResX;
   fVar1 = (float)outResX;
   fVar6 = (float)inResY;
@@ -1961,13 +1958,14 @@ int check_res_ratios(void)
     FLOAT_ARRAY_002089c0[(long)i * 5 + 4] = fVar3;
   }
   i = 0;
-  while( 1 ) {
+  while (1) {
     if (outResY <= i) {
       return 1;
     }
     fVar1 = (float)i * (fVar6 / fVar2);
     fVar1 = fVar1 - (float)(int)fVar1;
-    if (0x1f < i) break;
+    if (0x1f < i)
+      break;
     FLOAT_ARRAY_00208c60[(long)i * 5] = fVar1;
     fVar5 = FUN_00105413(fVar1 + 1.0);
     FLOAT_ARRAY_00208c60[(long)i * 5 + 1] = fVar5;
@@ -2269,8 +2267,9 @@ BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
     scandec_open_2.dwInLinePixCnt = scandec_open_local->dwInLinePixCnt;
     scandec_open_2.nOutDataKind = scandec_open_local->nOutDataKind;
     scandec_open_2.bLongBoundary = scandec_open_local->bLongBoundary;
-    BVar1 = ChangeResoInit(&scandec_open_2);
-    if (BVar1 == 0) {
+  
+    if (ChangeResoInit(&scandec_open_2) == 0) {
+      WriteLog("ChangeResoInit returned FALSE");
       free(pix_buf); // bugchk_free(pix_buf,0x59,-0x70);
       pix_buf = (void *)0x0;
       ret_val = 0;

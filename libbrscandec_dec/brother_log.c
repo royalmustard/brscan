@@ -37,9 +37,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdarg.h>
-
-#include "brother_devaccs.h"
-#include "brother_misc.h"
+#include "brother_dtype.h"
+//#include "brother_devaccs.h"
+//#include "brother_misc.h"
 
 #include "brother_log.h"
 
@@ -47,7 +47,7 @@
 // �����ե����롦�⥸�塼����������ѿ�
 //
 static int  nLogFile = 1;
-static int  nNewLog  = 1;
+static int  nNewLog  = 0;
 
 static HANDLE  hLogFile = 0;
 
@@ -83,7 +83,8 @@ WriteLogFileString(LPSTR lpszLogStr)
 
 	strcat( szLogFile, LOGFILENAME );
 	if (nNewLog == 0){
-	    hLogFile = fopen(szLogFile,"a");
+	    hLogFile = fopen(szLogFile,"w");
+		nNewLog = 1; //create new log each time program is run
 	} else {
 	    hLogFile = fopen(szLogFile,"a");
 	}
@@ -278,12 +279,12 @@ void CloseLogFile( void )
 //
 //-----------------------------------------------------------------------------
 //
-void
-GetLogSwitch( Brother_Scanner *this )
-{
-    nLogFile = this->modelConfig.bLogFile;
-    nNewLog  = 1;
-}
+// void
+// GetLogSwitch( Brother_Scanner *this )
+// {
+//     nLogFile = this->modelConfig.bLogFile;
+//     nNewLog  = 1;
+// }
 
 
 //////// end of brother_log.c ////////
