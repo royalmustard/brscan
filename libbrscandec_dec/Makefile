@@ -12,7 +12,10 @@ brother_scandec.o: brother_scandec.c brother_scandec.h
 # brother_chreso.o: brother_chreso.c brother_chreso.h
 # 	gcc -fPIC -c $< -o $@
 
-libbrscandec.so.1.0.0: brother_scandec.o 
+brother_log.o: brother_log.c brother_log.h
+	gcc -fPIC -c $< -o $@
+
+libbrscandec.so.1.0.0: brother_scandec.o brother_log.o
 	gcc -shared $^ -o $@
 
 clean:
