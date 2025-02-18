@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 // #include "third_fn_impls.h"
 int NAN(float x) { return x != x; }
 static void *RESO_BUFFR;
