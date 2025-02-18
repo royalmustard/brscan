@@ -2240,7 +2240,6 @@ char *set_buffer_and_do_something(SCANDEC_WRITE *param_1, size_t *param_2)
 }
 
 BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
-  BOOL BVar1;
   BOOL ret_val;
   SCANDEC_OPEN scandec_open_2;
   SCANDEC_OPEN *scandec_open_local;
@@ -2258,6 +2257,7 @@ BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
   pix_buf = malloc(
       InLinePixelCnt); // bugchk_malloc(InLinePixelCnt,69,"brother_scandec.c");
   if (pix_buf == (void *)0x0) {
+    WriteLog("pix_buf is nullpointer; malloc failed");
     ret_val = 0;
   } else {
     scandec_open_2.nInResoX = scandec_open_local->nInResoX;
