@@ -2240,6 +2240,7 @@ char *set_buffer_and_do_something(SCANDEC_WRITE *param_1, size_t *param_2)
 }
 
 BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
+  WriteLog("ScanDecOpen called");
   BOOL ret_val;
   SCANDEC_OPEN scandec_open_2;
   SCANDEC_OPEN *scandec_open_local;
@@ -2287,4 +2288,24 @@ BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
     }
   }
   return ret_val;
+}
+void	ScanDecSetTblHandle( HANDLE h1, HANDLE h2)
+{
+  return;
+}
+BOOL	ScanDecPageStart( void )
+{
+  return FALSE;
+}
+DWORD	ScanDecWrite( SCANDEC_WRITE * write_ptr, INT * iptr)
+{
+  return 0;
+}
+DWORD	ScanDecPageEnd( SCANDEC_WRITE * write_ptr, INT * iptr)
+{
+  return 0;
+}
+BOOL	ScanDecClose( void )
+{
+  return FALSE;
 }
