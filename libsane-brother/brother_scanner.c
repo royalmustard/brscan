@@ -132,15 +132,21 @@ LoadScanDecDll( Brother_Scanner *this )
 {
 	BOOL  bResult = TRUE;
 
-	WriteLog("Loading scanDec dll...");
+	WriteLog("Loading scanDec dll %s...", szScanDecDl);
 
 	this->scanDec.hScanDec = dlopen ( szScanDecDl, RTLD_LAZY );
-	
+	WriteLog("scanDec handle %p", this->scanDec.hScanDec);
+	if (!this->scanDec.hScanDec) {
+               WriteLog("dlerror: %s\n", dlerror());
+           }
+
+	dlerror();	
 	if( this->scanDec.hScanDec != NULL ){
 		//
 		// get the procedure addresses  of scanDec
 		//
 		this->scanDec.lpfnScanDecOpen      = dlsym ( this->scanDec.hScanDec, "ScanDecOpen" );
+		WriteLog("lpfnScanDecOpen: %p", this->scanDec.lpfnScanDecOpen);
 		this->scanDec.lpfnScanDecSetTbl    = dlsym ( this->scanDec.hScanDec, "ScanDecSetTblHandle" );
 		this->scanDec.lpfnScanDecPageStart = dlsym ( this->scanDec.hScanDec, "ScanDecPageStart" );
 		this->scanDec.lpfnScanDecWrite     = dlsym ( this->scanDec.hScanDec, "ScanDecWrite" );
@@ -155,11 +161,13 @@ LoadScanDecDll( Brother_Scanner *this )
 			 this->scanDec.lpfnScanDecClose  == NULL )
 		{
 			// ERROR: library exists but cannot get the procedure address 
+			WriteLog("at least one of the scanDec dll pointers was zero");
 			dlclose ( this->scanDec.hScanDec );
 			this->scanDec.hScanDec = NULL;
 			bResult = FALSE;
 		}
 	}else{
+		WriteLog("dlopen is NULL, setting all functions pointers to null");
 		this->scanDec.lpfnScanDecOpen      = NULL;
 		this->scanDec.lpfnScanDecSetTbl    = NULL;
 		this->scanDec.lpfnScanDecPageStart = NULL;
@@ -168,6 +176,11 @@ LoadScanDecDll( Brother_Scanner *this )
 		this->scanDec.lpfnScanDecClose     = NULL;
 		bResult = FALSE;
 	}
+	char* error = dlerror();
+	 if (error != NULL) {
+               WriteLog("dl error%s\n", error);
+           }
+	WriteLog("All function pointers acquired succesfully :3");
 	return bResult;
 }
 
@@ -1868,6 +1881,7 @@ StartDecodeStretchProc( Brother_Scanner *this )
 	// Initialize the scanned-data-expanding-modules/resolution-exchange-module
 	//
 	if (this->modelInf.seriesNo < BROPEN_SERIES_NO) {
+		WriteLog("lpfnScanDecOpen about to be called, value is %p", this->scanDec.lpfnScanDecOpen);
 		if (this->scanDec.lpfnScanDecOpen) {
 			bResult = this->scanDec.lpfnScanDecOpen( &ImageProcInfo );
 			WriteLog( "Result from ScanDecOpen is %d", bResult );
