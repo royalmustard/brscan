@@ -35,8 +35,8 @@ static DWORD InLinePixelCnt;
 static void *pix_buf;
 static HANDLE HANDLE_1;
 static HANDLE HANDLE_2;
-static int some_flag_1;
-static int some_flag_2;
+static HANDLE some_flag_1;
+static HANDLE some_flag_2;
 static void *some_function;
 static void *some_fn_write;
 static THIRD_FN third_fn;
@@ -1552,7 +1552,7 @@ DWORD FUN_00104399(CHAR *param_1, DWORD param_2, CHAR *param_3, int param_4)
   return dwOutLineByte;
 }
 //--------------------------------------End fourth_fn
-//impl---------------------------------------------
+// impl---------------------------------------------
 
 void FUN_001044ca(INT *param_1)
 
@@ -1665,7 +1665,7 @@ long write_impl_1(SCANDEC_WRITE *param_1, int *param_2)
 }
 
 //-----------------------start fifth_fn
-//impl-----------------------------------------------
+// impl-----------------------------------------------
 DWORD FUN_00104153(CHAR *line_data, DWORD line_data_size, CHAR *buf)
 
 {
@@ -1743,7 +1743,7 @@ ulong FUN_0010404d(CHAR *param_1, DWORD param_2, char *param_3)
   for (local_28 = 0; (local_28 < param_2 >> 1 && (local_28 < dwOutLineByte));
        local_28 = local_28 + 1) {
     //*local_20 = (&DAT_002082a0)[local_10[1]] | (&DAT_002082a0)[*local_10] <<
-    //4;
+    // 4;
     local_20 = local_20 + 1;
     local_10 = local_10 + 2;
   }
@@ -2238,8 +2238,8 @@ char *set_buffer_and_do_something(SCANDEC_WRITE *param_1, size_t *param_2)
   }
   return local_pix_buf_2;
 }
-BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {	
-	WriteLog("Enter ScanDecOpen");
+BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
+  WriteLog("Enter ScanDecOpen");
   BOOL ret_val;
   SCANDEC_OPEN scandec_open_2;
   SCANDEC_OPEN *scandec_open_local;
@@ -2268,7 +2268,7 @@ BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
     scandec_open_2.dwInLinePixCnt = scandec_open_local->dwInLinePixCnt;
     scandec_open_2.nOutDataKind = scandec_open_local->nOutDataKind;
     scandec_open_2.bLongBoundary = scandec_open_local->bLongBoundary;
-  
+
     if (ChangeResoInit(&scandec_open_2) == 0) {
       WriteLog("ChangeResoInit returned FALSE");
       free(pix_buf); // bugchk_free(pix_buf,0x59,-0x70);
@@ -2288,28 +2288,318 @@ BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
   }
   return ret_val;
 }
-void	ScanDecSetTblHandle( HANDLE h1, HANDLE h2)
-{
-WriteLog("enter ScanDecSetTblHandle");
+void ScanDecSetTblHandle(HANDLE h1, HANDLE h2) {
+  WriteLog("enter ScanDecSetTblHandle");
+  HANDLE_1 = h1;
+  HANDLE_2 = h2;
   return;
 }
-BOOL	ScanDecPageStart( void )
+
+//--------------------------------------ScanDecPageStart
+//functions---------------------------------------------------------
+char *FUN_00106751(SCANDEC_WRITE *scandec_write, size_t *pix_cnt,
+                   size_t *param_3)
+
 {
-WriteLog("enter ScanDecPageStart");
+  DWORD DVar1;
+  char *pbVar2;
+  char bVar3;
+  char bVar4;
+  void *pvVar5;
+  char local_62;
+  char *local_60;
+  char *local_58;
+  size_t l_pix_cnt;
+  DWORD dw_line_data_size;
+  char local_3a;
+  char *local_38;
+  char *local_30;
+  char *p_line_data;
+
+  p_line_data = (char *)scandec_write->pLineData;
+  dw_line_data_size = scandec_write->dwLineDataSize;
+  local_58 = some_flag_2;
+  local_60 = some_flag_2 + dw_line_data_size;
+  *pix_cnt = 0;
+  pvVar5 = pix_buf_2;
+  if (scandec_write->nInDataComp == 1) {
+    memset(pix_buf_2, 0, InLinePixelCnt);
+    local_30 = (char *)pix_buf_2;
+    *pix_cnt = InLinePixelCnt;
+  } else if (scandec_write->nInDataComp == 3) {
+    local_38 = (char *)pix_buf_2;
+    local_30 = (char *)pix_buf_2;
+    l_pix_cnt = InLinePixelCnt;
+    if (some_flag_1 == 0) {
+      do {
+        if (l_pix_cnt == 0) {
+          return (char *)pvVar5;
+        }
+        DVar1 = dw_line_data_size - 1;
+        if (DVar1 == 0) {
+          return (char *)pvVar5;
+        }
+        bVar4 = *p_line_data;
+        pbVar2 = p_line_data + 1;
+        if ((char)bVar4 < '\0') {
+          if (bVar4 != 128) {
+            local_3a = 1 - bVar4;
+            bVar4 = *pbVar2;
+            while ((local_3a != '\0' && (l_pix_cnt != 0))) {
+              local_62 = *local_60;
+              local_60 = local_60 + 1;
+              if (local_62 < bVar4) {
+                local_62 = bVar4 - local_62;
+              }
+              bVar3 = *local_58;
+              local_58 = local_58 + 1;
+              if (local_62 < bVar3) {
+                *local_38 =
+                    (char)((int)((uint)local_62 * 0x100 - (uint)local_62) /
+                           (int)(uint)bVar3);
+              } else {
+                *local_38 = -1;
+              }
+              local_38 = local_38 + 1;
+              local_3a = local_3a + -1;
+              l_pix_cnt = l_pix_cnt - 1;
+              *pix_cnt = *pix_cnt + 1;
+            }
+            DVar1 = dw_line_data_size - 2;
+            pbVar2 = p_line_data + 2;
+          }
+        } else {
+          local_3a = bVar4 + 1;
+          dw_line_data_size = DVar1;
+          p_line_data = pbVar2;
+          while (((DVar1 = dw_line_data_size, pbVar2 = p_line_data,
+                   local_3a != '\0' && (l_pix_cnt != 0)) &&
+                  (dw_line_data_size != 0))) {
+            bVar4 = *p_line_data;
+            p_line_data = p_line_data + 1;
+            local_62 = *local_60;
+            local_60 = local_60 + 1;
+            if (local_62 < bVar4) {
+              local_62 = bVar4 - local_62;
+            }
+            bVar4 = *local_58;
+            local_58 = local_58 + 1;
+            if (local_62 < bVar4) {
+              *local_38 =
+                  (char)((int)((uint)local_62 * 0x100 - (uint)local_62) /
+                         (int)(uint)bVar4);
+            } else {
+              *local_38 = -1;
+            }
+            local_38 = local_38 + 1;
+            local_3a = local_3a + -1;
+            l_pix_cnt = l_pix_cnt - 1;
+            dw_line_data_size = dw_line_data_size - 1;
+            *pix_cnt = *pix_cnt + 1;
+          }
+        }
+        p_line_data = pbVar2;
+        dw_line_data_size = DVar1;
+      } while (dw_line_data_size != 0);
+    } else {
+      do {
+        if (l_pix_cnt == 0) {
+          return (char *)pvVar5;
+        }
+        DVar1 = dw_line_data_size - 1;
+        if (DVar1 == 0) {
+          return (char *)pvVar5;
+        }
+        bVar4 = *p_line_data;
+        pbVar2 = p_line_data + 1;
+        if ((char)bVar4 < '\0') {
+          if (bVar4 != 0x80) {
+            local_3a = '\x01' - bVar4;
+            bVar4 = *pbVar2;
+            while ((local_3a != '\0' && (l_pix_cnt != 0))) {
+              local_62 = *local_60;
+              local_60 = local_60 + 1;
+              if (local_62 < bVar4) {
+                local_62 = bVar4 - local_62;
+              }
+              bVar3 = *local_58;
+              local_58 = local_58 + 1;
+              if (local_62 < bVar3) {
+                *local_38 =
+                    *(char *)((int)((uint)local_62 * 0x100 - (uint)local_62) /
+                                  (int)(uint)bVar3 +
+                              some_flag_1);
+              } else {
+                *local_38 = *(char *)(some_flag_1 + 0xff);
+              }
+              local_38 = local_38 + 1;
+              local_3a = local_3a + -1;
+              l_pix_cnt = l_pix_cnt - 1;
+              *pix_cnt = *pix_cnt + 1;
+            }
+            DVar1 = dw_line_data_size - 2;
+            pbVar2 = p_line_data + 2;
+          }
+        } else {
+          local_3a = bVar4 + 1;
+          dw_line_data_size = DVar1;
+          p_line_data = pbVar2;
+          while (((DVar1 = dw_line_data_size, pbVar2 = p_line_data,
+                   local_3a != '\0' && (l_pix_cnt != 0)) &&
+                  (dw_line_data_size != 0))) {
+            bVar4 = *p_line_data;
+            p_line_data = p_line_data + 1;
+            local_62 = *local_60;
+            local_60 = local_60 + 1;
+            if (local_62 < bVar4) {
+              local_62 = bVar4 - local_62;
+            }
+            bVar4 = *local_58;
+            local_58 = local_58 + 1;
+            if (local_62 < bVar4) {
+              *local_38 =
+                  *(char *)((int)((uint)local_62 * 0x100 - (uint)local_62) /
+                                (int)(uint)bVar4 +
+                            some_flag_1);
+            } else {
+              *local_38 = *(char *)(some_flag_1 + 0xff);
+            }
+            local_38 = local_38 + 1;
+            local_3a = local_3a + -1;
+            l_pix_cnt = l_pix_cnt - 1;
+            dw_line_data_size = dw_line_data_size - 1;
+            *pix_cnt = *pix_cnt + 1;
+          }
+        }
+        p_line_data = pbVar2;
+        dw_line_data_size = DVar1;
+      } while (dw_line_data_size != 0);
+    }
+  } else if (some_flag_1 == 0) {
+    local_38 = (char *)pix_buf_2;
+    local_30 = (char *)pix_buf_2;
+    l_pix_cnt = InLinePixelCnt;
+    while ((l_pix_cnt != 0 && (dw_line_data_size != 0))) {
+      bVar4 = *p_line_data;
+      p_line_data = p_line_data + 1;
+      local_62 = *local_60;
+      local_60 = local_60 + 1;
+      if (local_62 < bVar4) {
+        local_62 = bVar4 - local_62;
+      }
+      bVar4 = *local_58;
+      local_58 = local_58 + 1;
+      if (local_62 < bVar4) {
+        *local_38 = (char)((int)((uint)local_62 * 0x100 - (uint)local_62) /
+                           (int)(uint)bVar4);
+      } else {
+        *local_38 = -1;
+      }
+      local_38 = local_38 + 1;
+      l_pix_cnt = l_pix_cnt - 1;
+      dw_line_data_size = dw_line_data_size - 1;
+      *pix_cnt = *pix_cnt + 1;
+    }
+  } else {
+    local_38 = (char *)pix_buf_2;
+    local_30 = (char *)pix_buf_2;
+    l_pix_cnt = InLinePixelCnt;
+    while ((l_pix_cnt != 0 && (dw_line_data_size != 0))) {
+      bVar4 = *p_line_data;
+      p_line_data = p_line_data + 1;
+      local_62 = *local_60;
+      local_60 = local_60 + 1;
+      if (local_62 < bVar4) {
+        local_62 = bVar4 - local_62;
+      }
+      bVar4 = *local_58;
+      local_58 = local_58 + 1;
+      if (local_62 < bVar4) {
+        *local_38 = *(char *)((int)((uint)local_62 * 0x100 - (uint)local_62) /
+                                  (int)(uint)bVar4 +
+                              some_flag_1);
+      } else {
+        *local_38 = *(char *)(some_flag_1 + 0xff);
+      }
+      local_38 = local_38 + 1;
+      l_pix_cnt = l_pix_cnt - 1;
+      dw_line_data_size = dw_line_data_size - 1;
+      *pix_cnt = *pix_cnt + 1;
+    }
+  }
+  return local_30;
+}
+
+BOOL ChangeResoWriteStart(void) {
+  int i;
+
+  some_counter = 0;
+  counter_2 = 0;
+  counter_3 = 0;
+  if (RESO_BUFFR != (void *)0x0) {
+    RESO_BUFFER_2 = RESO_BUFFR;
+    if (RESO_BUFFR == (void *)0x0) {
+      RESO_BUFFER_2 = RESO_BUFFR;
+      some_counter = 0;
+      counter_2 = 0;
+      counter_3 = 0;
+      return 0;
+    }
+    for (i = 0; i < extra_bytes; i = i + 1) {
+      (&some_buf)[i] = (long *)((long)i * dwInLinePixCnt + (long)RESO_BUFFER_2);
+    }
+  }
+  return 1;
+}
+
+BOOL ScanDecPageStart(void) {
+  WriteLog("enter ScanDecPageStart");
+  BOOL BVar1;
+  BOOL ret_val;
+
+  pix_buf_2 = pix_buf;
+  if (pix_buf == (void *)0x0) {
+    ret_val = 0;
+  } else if ((HANDLE_1 == (HANDLE)0x0) ||
+             (some_flag_1 = HANDLE_1, HANDLE_1 != (HANDLE)0x0)) {
+    some_function = set_buffer_and_do_something;
+    if (HANDLE_2 != (HANDLE)0x0) {
+      some_flag_2 = HANDLE_2;
+      if ((HANDLE_2 == (HANDLE)0x0) &&
+          (pix_buf_2 = (void *)0x0, some_flag_1 != (HANDLE)0x0)) {
+        some_flag_1 = (HANDLE)0x0;
+      }
+      some_function = FUN_00106751;
+    }
+    BVar1 = ChangeResoWriteStart();
+    if (BVar1 == 0) {
+      pix_buf_2 = (void *)0x0;
+      if (some_flag_1 != (HANDLE)0x0) {
+        some_flag_1 = (HANDLE)0x0;
+      }
+      if (some_flag_2 != (HANDLE)0x0) {
+        some_flag_2 = (HANDLE)0x0;
+      }
+      ret_val = 0;
+    } else {
+      ret_val = 1;
+    }
+  } else {
+    pix_buf_2 = (void *)0x0;
+    ret_val = 0;
+  }
+  return ret_val;
   return FALSE;
 }
-DWORD	ScanDecWrite( SCANDEC_WRITE * write_ptr, INT * iptr)
-{
-WriteLog("enter ScanDecWrite");
+DWORD ScanDecWrite(SCANDEC_WRITE *write_ptr, INT *iptr) {
+  WriteLog("enter ScanDecWrite");
   return 0;
 }
-DWORD	ScanDecPageEnd( SCANDEC_WRITE * write_ptr, INT * iptr)
-{
-WriteLog("enter ScanDecPageEnd");
+DWORD ScanDecPageEnd(SCANDEC_WRITE *write_ptr, INT *iptr) {
+  WriteLog("enter ScanDecPageEnd");
   return 0;
 }
-BOOL	ScanDecClose( void )
-{
-WriteLog("enter ScanDecPageEnd");
+BOOL ScanDecClose(void) {
+  WriteLog("enter ScanDecPageEnd");
   return FALSE;
 }
