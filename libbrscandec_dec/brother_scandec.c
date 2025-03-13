@@ -2246,7 +2246,7 @@ char *set_buffer_and_do_something(SCANDEC_WRITE *param_1, size_t *param_2)
   return local_pix_buf_2;
 }
 BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
-  WriteLog("Enter ScanDecOpen");
+  WriteLog("Enter ScanDecOpen amogus");
   BOOL ret_val;
   SCANDEC_OPEN scandec_open_2;
   SCANDEC_OPEN *scandec_open_local;
@@ -2604,6 +2604,7 @@ BOOL ScanDecPageStart(void) {
 
 long ChangeResoWriteEnd(SCANDEC_WRITE *param_1,INT *param_2)
 {
+	WriteLog("enter ChangeResoWriteEnd");
   long lVar1;
   int local_24;
   long local_20;
@@ -2623,7 +2624,7 @@ long ChangeResoWriteEnd(SCANDEC_WRITE *param_1,INT *param_2)
 
 
 DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
-  WriteLog("enter ScanDecPageEnd");
+  WriteLog("enter ScanDecPageEnd amogus");
   DWORD DVar1;
   SCANDEC_WRITE local_n_data_kind;
   INT *local_18;
@@ -2638,6 +2639,7 @@ DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
   *some_ptr = 0;
   local_18 = some_ptr;
   local_10 = scandec_write;
+  WriteLog("call ChangeResoWriteEnd");
   DVar1 = ChangeResoWriteEnd(&local_n_data_kind,some_ptr);
   pix_buf_2 = (void *)0x0;
   if (some_flag_1 != 0) {
