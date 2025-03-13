@@ -2617,25 +2617,20 @@ long ChangeResoWriteEnd(SCANDEC_WRITE *param_1,INT *param_2)
 DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
   WriteLog("enter ScanDecPageEnd");
   DWORD DVar1;
-  INT local_n_data_kind [2];
-  long local_50;
-  long local_48;
-  CHAR *local_40;
-  DWORD local_38;
-  BOOL local_30;
+  SCANDEC_WRITE local_n_data_kind;
   INT *local_18;
   SCANDEC_WRITE *local_10;
   
-  local_n_data_kind[0] = scandec_write->nInDataKind;
-  local_50 = 0;
-  local_48 = 0;
-  local_40 = scandec_write->pWriteBuff;
-  local_38 = scandec_write->dwWriteBuffSize;
-  local_30 = scandec_write->bReverWrite;
+  local_n_data_kind.nInDataComp = scandec_write->nInDataKind;
+  local_n_data_kind.pLineData = (CHAR *)0x0;
+  local_n_data_kind.dwLineDataSize = 0;
+  local_n_data_kind.pWriteBuff = scandec_write->pWriteBuff;
+  local_n_data_kind.dwWriteBuffSize = scandec_write->dwWriteBuffSize;
+  local_n_data_kind.bReverWrite = scandec_write->bReverWrite;
   *some_ptr = 0;
   local_18 = some_ptr;
   local_10 = scandec_write;
-  DVar1 = ChangeResoWriteEnd(local_n_data_kind,some_ptr);
+  DVar1 = ChangeResoWriteEnd(&local_n_data_kind,some_ptr);
   pix_buf_2 = (void *)0x0;
   if (some_flag_1 != 0) {
     some_flag_1 = 0;
