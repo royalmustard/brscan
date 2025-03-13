@@ -38,7 +38,7 @@ static HANDLE HANDLE_2;
 static HANDLE some_flag_1;
 static HANDLE some_flag_2;
 static void *some_function;
-static void *some_fn_write;
+static SOME_FN_WRITE some_fn_write;
 static THIRD_FN third_fn;
 static FOURTH_FN fourth_fn;
 static FIFTH_FN fifth_fn;
@@ -761,7 +761,7 @@ LAB_001049eb:
   return local_34;
 }
 
-long FUN_00101eae(SCANDEC_WRITE *param_1, int *param_2)
+DWORD FUN_00101eae(SCANDEC_WRITE *param_1, int *param_2)
 
 {
   int iVar1;
@@ -1434,7 +1434,7 @@ void copy_something_to_buf(char *src)
   return;
 }
 
-long FUN_00101cba(long buf, int *param_2)
+DWORD FUN_00101cba(SCANDEC_WRITE *scandec_write,int *param_2)
 
 {
   CHAR *pCVar1;
@@ -1445,18 +1445,19 @@ long FUN_00101cba(long buf, int *param_2)
   int i;
   float local_2c;
   long local_28;
-
+  
   local_28 = 0;
-  copy_something_to_buf(*(char **)(buf + 8));
+  copy_something_to_buf(scandec_write->pLineData);
   if (2 < counter_3) {
     fVar4 = (float)inResY;
     fVar3 = (float)outResY;
     counter_3 = 0;
     if ((int)(counter_3 - 3) % inResY == 0) {
       local_2c = 1.0;
-    } else {
+    }
+    else {
       for (local_2c = 0.0; local_2c < (float)((int)(counter_3 - 3) % inResY);
-           local_2c = local_2c + fVar4 / fVar3) {
+          local_2c = local_2c + fVar4 / fVar3) {
         counter_3 = counter_3 + 1;
       }
       local_2c = (local_2c + 1.0) - (float)((int)(counter_3 - 3) % inResY);
@@ -1464,15 +1465,14 @@ long FUN_00101cba(long buf, int *param_2)
     local_38 = 0;
     for (i = 0; i < outResY; i = i + 1) {
       if (((int)(counter_3 - 3) % inResY <= (i * inResY) / outResY) &&
-          ((i * inResY) / outResY < (int)(counter_3 - 3) % inResY + 1)) {
+         ((i * inResY) / outResY < (int)(counter_3 - 3) % inResY + 1)) {
         local_38 = local_38 + 1;
       }
     }
     i = 0;
     while (i < local_38) {
-      pCVar1 = invert_buffer_offset(*(BOOL *)(buf + 0x28),
-                                    *(CHAR **)(buf + 0x18), *param_2);
-      lVar2 = (*third_fn)(local_2c, pCVar1);
+      pCVar1 = invert_buffer_offset(scandec_write->bReverWrite,scandec_write->pWriteBuff,*param_2);
+      lVar2 = (*third_fn)(local_2c,pCVar1);
       local_28 = local_28 + lVar2;
       i = i + 1;
       local_2c = local_2c + fVar4 / fVar3;
@@ -1483,7 +1483,7 @@ long FUN_00101cba(long buf, int *param_2)
   return local_28;
 }
 
-long FUN_00101bd8(SCANDEC_WRITE *param_1, int *param_2)
+DWORD FUN_00101bd8(SCANDEC_WRITE *param_1, int *param_2)
 
 {
   CHAR *pCVar1;
@@ -1554,30 +1554,30 @@ DWORD FUN_00104399(CHAR *param_1, DWORD param_2, CHAR *param_3, int param_4)
 //--------------------------------------End fourth_fn
 // impl---------------------------------------------
 
-void FUN_001044ca(INT *param_1)
+void FUN_001044ca(CHAR *param_1)
 
 {
   int iVar1;
   ulong j;
   ulong i;
   int local_18;
-
+  
   iVar1 = some_counter;
   some_counter = some_counter + 1;
-  if (param_1 == (INT *)0x0) {
+  if (param_1 == (CHAR *)0x0) {
     local_18 = iVar1 + -1;
     if (local_18 < 0) {
       local_18 = extra_bytes + -1;
     }
-    memcpy((&some_buf)[iVar1], (&some_buf)[local_18], dwInLinePixCnt);
-  } else {
+    memcpy((&some_buf)[iVar1],(&some_buf)[local_18],dwInLinePixCnt);
+  }
+  else {
     for (i = 0; i < dwInLinePixCnt; i = i + 1) {
       for (j = 0; j < 8; j = j + 1) {
-        if (((int)(uint) * (char *)(i + (long)param_1) >>
-                 (7U - (char)j & 0x1f) &
-             1U) == 0) {
+        if (((int)(uint)(char)param_1[i] >> (7U - (char)j & 0x1f) & 1U) == 0) {
           *(char *)((long)(&some_buf)[iVar1] + j + i * 8) = 0;
-        } else {
+        }
+        else {
           *(char *)((long)(&some_buf)[iVar1] + j + i * 8) = 10;
         }
       }
@@ -1585,8 +1585,7 @@ void FUN_001044ca(INT *param_1)
   }
   counter_3 = counter_3 + 1;
   if (counter_3 == 1) {
-    memcpy(*(void **)(&counter_2 + (long)extra_bytes * 2), param_1,
-           dwInLinePixCnt);
+    memcpy(*(void **)(&counter_2 + (long)extra_bytes * 2),param_1,dwInLinePixCnt);
   }
   if (extra_bytes <= some_counter) {
     some_counter = 0;
@@ -1594,7 +1593,7 @@ void FUN_001044ca(INT *param_1)
   return;
 }
 
-long write_impl_2(INT *data_kind, int *ptr) {
+DWORD write_impl_2(SCANDEC_WRITE *scandec_write, int *ptr) {
   CHAR *pCVar1;
   long lVar2;
   float l_outResY;
@@ -1605,7 +1604,7 @@ long write_impl_2(INT *data_kind, int *ptr) {
   long local_28;
 
   local_28 = 0;
-  FUN_001044ca(*(INT **)(data_kind + 2));
+  FUN_001044ca(scandec_write->pLineData);
   if (2 < counter_3) {
     l_inResY = (float)inResY;
     l_outResY = (float)outResY;
@@ -1629,7 +1628,7 @@ long write_impl_2(INT *data_kind, int *ptr) {
     local_34 = 0;
     while (local_34 < local_38) {
       pCVar1 =
-          invert_buffer_offset(data_kind[10], *(CHAR **)(data_kind + 6), *ptr);
+          invert_buffer_offset(scandec_write->bReverWrite,scandec_write->pWriteBuff,*ptr);
       lVar2 = (*third_fn)(i, pCVar1);
       local_28 = local_28 + lVar2;
       local_34 = local_34 + 1;
@@ -1641,7 +1640,7 @@ long write_impl_2(INT *data_kind, int *ptr) {
   return local_28;
 }
 
-long write_impl_1(SCANDEC_WRITE *param_1, int *param_2)
+DWORD write_impl_1(SCANDEC_WRITE *param_1, int *param_2)
 
 {
   ushort uVar1;
@@ -2591,14 +2590,67 @@ BOOL ScanDecPageStart(void) {
   return ret_val;
   return FALSE;
 }
+
+
+//------------------------------------------ScanDecPageEnd------------------------------------------------------
+
+long ChangeResoWriteEnd(SCANDEC_WRITE *param_1,INT *param_2)
+{
+  long lVar1;
+  int local_24;
+  long local_20;
+  
+  local_20 = 0;
+  *param_2 = 0;
+  if ((RESO_BUFFER_2 != 0) && (2 < counter_3)) {
+    for (local_24 = 0; local_24 < 2; local_24 = local_24 + 1) {
+      lVar1 = some_fn_write(param_1,param_2);
+      local_20 = local_20 + lVar1;
+    }
+    RESO_BUFFER_2 = 0;
+  }
+  return local_20;
+}
+
+
+
+DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
+  WriteLog("enter ScanDecPageEnd");
+  DWORD DVar1;
+  INT local_n_data_kind [2];
+  long local_50;
+  long local_48;
+  CHAR *local_40;
+  DWORD local_38;
+  BOOL local_30;
+  INT *local_18;
+  SCANDEC_WRITE *local_10;
+  
+  local_n_data_kind[0] = scandec_write->nInDataKind;
+  local_50 = 0;
+  local_48 = 0;
+  local_40 = scandec_write->pWriteBuff;
+  local_38 = scandec_write->dwWriteBuffSize;
+  local_30 = scandec_write->bReverWrite;
+  *some_ptr = 0;
+  local_18 = some_ptr;
+  local_10 = scandec_write;
+  DVar1 = ChangeResoWriteEnd(local_n_data_kind,some_ptr);
+  pix_buf_2 = (void *)0x0;
+  if (some_flag_1 != 0) {
+    some_flag_1 = 0;
+  }
+  if (some_flag_2 != 0) {
+    some_flag_2 = 0;
+  }
+  return DVar1;
+}
+
 DWORD ScanDecWrite(SCANDEC_WRITE *write_ptr, INT *iptr) {
   WriteLog("enter ScanDecWrite");
   return 0;
 }
-DWORD ScanDecPageEnd(SCANDEC_WRITE *write_ptr, INT *iptr) {
-  WriteLog("enter ScanDecPageEnd");
-  return 0;
-}
+
 BOOL ScanDecClose(void) {
   WriteLog("enter ScanDecPageEnd");
   return FALSE;
