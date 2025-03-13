@@ -2290,6 +2290,7 @@ BOOL ScanDecOpen(SCANDEC_OPEN *scandec_open) {
       HANDLE_2 = (HANDLE)0x0;
       some_flag_2 = 0;
       some_function = set_buffer_and_do_something;
+      WriteLog("some_fucntion = set_buffer_and_do_something");
       ret_val = 1;
     }
   }
@@ -2570,6 +2571,7 @@ BOOL ScanDecPageStart(void) {
   } else if ((HANDLE_1 == (HANDLE)0x0) ||
              (some_flag_1 = HANDLE_1, HANDLE_1 != (HANDLE)0x0)) {
     some_function = set_buffer_and_do_something;
+    WriteLog("some_function = set_buffer_and_do_something");
     if (HANDLE_2 != (HANDLE)0x0) {
       some_flag_2 = HANDLE_2;
       if ((HANDLE_2 == (HANDLE)0x0) &&
@@ -2577,6 +2579,7 @@ BOOL ScanDecPageStart(void) {
         some_flag_1 = (HANDLE)0x0;
       }
       some_function = FUN_00106751;
+      WriteLog("some_function = big sad");
     }
     BVar1 = ChangeResoWriteStart();
     if (BVar1 == 0) {
@@ -2651,9 +2654,33 @@ DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
   return DVar1;
 }
 
-DWORD ScanDecWrite(SCANDEC_WRITE *write_ptr, INT *iptr) {
+//------------------------------------------ScanDecWrite impl-------------------------------------
+
+DWORD ScanDecWrite(SCANDEC_WRITE *scandec_write,INT *param_2)
+{
   WriteLog("enter ScanDecWrite");
-  return 0;
+  DWORD ret_val;
+  INT local_data_kind [2];
+  char *local_50;
+  char *local_48;
+  CHAR *local_write_buff;
+  DWORD local_write_buff_size;
+  BOOL local_bReverWrite;
+  char *local_28;
+  INT *some_ptr;
+  SCANDEC_WRITE *local_scandec_write;
+  
+  some_ptr = param_2;
+  local_scandec_write = scandec_write;
+  local_50 = (char *)(*some_function)(scandec_write,&local_28); 
+  local_data_kind[0] = local_scandec_write->nInDataKind;
+  local_48 = local_28;
+  local_write_buff = local_scandec_write->pWriteBuff;
+  local_write_buff_size = local_scandec_write->dwWriteBuffSize;
+  local_bReverWrite = local_scandec_write->bReverWrite;
+  *some_ptr = 0;
+  ChangeResoWrite(local_data_kind,some_ptr);
+  return ret_val;
 }
 
 BOOL ScanDecClose(void) {
