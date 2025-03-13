@@ -504,6 +504,7 @@ CHAR *invert_buffer_offset(BOOL reverWrite, CHAR *write_buf, int param_3)
 size_t copy_buffer_and_decomp(SCANDEC_WRITE *scandec_write, int *param_2)
 
 {
+  WriteLog("enter copy_buffer_and_decomp");
   BOOL bVar1;
   CHAR *__dest;
   CHAR *dest;
@@ -636,6 +637,7 @@ LAB_00104c78:
 size_t write_sameRes_kind1(SCANDEC_WRITE *param_1, int *status)
 
 {
+  WriteLog("enter write_sameRes_kind1");
   BOOL bVar1;
   CHAR *write_buffer_start;
   DWORD local_20;
@@ -663,6 +665,7 @@ size_t write_sameRes_kind1(SCANDEC_WRITE *param_1, int *status)
 size_t write_sameRes_kind3(SCANDEC_WRITE *scandec_write, int *param_2)
 
 {
+  WriteLog("enter write_sameRes_kind3");
   BOOL bVar1;
   CHAR *pvVar2;
   CHAR *dest;
@@ -761,9 +764,10 @@ LAB_001049eb:
   return local_34;
 }
 
-DWORD FUN_00101eae(SCANDEC_WRITE *param_1, int *param_2)
+DWORD write_colorType_kind1(SCANDEC_WRITE *param_1, int *param_2)
 
 {
+  WriteLog("enter write_colorType_kind1");
   int iVar1;
   CHAR *pCVar2;
   long lVar3;
@@ -1434,9 +1438,10 @@ void copy_something_to_buf(char *src)
   return;
 }
 
-DWORD FUN_00101cba(SCANDEC_WRITE *scandec_write,int *param_2)
+DWORD write_colorType_smallerY(SCANDEC_WRITE *scandec_write,int *param_2)
 
 {
+  WriteLog("enter write_colorType_smallerY");
   CHAR *pCVar1;
   long lVar2;
   float fVar3;
@@ -1483,9 +1488,10 @@ DWORD FUN_00101cba(SCANDEC_WRITE *scandec_write,int *param_2)
   return local_28;
 }
 
-DWORD FUN_00101bd8(SCANDEC_WRITE *param_1, int *param_2)
+DWORD write_colorType_no_scaling(SCANDEC_WRITE *param_1, int *param_2)
 
 {
+  WriteLog("enter write_colorType_no_scaling");
   CHAR *pCVar1;
   long lVar2;
   long local_28;
@@ -1594,6 +1600,7 @@ void FUN_001044ca(CHAR *param_1)
 }
 
 DWORD write_impl_2(SCANDEC_WRITE *scandec_write, int *ptr) {
+  WriteLog("enter write_impl_2");
   CHAR *pCVar1;
   long lVar2;
   float l_outResY;
@@ -1643,6 +1650,7 @@ DWORD write_impl_2(SCANDEC_WRITE *scandec_write, int *ptr) {
 DWORD write_impl_1(SCANDEC_WRITE *param_1, int *param_2)
 
 {
+  WriteLog("enter write_impl_1");
   ushort uVar1;
   CHAR *pCVar2;
   long lVar3;
@@ -1771,7 +1779,7 @@ int assign_global_fn_pointers(int *assigned_type) {
       if (outResY * 2 < inResY) {
         return 0;
       }
-      some_fn_write = FUN_00101eae;
+      some_fn_write = write_colorType_kind1;
       if (outResX < inResX) {
         if (nOutDatKind == 1) {
           third_fn = FUN_00103ccf;
@@ -1795,7 +1803,7 @@ int assign_global_fn_pointers(int *assigned_type) {
       if (outResY * 2 < inResY) {
         return 0;
       }
-      some_fn_write = FUN_00101cba;
+      some_fn_write = write_colorType_smallerY;
       if (outResX < inResX) {
         third_fn = FUN_00103bca;
         *assigned_type = 4;
@@ -1807,7 +1815,7 @@ int assign_global_fn_pointers(int *assigned_type) {
       if ((X_scaling_factor == 0) || (Y_scaling_factor == 0)) {
         return 0;
       }
-      some_fn_write = FUN_00101bd8;
+      some_fn_write = write_colorType_no_scaling;
       *assigned_type = 2;
       if (X_scaling_factor - 2U < 3) {
         fourth_fn = FUN_00104412;
