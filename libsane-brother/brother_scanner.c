@@ -504,7 +504,7 @@ ScanStart( Brother_Scanner *this )
 //		None
 //
 //-----------------------------------------------------------------------------
-//	PageScanStart��A part of PageScan of Windows version��
+//	PageScanStart锟斤拷A part of PageScan of Windows version锟斤拷
 BOOL
 PageScanStart( Brother_Scanner *this )
 {
@@ -645,10 +645,10 @@ static struct timezone save_tz;		// Valiable for time-interval information(min)
  *									      *
  *	PURPOSE		Scan 1 page					      *
  *									      *
- *      ARGUMENT	Brother_Scanner *this	�� Brother_Scanner structure  *
- *			char *lpFwBuf		�� transmission buffer	      *
- *			int nMaxLen		�� size of transmission buffer*
- *			int *lpFwLen		�� size of data to sent	      *
+ *      ARGUMENT	Brother_Scanner *this	锟斤拷 Brother_Scanner structure  *
+ *			char *lpFwBuf		锟斤拷 transmission buffer	      *
+ *			int nMaxLen		锟斤拷 size of transmission buffer*
+ *			int *lpFwLen		锟斤拷 size of data to sent	      *
  *									      *
  *									      *
  *									      *
@@ -1122,12 +1122,12 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
  *										*
  *	FUNCTION	PageScan						*
  *										*
- *	PURPOSE		���ڡ���ʬ�򥹥���󤹤롣					*
+ *	PURPOSE		锟斤拷锟节★拷锟斤拷尸锟津スワ拷锟斤拷螭工搿�					*
  *										*
- *	����		Brother_Scanner *this	�� Brother_Scanner��¤��		*
- *			char *lpFwBuf		�� �����Хåե�			*
- *			int nMaxLen		�� �����Хåե�Ĺ			*
- *			int *lpFwLen		�� �����ǡ���Ĺ			*
+ *	锟斤拷锟斤拷		Brother_Scanner *this	锟斤拷 Brother_Scanner锟斤拷陇锟斤拷		*
+ *			char *lpFwBuf		锟斤拷 锟斤拷锟斤拷锟叫ッフワ拷			*
+ *			int nMaxLen		锟斤拷 锟斤拷锟斤拷锟叫ッフワ拷墓			*
+ *			int *lpFwLen		锟斤拷 锟斤拷锟斤拷锟角★拷锟斤拷墓			*
  *										*
  *										*
  *										*
@@ -1135,8 +1135,8 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 int
 PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 {
-	WORD	wData=0;	// �����ǡ����������ʥХ��ȿ���
-	WORD	wDataLineCnt=0;	// �����ǡ����Υ饤���
+	WORD	wData=0;	// 锟斤拷锟斤拷锟角★拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞バワ拷锟饺匡拷锟斤拷
+	WORD	wDataLineCnt=0;	// 锟斤拷锟斤拷锟角★拷锟斤拷锟轿ライ锟斤拷锟�
 	int	nAnswer=0;
 	int	rc;
 	LPSTR   lpRxTop;
@@ -1144,7 +1144,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	int	nReadSize;
 	LPSTR   lpReadBuf;
-	int	nMinReadSize; // �Ǿ��꡼�ɥ�����
+	int	nMinReadSize; // 锟角撅拷锟疥〖锟缴ワ拷锟斤拷锟斤拷
 
 #ifdef NO39_DEBUG
 	struct timeval start_tv, tv;
@@ -1155,7 +1155,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 		rc = SANE_STATUS_IO_ERROR;
 		return rc;
 	}
-	if (this->scanState.bCanceled) { //����󥻥����
+	if (this->scanState.bCanceled) { //锟斤拷锟斤拷螗互锟斤拷锟斤拷
 		WriteLog( "Page Canceled" );
 
 		rc = SANE_STATUS_CANCELLED;
@@ -1195,25 +1195,25 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 	WriteLog( "devScanInfo.ScanAreaByte.lHeight = [%d]", this->devScanInfo.ScanAreaByte.lHeight );
 
 
-	memset(lpFwBuf, 0x00, nMaxLen);	//  �����Хåե��򥼥����ꥢ���Ƥ�����
+	memset(lpFwBuf, 0x00, nMaxLen);	//  锟斤拷锟斤拷锟叫ッフワ拷锟津ゼワ拷锟斤拷锟疥ア锟斤拷锟狡わ拷锟斤拷锟斤拷
 	*lpFwLen = 0;
 
 	if ( (!this->scanState.iProcessEnd) && ( FwTempBuffLength < nMaxLen) ) { 
-	// ���ơ����������ɤ�������Ƥ��ʤ����Ǥ��������Хåե����������������¸�Хåե��Υǡ���Ĺ�����������
+	// 锟斤拷锟狡★拷锟斤拷锟斤拷锟斤拷锟斤拷锟缴わ拷锟斤拷锟斤拷锟斤拷皮锟斤拷胜锟斤拷锟斤拷扦锟斤拷锟斤拷锟斤拷锟斤拷啸氓榨锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟轿デ★拷锟斤拷墓锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�
 
-	// ��¸�ǡ����Хåե��˥ǡ�����¸�ߤ�����ϡ������ǡ����Хåե��˥��ԡ����롣
-	memmove( lpRxBuff, lpRxTempBuff, dwRxTempBuffLength );	// ��Ƭ������ǡ�������
-	wData += dwRxTempBuffLength;	// ��Ǽ�ǡ���length������
+	// 锟斤拷赂锟角★拷锟斤拷锟叫ッフワ拷锟剿デ★拷锟斤拷锟斤拷赂锟竭わ拷锟斤拷锟斤拷稀锟斤拷锟斤拷锟斤拷恰锟斤拷锟斤拷啸氓榨锟斤拷衰锟斤拷浴锟斤拷锟斤拷搿�
+	memmove( lpRxBuff, lpRxTempBuff, dwRxTempBuffLength );	// 锟斤拷片锟斤拷锟斤拷锟斤拷恰锟斤拷锟斤拷锟斤拷锟�
+	wData += dwRxTempBuffLength;	// 锟斤拷羌锟角★拷锟斤拷length锟斤拷锟斤拷锟斤拷
 
 	lpRxTop = lpRxBuff;
 
-	// ������¸�Хåե��˺���3�饤��ʬ��Ÿ���Ǥ���褦�˥�����ʤ���ǡ����ɤ߹��ࡣ
+	// 锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟剿猴拷锟斤拷3锟介イ锟斤拷尸锟斤拷鸥锟斤拷锟角わ拷锟斤拷瑜︼拷衰锟斤拷锟斤拷锟绞わ拷锟斤拷恰锟斤拷锟斤拷嗓吖锟斤拷唷�
 	if (this->devScanInfo.wColorType == COLOR_FUL || this->devScanInfo.wColorType == COLOR_FUL_NOCM )
 		nMinReadSize = (this->devScanInfo.ScanAreaByte.lWidth + 3) * 3;
 	else
 		nMinReadSize = (this->devScanInfo.ScanAreaByte.lWidth + 3);
 
-	nMinReadSize *= 3; // ����3�饤��ʬ�ϥ꡼�ɤ��롣
+	nMinReadSize *= 3; // 锟斤拷锟斤拷3锟介イ锟斤拷尸锟较リ〖锟缴わ拷锟诫。
 	if ( !this->scanState.bReadbufEnd ) {
 		for (rc=0 ; wData < nMinReadSize;)
 		{
@@ -1233,7 +1233,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			else if (rc > 0){
 				wData += rc;
 
-				if (StatusChk(lpRxBuff, wData)) { // ���ơ����������ɤ���������������å����롣
+				if (StatusChk(lpRxBuff, wData)) { // ステ〖タスコ〖ドを减慨したかチェックする。
 					this->scanState.bReadbufEnd = TRUE;
 					WriteLog( "bReadbufEnd =TRUE" );
 					break;
@@ -1247,13 +1247,13 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 	WriteLog( "Adjusted wData = %d, (dwRxTempBuffLength = %d)", wData, dwRxTempBuffLength );
 
 	if (wData != 0)
-	// �ǡ�����饤��ñ�̤ޤǤ˶��ڤ�
+	// 锟角★拷锟斤拷锟斤拷楗わ拷锟矫憋拷踏蓼扦硕锟斤拷冥锟�
 	{
 	LPSTR  pt = lpRxBuff;
 	int nFwTempBuffMaxLine;
 	int nResoLine;
 
-	// �������륤�᡼���ǡ�������(�ɥå�)
+	// 锟斤拷锟斤拷锟斤拷锟诫イ锟结〖锟斤拷锟角★拷锟斤拷锟斤拷锟斤拷(锟缴ッワ拷)
 	if (this->devScanInfo.wColorType == COLOR_FUL || this->devScanInfo.wColorType == COLOR_FUL_NOCM ) {
 		nFwTempBuffMaxLine = (dwFwTempBuffMaxSize / 2 - FwTempBuffLength) / this->scanInfo.ScanAreaByte.lWidth;
 		nFwTempBuffMaxLine *= 3;
@@ -1269,13 +1269,13 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 	for (wDataLineCnt=0; wDataLineCnt < nFwTempBuffMaxLine;){
 		BYTE headch;
 
-		if( dwRxTempBuffLength <= 0 )	break;	// ���ƤΥǡ����Ͻ�����ǽ(���ڤ��ɤ��������줿)
+		if( dwRxTempBuffLength <= 0 )	break;	// 锟斤拷锟狡のデ★拷锟斤拷锟较斤拷锟斤拷锟斤拷墙(锟斤拷锟节わ拷锟缴わ拷锟斤拷锟斤拷锟斤拷锟届た)
 
 		headch = (BYTE)*pt;
 		if ((char)headch < 0) {
-			// STATUS,CTRL�ϥ�����
-			dwRxTempBuffLength --;			// CTRL�ϥ����ɤ�1byte����
-			pt++;					// ����header����򻲾�
+			// STATUS,CTRL锟较ワ拷锟斤拷锟斤拷
+			dwRxTempBuffLength --;			// CTRL锟较ワ拷锟斤拷锟缴わ拷1byte锟斤拷锟斤拷
+			pt++;					// 锟斤拷锟斤拷header锟斤拷锟斤拷蚧簿锟�
 
 			wDataLineCnt+=3;
 		}else{
@@ -1285,30 +1285,30 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 				wDataLineCnt++;
 			}
 			else {
-				// �����ǡ���
+				// 锟斤拷锟斤拷锟角★拷锟斤拷
 				WORD length;
 
 				if( dwRxTempBuffLength < 3 )
-					length = 0;		// �����
+					length = 0;		// 锟斤拷锟斤拷锟�
 				else
-					// �饹���ǡ���Ĺ�μ���
+					// 锟介ス锟斤拷锟角★拷锟斤拷墓锟轿硷拷锟斤拷
 					length = *(WORD *)( pt + 1 );	// format: [HEADER(1B)][LENGTH(intel 2B)][DATA...]
 
 				if( dwRxTempBuffLength < (DWORD)( length + 3) ){	// length+3 = head(1B)+length(2B)+data(length)
 					break;
 				}
 				else{
-					// 1lineʬ�Υǡ�������
-					dwRxTempBuffLength -= length + 3;	// �����ǡ����� length+3 byte����
-					pt += length + 3;			// ����header����򻲾�
+					// 1line尸锟轿デ★拷锟斤拷锟斤拷锟斤拷
+					dwRxTempBuffLength -= length + 3;	// 锟斤拷锟斤拷锟角★拷锟斤拷锟斤拷 length+3 byte锟斤拷锟斤拷
+					pt += length + 3;			// 锟斤拷锟斤拷header锟斤拷锟斤拷蚧簿锟�
 					wDataLineCnt++;
 				}
 			}
 		}
 	} // end of for(;;)
-	wData -= dwRxTempBuffLength;	// Ÿ�������˲󤹥ǡ������飱�饤��̤���Υǡ��������
+	wData -= dwRxTempBuffLength;	// 鸥锟斤拷锟斤拷锟斤拷锟剿搀すデ★拷锟斤拷锟斤拷锟介１锟介イ锟斤拷踏锟斤拷锟轿デ★拷锟斤拷锟斤拷锟斤拷锟�
 
-	// �饹���ǡ�����Ÿ������
+	// 锟介ス锟斤拷锟角★拷锟斤拷锟斤拷鸥锟斤拷锟斤拷锟斤拷
 #ifdef NO39_DEBUG
 	if (gettimeofday(&start_tv, &tz) == -1)
 		return FALSE;
@@ -1334,11 +1334,11 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	if ((dwRxTempBuffLength > 0) || (wProcessSize < wData)) {
 		dwRxTempBuffLength += (wData - wProcessSize);
-		memmove( lpRxTempBuff, lpRxBuff+wProcessSize, dwRxTempBuffLength );	// �Ĥ�ǡ�������¸
+		memmove( lpRxTempBuff, lpRxBuff+wProcessSize, dwRxTempBuffLength );	// 锟侥わ拷恰锟斤拷锟斤拷锟斤拷锟铰�
 	}
 
 	if ( nAnswer == SCAN_EOF || nAnswer == SCAN_MPS )  {
-		// �Ǹ�Υڡ����ǡ����ξ��
+		// 锟角革拷违凇锟斤拷锟斤拷恰锟斤拷锟斤拷尉锟斤拷
 		if( lRealY > 0 ){
 
 			ImgLineProcInfo.pWriteBuff = lpFwTempBuff+FwTempBuffLength;
@@ -1357,7 +1357,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			WriteLog( "  PageScan End1 nWriteLineCount = %d", nWriteLineCount );
 #endif
 		}
-		// ���ơ����������ɤ�������¸�Хåե������ä����ᡢ���֤�Ф��Ƥ���
+		// 锟斤拷锟狡★拷锟斤拷锟斤拷锟斤拷锟斤拷锟缴わ拷锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟斤拷锟斤拷锟矫わ拷锟斤拷锟结、锟斤拷锟街わ拷肖锟斤拷皮锟斤拷锟�
 		this->scanState.iProcessEnd = nAnswer;
 		WriteLog( " PageScan scanState.iProcessEnd = %d, ", this->scanState.iProcessEnd );
 	}
@@ -1373,12 +1373,12 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	} // if ( (!this->scanState.iProcessEnd) || ( FwTempBuffLength > nMaxLen) ) 
 
-	if (this->scanState.iProcessEnd) { // ������¸�Хåե��˥��ơ����������ɤ�������Ƥ�����
+	if (this->scanState.iProcessEnd) { // 锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟剿ワ拷锟狡★拷锟斤拷锟斤拷锟斤拷锟斤拷锟缴わ拷锟斤拷锟斤拷锟斤拷皮锟斤拷锟斤拷锟�
 		WriteLog( "<<<<< PageScan Status Code Read!!!" );
 		nAnswer = this->scanState.iProcessEnd;
 	}
 
-	/* �����Хåե���������¸�Хåե��ˤ��륤�᡼���ǡ����򥳥ԡ����롣*/
+	/* 锟斤拷锟斤拷锟叫ッフワ拷锟斤拷锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟剿わ拷锟诫イ锟结〖锟斤拷锟角★拷锟斤拷锟津コピ★拷锟斤拷锟诫。*/
 	WriteLog( "<<<<< PageScan FwTempBuffLength = %d", FwTempBuffLength );
 
 	if ( FwTempBuffLength > nMaxLen )
@@ -1388,8 +1388,8 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 
 	FwTempBuffLength -= *lpFwLen ;
 
-	memmove( lpFwBuf, lpFwTempBuff, *lpFwLen);	// ������¸�Хåե����������Хåե��إ��ԡ����롣
-	memmove( lpFwTempBuff, lpFwTempBuff+*lpFwLen, FwTempBuffLength ); // �Ĥ����¸�ǡ�������Ƭ�˰�ư���롣	
+	memmove( lpFwBuf, lpFwTempBuff, *lpFwLen);	// 锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟斤拷锟斤拷锟斤拷锟斤拷锟叫ッフワ拷锟截ワ拷锟皆★拷锟斤拷锟诫。
+	memmove( lpFwTempBuff, lpFwTempBuff+*lpFwLen, FwTempBuffLength ); // 锟侥わ拷锟斤拷锟铰革拷恰锟斤拷锟斤拷锟斤拷锟狡拷税锟狡帮拷锟斤拷搿�	
 
 	rc = SANE_STATUS_GOOD;
 
@@ -1402,9 +1402,9 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			return rc;
 		}
 		else {
-			// ���ꤷ���ǡ���Ĺ�����������ǡ���Ĺ�����ʤ���硢�Ĥ�Υǡ���Ĺ�����Ȥ��ƥ��åȤ��롣		
+			// 锟斤拷锟疥し锟斤拷锟角★拷锟斤拷墓锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟角★拷锟斤拷墓锟斤拷锟斤拷锟绞わ拷锟斤拷纭拷膜锟轿デ★拷锟斤拷墓锟斤拷锟斤拷锟饺わ拷锟狡ワ拷锟矫トわ拷锟诫。		
 			if( lRealY < this->scanInfo.ScanAreaSize.lHeight ){
-				// ���ꤷ��Ĺ����꾯�ʤ��ͤξ��֤ǡ��ڡ�������ɥ��ơ������Ȥʤä����
+				// 锟斤拷锟疥し锟斤拷墓锟斤拷锟斤拷昃拷胜锟斤拷亭尉锟斤拷证恰锟斤拷凇锟斤拷锟斤拷锟斤拷锟缴ワ拷锟狡★拷锟斤拷锟斤拷锟饺なっわ拷锟斤拷锟�
 				int nHeightLen = this->scanInfo.ScanAreaSize.lHeight - lRealY;
 				int nSize = this->scanInfo.ScanAreaByte.lWidth * nHeightLen; 
 				int nMaxSize = nMaxLen - *lpFwLen;
@@ -1450,7 +1450,7 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 			WriteLog( "  nAnswer = %d lRealY = %d", nAnswer, lRealY );
 
 			if( lRealY != 0 ) {
-				// ������¸�Хåե��˥ǡ���������֤ϡ�SANE_STATUS_GOOD���֤���
+				// 锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟剿デ★拷锟斤拷锟斤拷锟斤拷锟斤拷证稀锟絊ANE_STATUS_GOOD锟斤拷锟街わ拷锟斤拷
 				if (*lpFwLen == 0) {
 					this->scanState.bEOF=TRUE;
 					this->scanState.bScanning=FALSE;
@@ -1458,12 +1458,12 @@ PageScan( Brother_Scanner *this, char *lpFwBuf, int nMaxLen, int *lpFwLen )
 				}
 			}
 			else {
-				// �ǡ�������̵����EOF�ξ�硢���顼�Ȥ��롣
+				// 锟角★拷锟斤拷锟斤拷锟斤拷痰锟斤拷锟斤拷EOF锟轿撅拷纭拷锟斤拷椤硷拷趣锟斤拷搿�
 				rc = SANE_STATUS_IO_ERROR;
 			}
 			break;
 		case SCAN_MPS:
-			// ������¸�Хåե��˥ǡ���������֤ϡ�SANE_STATUS_GOOD���֤���
+			// 锟斤拷锟斤拷锟斤拷赂锟叫ッフワ拷锟剿デ★拷锟斤拷锟斤拷锟斤拷锟斤拷证稀锟絊ANE_STATUS_GOOD锟斤拷锟街わ拷锟斤拷
 			if (*lpFwLen == 0) {
 				this->scanState.bEOF=TRUE;
 				rc = SANE_STATUS_EOF;
@@ -1614,7 +1614,7 @@ ReadTrash( Brother_Scanner *this )
 //	Return values:
 //
 //-----------------------------------------------------------------------------
-//	AbortPageScan��The part of PageScan i the windows version��
+//	AbortPageScan锟斤拷The part of PageScan i the windows version锟斤拷
 void
 AbortPageScan( Brother_Scanner *this )
 {
@@ -1719,7 +1719,7 @@ ScanEnd( Brother_Scanner *this )
 //		None
 //
 //-----------------------------------------------------------------------------
-//	GetScanAreaParam(GetScanDot of the windows version��
+//	GetScanAreaParam(GetScanDot of the windows version锟斤拷
 void
 GetScanAreaParam( Brother_Scanner *this )
 {
@@ -1929,7 +1929,7 @@ StartDecodeStretchProc( Brother_Scanner *this )
 //		None
 //
 //-----------------------------------------------------------------------------
-//	GetDeviceScanArea��Parts of GetScanDot in  the Windows version��
+//	GetDeviceScanArea锟斤拷Parts of GetScanDot in  the Windows version锟斤拷
 void
 GetDeviceScanArea( Brother_Scanner *this, LPAREARECT lpScanAreaDot )
 {

@@ -72,9 +72,9 @@ Not support (force causing compile error)
 
 TDevice *g_pdev;
 
-static int      num_devices;	// USB��˸��Ф��줿Brother�ǥХ�����
-static TDevice  *pdevFirst;	// USB��˸��Ф��줿Brother�ǥХ����ꥹ��
-static Brother_Scanner   *pinstFirst;	// �����ץ󤷤��ǥХ����γƼ����
+static int      num_devices;	// USB锟斤拷烁锟斤拷肖锟斤拷欷緽rother锟角バワ拷锟斤拷锟斤拷
+static TDevice  *pdevFirst;	// USB锟斤拷烁锟斤拷肖锟斤拷欷緽rother锟角バワ拷锟斤拷锟疥ス锟斤拷
+static Brother_Scanner   *pinstFirst;	// 锟斤拷锟斤拷锟阶ンしわ拷锟角バワ拷锟斤拷锟轿称硷拷锟斤拷锟�
 
 /* ======================================================================
 
@@ -105,7 +105,7 @@ static SANE_Range rangeYmm;
 static SANE_Status
 SetupScanMode (Brother_Scanner *this, int scanMode)
 {
-   // �֥饤�ȥͥ�/����ȥ饹�Ȥ�ͭ��/̵����Ƚ�Ǥ��롣
+   // 锟街ライ锟饺ネワ拷/锟斤拷锟斤拷去楗癸拷趣锟酵拷锟�/痰锟斤拷锟斤拷冉锟角わ拷锟诫。
    if (scanMode == COLOR_FUL || scanMode == COLOR_FUL_NOCM)
    {
      this->aoptDesc[optContrast].cap |= SANE_CAP_INACTIVE;
@@ -163,7 +163,7 @@ InitOptions (Brother_Scanner *this)
   memset(this->aoptDesc,0,sizeof(this->aoptDesc));
   memset(this->aoptVal,0,sizeof(this->aoptVal));
 
-  // �������⡼�ɤ�������ܥꥹ�Ȥ�������롣
+  // 锟斤拷锟斤拷锟斤拷锟解〖锟缴わ拷锟斤拷锟斤拷锟斤拷堀辚癸拷趣锟斤拷锟斤拷锟斤拷锟诫。
   nSize = NUM_SCANMODE * sizeof (scanModeList[0]);
   scanModeList = MALLOC (nSize);
   if (!scanModeList)
@@ -171,7 +171,7 @@ InitOptions (Brother_Scanner *this)
   rc = get_scanmode_string(this->uiSetting.ScanModeList, scanModeList);
   if (!rc)
       return SANE_STATUS_INVAL;
-  // �����٤�������ܥꥹ�Ȥ�������롣
+  // 锟斤拷锟斤拷锟劫わ拷锟斤拷锟斤拷锟斤拷堀辚癸拷趣锟斤拷锟斤拷锟斤拷锟诫。
   nSize = NUM_RESO * sizeof (scanResoList);
   scanResoList = MALLOC (nSize);
   if (!scanResoList)
@@ -179,7 +179,7 @@ InitOptions (Brother_Scanner *this)
   rc = get_reso_int(this->uiSetting.ResoList, scanResoList);
   if (!rc)
       return SANE_STATUS_INVAL;
-  // ������󥽡�����������ܥꥹ�Ȥ�������롣
+  // 锟斤拷锟斤拷锟斤拷螗健锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟杰リス锟饺わ拷锟斤拷锟斤拷锟斤拷搿�
   nSize = NUM_SCANSRC * sizeof (scanSrcList[0]);
   scanSrcList = MALLOC (nSize);
   if (!scanSrcList)
@@ -188,21 +188,21 @@ InitOptions (Brother_Scanner *this)
   if (!rc)
       return SANE_STATUS_INVAL;
 
-  // �ɤ߼�����Τ������ϰ��ͤ�������롣
+  // 锟缴み硷拷锟斤拷锟斤拷韦锟斤拷锟斤拷锟斤拷习锟斤拷亭锟斤拷锟斤拷锟斤拷锟诫。
   rangeXmm.min = SANE_FIX(0.0);
   rangeXmm.max = SANE_FIX(this->modelConfig.SupportScanAreaWidth);
   rangeXmm.quant = SANE_FIX(0.1);
 
-  // �����ɤ߼�������ǥե�����ͤ��礭����硢�����ɤ߼������ǥե���ȤȤ��롣
+  // 锟斤拷锟斤拷锟缴み硷拷锟斤拷锟斤拷锟斤拷钎榨锟斤拷锟斤拷锟酵わ拷锟界き锟斤拷锟斤拷纭拷锟斤拷锟斤拷嗓呒锟斤拷锟斤拷锟斤拷钎榨锟斤拷锟饺とわ拷锟诫。
   if (rangXY_DEF[optBRX-optTLX] > rangeXmm.max)
     rangXY_DEF[optBRX-optTLX] = rangeXmm.max;
 
-  // �ɤ߼��Ĺ�������ϰ��ͤ�������롣
+  // 锟缴み硷拷锟侥癸拷锟斤拷锟斤拷锟斤拷习锟斤拷亭锟斤拷锟斤拷锟斤拷锟诫。
   rangeYmm.min = SANE_FIX(0.0);
   rangeYmm.max = SANE_FIX(this->modelConfig.SupportScanAreaHeight);
   rangeYmm.quant = SANE_FIX(0.1);
 
-  // �����ɤ߼��Ĺ���ǥե�����ͤ��礭����硢�����ɤ߼��Ĺ��ǥե���ȤȤ��롣
+  // 锟斤拷锟斤拷锟缴み硷拷锟侥癸拷锟斤拷钎榨锟斤拷锟斤拷锟酵わ拷锟界き锟斤拷锟斤拷纭拷锟斤拷锟斤拷嗓呒锟斤拷墓锟斤拷钎榨锟斤拷锟饺とわ拷锟诫。
   if (rangXY_DEF[optBRY-optTLX] > rangeYmm.max)
     rangXY_DEF[optBRY-optTLX] = rangeYmm.max;
 
@@ -490,7 +490,7 @@ sane_exit (void)
   for (dev = pdevFirst; dev; dev = pNext)
     {
       pNext = dev->pNext;
-      // strdup�ؿ��ǥ������ݤ��Ƥ��뤿�ᡢľ��free()�����
+      // strdup锟截匡拷锟角ワ拷锟斤拷锟斤拷锟捷わ拷锟狡わ拷锟诫た锟结、木锟斤拷free()锟斤拷锟斤拷锟�
       free ((void *) dev->sane.name);
       free ((void *) dev->sane.model);
       free ((void *) dev->sane.type);
@@ -589,7 +589,7 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 	sscanf(devicename,"net1;dev%d",&this->hScanner->net_device_index);
     }
 
-    // �ǥХ��������ץ�
+    // 锟角バワ拷锟斤拷锟斤拷锟斤拷锟阶ワ拷
     rc= OpenDevice(this->hScanner, pdev->modelInf.seriesNo);
     WriteLog("Open device return code %d", rc);
     if (!rc){ 
@@ -597,13 +597,13 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 	    return SANE_STATUS_INVAL;
 	}
 
-    // �Ƽ����ν����
+    // 锟狡硷拷锟斤拷锟轿斤拷锟斤拷锟�
     this->scanState.bEOF = FALSE;
     this->scanState.bCanceled = FALSE;
     this->scanState.bScanning = FALSE;
     this->scanState.nPageCnt = 0;
 
-    // �Ƽ������������
+    // 锟狡硷拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�
     this->modelInf.productID = pdev->modelInf.productID;
     this->modelInf.expcaps = pdev->modelInf.expcaps;     //M-LNX-20
     this->modelInf.vendorID = pdev->modelInf.vendorID;
@@ -617,7 +617,7 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 	WriteLog("Got model config");	
 	//GetLogSwitch( this );
 	WriteLog("Got log switch");
-    // Frontend��������ͤ򥻥å�
+    // Frontend锟斤拷锟斤拷锟斤拷锟斤拷亭颔互氓锟�
     this->uiSetting.ResoList.val = this->modelConfig.SupportReso.val;
     this->uiSetting.ScanModeList.val = this->modelConfig.SupportScanMode.val;
     this->uiSetting.ScanSrcList.val = this->modelConfig.SupportScanSrc.val;
@@ -632,7 +632,7 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
 
     GetDeviceAccessParam( this );
 	WriteLog("Got device access param");
-    if (!QueryDeviceInfo(this))// Q���ޥ�ɤ�ȯ�Ԥ��ơ��ǥХ�����������
+    if (!QueryDeviceInfo(this))// Q锟斤拷锟睫ワ拷嗓锟饺拷预锟斤拷啤锟斤拷钎啸锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�
 	{
 		WriteLog("QueryDeviceInfo failed");
 	    return SANE_STATUS_INVAL;
@@ -659,25 +659,25 @@ sane_open (SANE_String_Const devicename, SANE_Handle *handle)
     }
 #endif
     ///
-    /// ColorMatch DLL�Υ�����
+    /// ColorMatch DLL锟轿ワ拷锟斤拷锟斤拷
     ///
     WriteLog("Load ColorMatch dll");
     this->modelInf.index = pdev->modelInf.index;     // cp index
     LoadColorMatchDll( this ,this->modelInf.index);  // load dll
 
     //
-    // Scan Decode DLL�Υ�����
+    // Scan Decode DLL锟轿ワ拷锟斤拷锟斤拷
     //
     if (this->modelInf.seriesNo < BROPEN_SERIES_NO)
     {
         rc = LoadScanDecDll( this );
-        if ( !rc ){  // Scan Decode DLL�Υ����ɼ���
+        if ( !rc ){  // Scan Decode DLL锟轿ワ拷锟斤拷锟缴硷拷锟斤拷
             WriteLog("Failed loading dec dll: %s", dlerror());
 		return SANE_STATUS_INVAL;
 	}
     }
 
-    // GrayTable�Υ�����
+    // GrayTable锟轿ワ拷锟斤拷锟斤拷
     LoadGrayTable( this, GRAY_TABLE_NO );
 
     rc = InitOptions(this);
@@ -839,7 +839,7 @@ sane_control_option (SANE_Handle handle, SANE_Int iOpt,
 	  if (pnInfo)
 	    (*pnInfo) |= SANE_INFO_RELOAD_PARAMS | SANE_INFO_RELOAD_OPTIONS;
 
-	  // �������⡼�ɤˤ�äƱƶ�������뵡ǽ������å����롣
+	  // 锟斤拷锟斤拷锟斤拷锟解〖锟缴にわ拷盲票贫锟斤拷锟斤拷锟斤拷锟诫怠墙锟斤拷锟斤拷锟斤拷氓锟斤拷锟斤拷搿�
 	  id = get_scanmode_id(pVal);
 	  if (id == -1)
 	    return SANE_STATUS_INVAL;
@@ -851,7 +851,7 @@ sane_control_option (SANE_Handle handle, SANE_Int iOpt,
 	case optScanSrc:
 
 	if (this->aoptVal[iOpt].s)
-	 free (this->aoptVal[iOpt].s); // strdup�ؿ��ǥ������ݤ��Ƥ��뤿�ᡢľ��free()����ѡ�
+	 free (this->aoptVal[iOpt].s); // strdup锟截匡拷锟角ワ拷锟斤拷锟斤拷锟捷わ拷锟狡わ拷锟诫た锟结、木锟斤拷free()锟斤拷锟斤拷选锟�
 	this->aoptVal[iOpt].s = strdup (pVal);
 
 	  break;
@@ -879,7 +879,7 @@ SetupInternalParameters(Brother_Scanner *this)
   this->uiSetting.nContrast=(int)(this->aoptVal[optContrast].w>>SANE_FIXED_SCALE_SHIFT);
   this->uiSetting.nSrcType = get_scansrc_id(this->aoptVal[optScanSrc].s);  //06/02/27 Duplex Scan
 
-  // X����Ʊ���ͤξ��ϥ��顼
+  // X锟斤拷锟斤拷票锟斤拷锟酵の撅拷锟较ワ拷锟介〖
   if (this->aoptVal[optTLX].w == this->aoptVal[optBRX].w )
     return SANE_STATUS_INVAL;
 
@@ -894,7 +894,7 @@ SetupInternalParameters(Brother_Scanner *this)
     this->uiSetting.ScanAreaMm.right = (int)(SANE_UNFIX(this->aoptVal[optTLX].w) * 10);
   }
 
-  // Y����Ʊ���ͤξ��ϥ��顼
+  // Y锟斤拷锟斤拷票锟斤拷锟酵の撅拷锟较ワ拷锟介〖
   if (this->aoptVal[optTLY].w == this->aoptVal[optBRY].w )
     return SANE_STATUS_INVAL;
 
@@ -912,7 +912,7 @@ SetupInternalParameters(Brother_Scanner *this)
   nWidthMm = this->uiSetting.ScanAreaMm.right - this->uiSetting.ScanAreaMm.left + 1;
   nHeightMm = this->uiSetting.ScanAreaMm.bottom - this->uiSetting.ScanAreaMm.top + 1;
 
-  // �����⤵��8mm�ʲ��ξ�硢���顼�Ȥ��롣
+  // 锟斤拷锟斤拷锟解さ锟斤拷8mm锟绞诧拷锟轿撅拷纭拷锟斤拷椤硷拷趣锟斤拷搿�
   if (nWidthMm <= 80 || nHeightMm <= 80)
     return SANE_STATUS_INVAL;
 
@@ -988,7 +988,7 @@ sane_start (SANE_Handle handle)
   WriteLog( "<<< sane_start start >>> " );
 
   rc=SetupInternalParameters(this);
-  if (rc) // �����ͤ��ְ�äƤ����票�顼���֤���
+  if (rc) // 锟斤拷锟斤拷锟酵わ拷锟街帮拷盲皮锟斤拷锟斤拷绁拷椤硷拷锟斤拷证锟斤拷锟�
 	return rc;
 
   rc = ScanStart(this);
