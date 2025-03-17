@@ -2582,24 +2582,26 @@ BOOL ScanDecPageStart(void) {
       WriteLog("some_function = big sad");
     }
     BVar1 = ChangeResoWriteStart();
+    WriteLog("ChangeResoWriteStart returned %d", BVar1);
     if (BVar1 == 0) {
       pix_buf_2 = (void *)0x0;
-      if (some_flag_1 != (HANDLE)0x0) {
-        some_flag_1 = (HANDLE)0x0;
-      }
-      if (some_flag_2 != (HANDLE)0x0) {
-        some_flag_2 = (HANDLE)0x0;
-      }
+      some_flag_1 = NULL;
+      some_flag_2 = NULL;
+      // if (some_flag_1 != (HANDLE)0x0) {
+      //   some_flag_1 = (HANDLE)0x0;
+      // }
+      // if (some_flag_2 != (HANDLE)0x0) {
+      //   some_flag_2 = (HANDLE)0x0;
+      // }
       ret_val = 0;
     } else {
       ret_val = 1;
     }
   } else {
-    pix_buf_2 = (void *)0x0;
+    pix_buf_2 = NULL;//(void *)0x0;
     ret_val = 0;
   }
   return ret_val;
-  return FALSE;
 }
 
 
