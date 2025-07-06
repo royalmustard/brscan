@@ -489,14 +489,19 @@ LAB_001050d9:
 CHAR *invert_buffer_offset(BOOL reverWrite, CHAR *write_buf, int param_3)
 
 {
-  long lVar1;
+	//TODO: this seems to be returning an invalid pointer
   CHAR *ret_val;
-
+	WriteLog("enter invert_buffer_offset");
+	WriteLog("write_buf ) %p", write_buf);
+	WriteLog("reverWrite = %d", reverWrite);
+	WriteLog("param_3 = %d", param_3);
+  DWORD lVar1;
   if (reverWrite == 0) {
     lVar1 = (long)param_3 * dwOutLineByte;
   } else {
     lVar1 = -((long)(param_3 + 1) * dwOutLineByte);
   }
+  WriteLog("lVar1 = %lu", lVar1);
   ret_val = write_buf + lVar1;
   return ret_val;
 }
@@ -585,6 +590,7 @@ LAB_00104eaa:
 BOOL FUN_00104a67(CHAR *line_pointer, int data_comp, void *dest)
 
 {
+	WriteLog("enter FUN_00104a67");
   BOOL bVar1;
   ulong uVar2;
   ulong i;
@@ -595,6 +601,7 @@ BOOL FUN_00104a67(CHAR *line_pointer, int data_comp, void *dest)
     for (i = 0; i < uVar2; i = i + 1) {
       *(CHAR *)((long)dest + i * 3 + 1) = line_pointer[i];
     }
+    WriteLog("FUN_00104a67 goto 1");
     goto LAB_00104c78;
   }
   if (data_comp < 4) {
@@ -602,7 +609,8 @@ BOOL FUN_00104a67(CHAR *line_pointer, int data_comp, void *dest)
       counter_2 = counter_2 + 1;
       for (i = 0; i < uVar2; i = i + 1) {
         *(CHAR *)(i * 3 + (long)dest) = line_pointer[i];
-      }
+      }  
+      WriteLog("FUN_00104a67 goto 2");
       goto LAB_00104c78;
     }
   } else {
@@ -610,13 +618,15 @@ BOOL FUN_00104a67(CHAR *line_pointer, int data_comp, void *dest)
       counter_2 = counter_2 + 1;
       for (i = 0; i < uVar2; i = i + 1) {
         *(CHAR *)((long)dest + i * 3 + 2) = line_pointer[i];
-      }
+      }  
+      WriteLog("FUN_00104a67 goto 3");
       goto LAB_00104c78;
     }
     if (data_comp == 5) {
       counter_2 = counter_2 + 3;
       memcpy(dest, line_pointer, dwInLinePixCnt);
-      goto LAB_00104c78;
+      WriteLog("FUN_00104a67 goto 4");
+	goto LAB_00104c78;
     }
   }
   counter_2 = counter_2 + 3;
@@ -638,6 +648,7 @@ size_t write_sameRes_kind1(SCANDEC_WRITE *param_1, int *status)
 
 {
   WriteLog("enter write_sameRes_kind1");
+  WriteLog("pWriteBuff = %p", param_1->pWriteBuff);
   BOOL bVar1;
   CHAR *write_buffer_start;
   DWORD local_20;
@@ -646,6 +657,10 @@ size_t write_sameRes_kind1(SCANDEC_WRITE *param_1, int *status)
   if (((uint)nColorType >> 10 & 1) == 0) {
     write_buffer_start =
         invert_buffer_offset(param_1->bReverWrite, param_1->pWriteBuff, 0);
+    //WriteLog("write_sameRes_kind1 dwOutLineByte= %lu", dwOutLineByte);
+    WriteLog("write_buffer_start = %p | pLineData = %p | dwOutLineByte = %lu", write_buffer_start, param_1->pLineData, dwOutLineByte);
+    char amogus = *write_buffer_start; //check if write_buffer_start is valid pointer
+    WriteLog("amgous = %d");
     memcpy(write_buffer_start, param_1->pLineData, dwOutLineByte);
     local_20 = dwOutLineByte;
     *status = 1;
@@ -654,6 +669,7 @@ size_t write_sameRes_kind1(SCANDEC_WRITE *param_1, int *status)
         invert_buffer_offset(param_1->bReverWrite, param_1->pWriteBuff, 0);
     bVar1 = FUN_00104a67(param_1->pLineData, param_1->nInDataComp,
                          write_buffer_start);
+    WriteLog("write_sameRes_kind1 passed FUN_00104a67");
     if (bVar1 != 0) {
       local_20 = dwOutLineByte;
       *status = 1;
@@ -2113,6 +2129,7 @@ BOOL ChangeResoInit(SCANDEC_OPEN *param_1)
 char *set_buffer_and_do_something(SCANDEC_WRITE *param_1, size_t *param_2)
 
 {
+  WriteLog("enter set_buffer_and_do_something");
   size_t sVar1;
   char *pbVar2;
   char bVar3;
@@ -2540,7 +2557,7 @@ char *FUN_00106751(SCANDEC_WRITE *scandec_write, size_t *pix_cnt,
 
 BOOL ChangeResoWriteStart(void) {
   int i;
-
+ WriteLog("enter ChangeResoWriteStart");
   some_counter = 0;
   counter_2 = 0;
   counter_3 = 0;
@@ -2601,18 +2618,19 @@ BOOL ScanDecPageStart(void) {
     pix_buf_2 = NULL;//(void *)0x0;
     ret_val = 0;
   }
+  WriteLog("ScanDecPageStart return %d", ret_val);
   return ret_val;
 }
 
 
 //------------------------------------------ScanDecPageEnd------------------------------------------------------
 
-long ChangeResoWriteEnd(SCANDEC_WRITE *param_1,INT *param_2)
+DWORD ChangeResoWriteEnd(SCANDEC_WRITE *param_1,INT *param_2)
 {
 	WriteLog("enter ChangeResoWriteEnd");
-  long lVar1;
+  DWORD lVar1;
   int local_24;
-  long local_20;
+  DWORD local_20;
   
   local_20 = 0;
   *param_2 = 0;
@@ -2635,17 +2653,10 @@ DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
   INT *local_18;
   SCANDEC_WRITE *local_10;
   
-  local_n_data_kind.nInDataComp = scandec_write->nInDataKind;
-  local_n_data_kind.pLineData = (CHAR *)0x0;
-  local_n_data_kind.dwLineDataSize = 0;
-  local_n_data_kind.pWriteBuff = scandec_write->pWriteBuff;
-  local_n_data_kind.dwWriteBuffSize = scandec_write->dwWriteBuffSize;
-  local_n_data_kind.bReverWrite = scandec_write->bReverWrite;
   *some_ptr = 0;
   local_18 = some_ptr;
-  local_10 = scandec_write;
   WriteLog("call ChangeResoWriteEnd");
-  DVar1 = ChangeResoWriteEnd(&local_n_data_kind,some_ptr);
+  DVar1 = ChangeResoWriteEnd(scandec_write,some_ptr);
   pix_buf_2 = (void *)0x0;
   if (some_flag_1 != 0) {
     some_flag_1 = 0;
@@ -2653,6 +2664,7 @@ DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
   if (some_flag_2 != 0) {
     some_flag_2 = 0;
   }
+  WriteLog("DVar1 = %lu", DVar1);
   return DVar1;
 }
 
@@ -2661,6 +2673,7 @@ DWORD ScanDecPageEnd(SCANDEC_WRITE *scandec_write, INT *some_ptr) {
 void ChangeResoWrite(SCANDEC_WRITE *scandec_write,INT *ptr)
 
 {
+	WriteLog("enter ChangeResoWrite");
   *ptr = 0;
   some_fn_write(scandec_write,ptr);
   return;
@@ -2681,7 +2694,9 @@ DWORD ScanDecWrite(SCANDEC_WRITE *scandec_write,INT *param_2)
   
   some_ptr = param_2;
   local_scandec_write = scandec_write;
+	WriteLog("pWriteBuf before = %p", scandec_write->pWriteBuff);
   local_50 = set_buffer_and_do_something(scandec_write, &local_28);//(char *)(*some_function)(scandec_write,&local_28); 
+	WriteLog("pWriteBuf after = %p", scandec_write->pWriteBuff);
   // local_data_kind[0] = local_scandec_write->nInDataKind;
   // local_write_buff = local_scandec_write->pWriteBuff;
   // local_write_buff_size = local_scandec_write->dwWriteBuffSize;

@@ -1015,6 +1015,7 @@ sane_read (SANE_Handle handle, SANE_Byte *buf,
   {
     if (!this->scanState.bEOF)
     {
+	WriteLog("sane_read normal");
       rc = PageScan(this, (char *)buf, maxlen, len);
       if (rc == SANE_STATUS_DUPLEX_ADVERSE && *len == 1) // 06/02/27 if 0x84 is only returned, retry PageScan.
       // while(rc == SANE_STATUS_DUPLEX_ADVERSE  && *len == 1)
@@ -1027,6 +1028,7 @@ sane_read (SANE_Handle handle, SANE_Byte *buf,
   }
   else
   {
+	WriteLog("sane_read bropen");
     bropen_com_params_t com_params;
 
     bropen_com_params_init(&com_params);

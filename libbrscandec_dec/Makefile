@@ -1,4 +1,4 @@
-all: libbrscandec.so.1.0.0
+all: libbrscandec.so.1
 
 ghidra_decomp.o: ghidra_decomp.c ghidra_decomp.h
 	gcc -fPIC -c $< -o $@
@@ -15,7 +15,7 @@ brother_scandec.o: brother_scandec.c brother_scandec.h
 brother_log.o: brother_log.c brother_log.h
 	gcc -fPIC -c $< -o $@
 
-libbrscandec.so.1.0.0: brother_scandec.o brother_log.o
+libbrscandec.so.1: brother_scandec.o brother_log.o
 	gcc -shared $^ -o $@
 
 clean:

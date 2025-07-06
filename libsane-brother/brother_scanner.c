@@ -335,6 +335,7 @@ ScanStart( Brother_Scanner *this )
 					break;
 				default:
 					BROPEN_PRINT_USER_ERROR("only [%s] mode is suppored", "24bit Color");
+					WriteLog("Only 24bit Color mode is supported");
 					return SANE_STATUS_INVAL;
 					break;
 			}
@@ -424,7 +425,8 @@ ScanStart( Brother_Scanner *this )
 		// Start page scanning
 		if (!PageScanStart( this )) {
 			ScanEnd( this);
-			return SANE_STATUS_INVAL;
+				WriteLog("PageScanStart returned false, returning STATUS_INVAL");
+				return SANE_STATUS_INVAL;
 		}
 
 		this->scanState.bScanning=TRUE;
@@ -445,6 +447,7 @@ ScanStart( Brother_Scanner *this )
 			//    start the scanning
 			this->scanState.iProcessEnd=0;
 			if (!PageScanStart( this )) {
+				WriteLog("PageScanStart 2006 returned false, return STATUS_INVAL");
 				return SANE_STATUS_INVAL;
 			}
 			bResult = SANE_STATUS_GOOD;
@@ -466,12 +469,14 @@ ScanStart( Brother_Scanner *this )
 		if (this->scanDec.lpfnScanDecSetTbl != NULL && this->scanDec.lpfnScanDecPageStart != NULL) {
 			this->scanDec.lpfnScanDecSetTbl( hGray, NULL );
 			bResult = this->scanDec.lpfnScanDecPageStart();
-			if (!bResult)
-				return SANE_STATUS_INVAL;
+			if (!bResult){
+				WriteLog("lpfnScanDecPageStart returned false, return STATUS_INVAL");
+				return SANE_STATUS_INVAL;}
 			else
 				bResult = SANE_STATUS_GOOD;
 		}
 		else {
+			WriteLog("seriesNo < BROPEN_SERIES_NO, return STATUS_INVAL");
 			return SANE_STATUS_INVAL;
 	}
 	} else {
@@ -2091,6 +2096,7 @@ ProcessMain(Brother_Scanner *this, WORD wByte, WORD wDataLineCnt, char * lpFwBuf
 					SetupImgLineProc( Header );
 					ImgLineProcInfo.pLineData      = lpSrc;
 					ImgLineProcInfo.dwLineDataSize = count;
+					WriteLog("ProcessMain lpFwBuf %p", lpFwBuf);
 					ImgLineProcInfo.pWriteBuff     = lpFwBuf;
 					//
 					// raster data expansion/ resolution exchanging
@@ -2101,7 +2107,7 @@ ProcessMain(Brother_Scanner *this, WORD wByte, WORD wDataLineCnt, char * lpFwBuf
 #endif
 
 					dwWriteImageSize = this->scanDec.lpfnScanDecWrite( &ImgLineProcInfo, &nWriteLineCount );
-					WriteLog( "\tlpFwBuf = %X, WriteSize = %d, LineCount = %d, RealY = %d", lpFwBuf, dwWriteImageSize, nWriteLineCount, lRealY );
+					WriteLog( "\tlpFwBuf = %X, WriteSize = %lu, LineCount = %d, RealY = %d", lpFwBuf, dwWriteImageSize, nWriteLineCount, lRealY );
 
 #ifdef NO39_DEBUG
 	if (gettimeofday(&tv, &tz) == 0) {
@@ -2122,7 +2128,7 @@ ProcessMain(Brother_Scanner *this, WORD wByte, WORD wDataLineCnt, char * lpFwBuf
 #if 1	// DEBUG for MASU
 						dwFWImageSize += dwWriteImageSize;
 						dwFWImageLine += nWriteLineCount;
-						WriteLog( "DEBUG for MASU (ProcessMain) dwFWImageSize  = %d dwFWImageLine = %d", dwFWImageSize, dwFWImageLine );
+						WriteLog( "DEBUG for MASU (ProcessMain) dwFWImageSize  = %lu dwFWImageLine = %lu", dwFWImageSize, dwFWImageLine );
 #endif
 
 						if( this->mfcModelInfo.bColorModel && ! this->modelConfig.bNoUseColorMatch && this->devScanInfo.wColorType == COLOR_FUL ){
